@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using System.Threading;
 
 namespace HermesChatApp.Hubs
 {
@@ -34,6 +35,14 @@ namespace HermesChatApp.Hubs
             var generalChatName = "GeneralDefaultChat";
             await Groups.AddToGroupAsync(Context.ConnectionId, generalChatName);
             await Clients.User(hubUser.UserIdentifier).SendAsync("AddToMainChat", hubUser, generalChatName);
+
+            //зчитування повідомлень зі словника
+            var messageList = _messageDictionary.GetLastMessageList(generalChatName);
+            if (messageList != null)
+            {
+                await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
+            }
+            //кінець
             await Clients.Group(generalChatName).SendAsync("NotifyGroup", hubUser, " joined General Chat").ConfigureAwait(true);
 
             await base.OnConnectedAsync();
@@ -128,7 +137,16 @@ namespace HermesChatApp.Hubs
 
             //time when message was sent
             var timeNow = DateTime.Now;
+            //добавив зберігання повідомлень з особистих груп у словник 
+            var saveMessage = new HubMessage()
+            {
+                FromUserName = hubUser.Name,
+                Time = timeNow.ToString("HH:mm:ss"),
+                Message = message
+            };
 
+            _messageDictionary.Add(toGroup, saveMessage);
+            //кінець
             await Clients.Group(toGroup).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"));
         }
 
@@ -159,6 +177,14 @@ namespace HermesChatApp.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             _groupDictionary.Add(groupName, hubUser);
             await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
+            
+            //апдейт: для особистих груп добавив читання історії повідомлень
+            var messageList = _messageDictionary.GetLastMessageList(groupName);
+            if (messageList != null)
+            {
+                await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
+            }
+            //кінець 
             await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " joined " + groupName).ConfigureAwait(true);
         }
 
