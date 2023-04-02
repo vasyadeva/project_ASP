@@ -1,42 +1,60 @@
-﻿namespace HermesChatApp.Hubs
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+namespace HermesChatApp.Hubs
 {
     public class MessageDictionary
     {
+        private readonly Dictionary<string, List<HubMessage>> dictionary;
+        private readonly string filePath = "dictionary.json";
 
-        public Dictionary<string, List<HubMessage>> dictionary = new Dictionary<string, List<HubMessage>>();
+        public MessageDictionary()
+        {
+            dictionary = LoadDictionaryFromFile();
+        }
 
         public void Add(string key, HubMessage value)
         {
-            if (this.dictionary.ContainsKey(key))
+            if (dictionary.TryGetValue(key, out List<HubMessage> messageList))
             {
-                List<HubMessage> list = this.dictionary[key];
-                if (list.Count < 10)
+               /* if (messageList.Count >= 10)
                 {
-                    list.Add(value);
-                }
-                else
-                {
-                    list.RemoveAt(0);
-                    list.Add(value);
-                }
+                    messageList.RemoveAt(0);
+                }*/
+
+                messageList.Add(value);
             }
             else
             {
-                List<HubMessage> list = new List<HubMessage>();
-                list.Add(value);
-                this.dictionary.Add(key, list);
+                messageList = new List<HubMessage> { value };
+                dictionary.Add(key, messageList);
             }
+
+            SaveDictionaryToFile();
         }
+
         public List<HubMessage>? GetLastMessageList(string key)
         {
-            if (this.dictionary.ContainsKey(key))
+            dictionary.TryGetValue(key, out List<HubMessage> messageList);
+            return messageList;
+        }
+
+        private Dictionary<string, List<HubMessage>> LoadDictionaryFromFile()
+        {
+            if (File.Exists(filePath))
             {
-                return dictionary[key];
+                string jsonString = File.ReadAllText(filePath);
+                return JsonSerializer.Deserialize<Dictionary<string, List<HubMessage>>>(jsonString);
             }
-            else
-            {
-                return null;
-            }
+
+            return new Dictionary<string, List<HubMessage>>();
+        }
+
+        private void SaveDictionaryToFile()
+        {
+            string jsonString = JsonSerializer.Serialize(dictionary);
+            File.WriteAllText(filePath, jsonString);
         }
     }
 }
