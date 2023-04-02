@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "News";
+}
+
+
+@model NewsModel
+
+<h1>News</h1>
+
+@for (int i = 0; i < Model.Messages.Count && i < Model.Photos.Count; i++)
+{
+    <p>@Model.Messages[i]</p>
+    <img src="/photos/@Model.Photos[i]" width="320px"/>
+}
+
+
+
