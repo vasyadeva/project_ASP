@@ -1,8 +1,10 @@
 ﻿using HermesChatApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Exceptions;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -14,12 +16,14 @@ namespace HermesChatApp.Controllers
 
         private readonly TelegramBotClient _botClient;
         private readonly IWebHostEnvironment _env;
-
+        private readonly int _chatId;
+        private readonly long _userId;
         public NewsController(IWebHostEnvironment env)
         {
             // Ініціалізуємо клієнт TelegramBotClient з використанням API ключа
             _botClient = new TelegramBotClient("6186923370:AAHipk9pGebrcpbBKFuCLKvBGfB6-c3dG8o");
             _env = env;
+            _chatId = -970414042; // Замініть цей ID на ID свого приватного каналу.
         }
 
 
@@ -33,15 +37,14 @@ namespace HermesChatApp.Controllers
             var updates = await _botClient.GetUpdatesAsync();
 
             // Формуємо список текстів повідомлень та фото
-            var messages = updates.Select(u => u.Message?.Text).Where(t => t != null).ToList();
-
+            var messages = new List<string>();
             var photos = new List<string>();
 
             foreach (var update in updates)
             {
                 var message = update.Message;
 
-                if (message != null)
+                if (message != null && message.Chat.Id == -970414042)
                 {
                     var text = message.Text;
                     var photo = message.Photo?.LastOrDefault();
@@ -61,6 +64,10 @@ namespace HermesChatApp.Controllers
 
                         photos.Add(fileName);
                     }
+                    else if (text != null)
+                    {
+                        messages.Add(text);
+                    }
                 }
             }
 
@@ -72,10 +79,6 @@ namespace HermesChatApp.Controllers
             };
             return View(viewModel);
         }
-
-        
-
-
 
     }
 }
