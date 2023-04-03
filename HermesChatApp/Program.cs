@@ -11,9 +11,9 @@ builder.Services.AddSignalR();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddDbContext<HermesDbContext>();
+builder.Services.AddDbContext<LinkedNewsDbContext>();
 
-builder.Services.AddScoped<DataLayer.HermesRepository>();
+builder.Services.AddScoped<DataLayer.LinkedNewsRepository>();
 builder.Services.AddScoped<ServiceLayer.LoginOperations>();
 builder.Services.AddScoped<ServiceLayer.ChatOperations>();
 builder.Services.AddScoped<ServiceLayer.MailService>();

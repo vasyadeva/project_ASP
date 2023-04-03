@@ -4,10 +4,10 @@ namespace ServiceLayer
 {
     public class ChatOperations
     {
-        private readonly HermesRepository _repository;
+        private readonly LinkedNewsRepository _repository;
         private readonly LoginOperations _loginOperator;
 
-        public ChatOperations(HermesRepository repository, LoginOperations loginOperator)
+        public ChatOperations(LinkedNewsRepository repository, LoginOperations loginOperator)
         {
             _repository = repository;
             _loginOperator = loginOperator;

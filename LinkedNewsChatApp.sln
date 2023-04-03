@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HermesChatApp", "HermesChatApp\HermesChatApp.csproj", "{2EE0F10E-98CE-4104-BFC6-06D77891E5A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedNewsChatApp", "HermesChatApp\LinkedNewsChatApp.csproj", "{2EE0F10E-98CE-4104-BFC6-06D77891E5A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{CE07D7F5-FCF9-4724-B742-1066EBFCB354}"
 EndProject

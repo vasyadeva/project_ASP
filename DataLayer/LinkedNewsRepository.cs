@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
-    public class HermesRepository : IHermesRepository
+    public class LinkedNewsRepository : ILinkedNewsRepository
     {
-        private readonly HermesDbContext _dbContext;
+        private readonly LinkedNewsDbContext _dbContext;
 
-        public HermesRepository(HermesDbContext dbContext)
+        public LinkedNewsRepository(LinkedNewsDbContext dbContext)
         {
             _dbContext = dbContext;
         }

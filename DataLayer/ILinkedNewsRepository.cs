@@ -2,7 +2,7 @@
 
 namespace DataLayer
 {
-    public interface IHermesRepository
+    public interface ILinkedNewsRepository
     {
         public List<User> GetListOfUsers();
         public User UpdateUserPassword(User user);

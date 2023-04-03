@@ -4,11 +4,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataLayer.Context
 {
-    public class HermesDbContext: DbContext
+    public class LinkedNewsDbContext: DbContext
     {
         private readonly IConfiguration _config;
 
-        public HermesDbContext(IConfiguration config)
+        public LinkedNewsDbContext(IConfiguration config)
         {
             _config = config;
         }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
-    [DbContext(typeof(HermesDbContext))]
+    [DbContext(typeof(LinkedNewsDbContext))]
     [Migration("20220328112547_SetUpTables")]
     partial class SetUpTables
     {
