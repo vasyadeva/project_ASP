@@ -2,18 +2,45 @@
     ViewData["Title"] = "News";
 }
 
-
 @model NewsModel
+<style>
+    .news-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 80%;
+    }
 
+    .news {
+        background-color: #F8F8F8;
+        color: #444444;
+        margin-bottom: 10px;
+        margin: 5px 10px 10px 5px;
+        border: 2px solid #CCCCCC;
+        border-radius: 15px;
+        padding: 20px;
+        width: 400px;
+    }
+
+        .news p {
+            text-align: center;
+            font-family: serif;
+        }
+
+        .news img {
+            width: 320px;
+            margin: auto;
+            display: block;
+        }
+</style>
 <h1>News</h1>
+<div class="news-container">
+    @for (int i = 0; i < Model.Messages.Count && i < Model.Photos.Count; i++)
+    {
+        <div class="news">
+            <p>@Model.Messages[i]</p>
+            <img src="/photos/@Model.Photos[i]" />
+        </div>
+    }
 
-@for  (int i = 0; i < Model.Messages.Count && i < Model.Photos.Count; i++) 
-{
-<div class="news" style="background-color:antiquewhite; font: black; margin:10px auto 10px auto">
-    <p>@Model.Messages[i]</p>
-    <img src="/photos/@Model.Photos[i]" width="320px"/>
 </div>
-}
-
-
-
