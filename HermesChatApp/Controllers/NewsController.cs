@@ -44,8 +44,8 @@ namespace HermesChatApp.Controllers
             {
                 var message = update.Message;
 
-                if (message != null && message.Chat.Id == -970414042)
-                {
+                if (message != null && message.Chat.Id == -1001694193222)
+				{
                     var text = message.Text;
                     var photo = message.Photo?.LastOrDefault();
 
