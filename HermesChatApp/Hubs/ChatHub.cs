@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading;
 
-namespace HermesChatApp.Hubs
+namespace LinkedNewsChatApp.Hubs
 {
     [Authorize]
     public class ChatHub : Hub

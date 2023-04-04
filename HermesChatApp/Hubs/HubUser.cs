@@ -1,4 +1,4 @@
-﻿namespace HermesChatApp.Hubs
+﻿namespace LinkedNewsChatApp.Hubs
 {
     public class HubUser
     {

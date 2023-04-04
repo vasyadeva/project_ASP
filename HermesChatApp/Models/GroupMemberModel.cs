@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace HermesChatApp.Models
+namespace LinkedNewsChatApp.Models
 {
     public class GroupMemberModel
     {

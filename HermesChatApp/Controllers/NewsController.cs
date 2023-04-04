@@ -1,4 +1,4 @@
-﻿using HermesChatApp.Models;
+﻿using LinkedNewsChatApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Telegram.Bot;
@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 
-namespace HermesChatApp.Controllers
+namespace LinkedNewsChatApp.Controllers
 {
     public class NewsController : Controller
     {

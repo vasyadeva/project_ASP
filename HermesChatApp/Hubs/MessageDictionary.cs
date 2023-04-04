@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace HermesChatApp.Hubs
+namespace LinkedNewsChatApp.Hubs
 {
     public class MessageDictionary
     {

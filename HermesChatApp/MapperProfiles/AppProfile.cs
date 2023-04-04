@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DataLayer;
-using HermesChatApp.Models;
+using LinkedNewsChatApp.Models;
 
-namespace HermesChatApp.MapperProfiles
+namespace LinkedNewsChatApp.MapperProfiles
 {
     public class AppProfile : Profile
     {

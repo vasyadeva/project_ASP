@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace HermesChatApp.Models
+namespace LinkedNewsChatApp.Models
 {
     public class NewsModel
     {

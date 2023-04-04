@@ -1,11 +1,11 @@
-﻿using HermesChatApp.Models;
+﻿using LinkedNewsChatApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
 using DataLayer;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 
-namespace HermesChatApp.Controllers
+namespace LinkedNewsChatApp.Controllers
 {
     [Authorize]
     public class ChatController : Controller

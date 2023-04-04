@@ -1,5 +1,5 @@
 using DataLayer.Context;
-using HermesChatApp.Hubs;
+using LinkedNewsChatApp.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);

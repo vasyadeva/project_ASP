@@ -1,4 +1,4 @@
-namespace HermesChatApp.Models
+namespace LinkedNewsChatApp.Models
 {
     public class ErrorViewModel
     {

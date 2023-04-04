@@ -1,4 +1,4 @@
-﻿using HermesChatApp.Models;
+﻿using LinkedNewsChatApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.RegularExpressions;
 
-namespace HermesChatApp.Controllers
+namespace LinkedNewsChatApp.Controllers
 {
     public class HomeController : Controller
     {
