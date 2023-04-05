@@ -1,0 +1,2 @@
+1,hello,world,/images/4ad0e989-b5b4-48f0-a0ac-1406f7001d5d_photo.png
+2,Яхта,ЛНУ купили яхту в честь ювілею ХІО,/images/50f9c13a-365f-4044-af1a-1024c38c0e3b_yacht.jpg

@@ -14,71 +14,124 @@ namespace LinkedNewsChatApp.Controllers
     public class NewsController : Controller
     {
 
-        private readonly TelegramBotClient _botClient;
-        private readonly IWebHostEnvironment _env;
-        private readonly int _chatId;
-        private readonly long _userId;
-        public NewsController(IWebHostEnvironment env)
+        List<string> data = new List<string>();
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public NewsController(IWebHostEnvironment hostingEnvironment)
         {
-            // Ініціалізуємо клієнт TelegramBotClient з використанням API ключа
-            _botClient = new TelegramBotClient("6186923370:AAHipk9pGebrcpbBKFuCLKvBGfB6-c3dG8o");
-            _env = env;
-            _chatId = -970414042; // Замініть цей ID на ID свого приватного каналу.
+            _hostingEnvironment = hostingEnvironment;
         }
 
-
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            var webRoot = _env.WebRootPath;
-            var photosPath = Path.Combine(webRoot, "photos");
-            Directory.CreateDirectory(photosPath);
+            // Get the path of the wwwroot folder
+            string wwwrootPath = _hostingEnvironment.WebRootPath;
+            // Initialize the dictionary
+            IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
 
-            // Отримуємо список повідомлень з каналу
-            var updates = await _botClient.GetUpdatesAsync();
-
-            // Формуємо список текстів повідомлень та фото
-            var messages = new List<string>();
-            var photos = new List<string>();
-
-            foreach (var update in updates)
+            // Read the existing data from the file, if it exists
+            string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+            if (System.IO.File.Exists(dataFilePath))
             {
-                var message = update.Message;
-
-                if (message != null && message.Chat.Id == -1001694193222)
-				{
-                    var text = message.Text;
-                    var photo = message.Photo?.LastOrDefault();
-
-                    if (photo != null)
-                    {
-                        var fileId = photo.FileId;
-                        var file = await _botClient.GetFileAsync(fileId);
-
-                        var fileName = $"{file.FileId}_{file.FilePath.Split('/').Last()}";
-                        var filePath = Path.Combine(photosPath, fileName);
-
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await _botClient.DownloadFileAsync(file.FilePath, fileStream);
-                        }
-
-                        photos.Add(fileName);
-                    }
-                    else if (text != null)
-                    {
-                        messages.Add(text);
-                    }
+                string[] lines = System.IO.File.ReadAllLines(dataFilePath);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+                    int id = int.Parse(parts[0]);
+                    dictionary.Add(id, Tuple.Create(parts[1], parts[2], parts[3]));
                 }
             }
-
-            // Передаємо список текстів повідомлень та фото у відображення
-            var viewModel = new NewsModel
-            {
-                Messages = messages,
-                Photos = photos
-            };
-            return View(viewModel);
+            return View(dictionary);
         }
 
+
+        // GET: Home
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult PostUsingParameters(PersonData data, IFormFile file, string pass, string FName, string LName)
+        {
+            if (pass == "deva1234")
+            {
+                // Get the path of the wwwroot folder
+                string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+
+                // Get the path of the images folder
+                string imagesPath = Path.Combine(wwwrootPath, "images");
+
+                // If the images folder doesn't exist, create it
+                if (!Directory.Exists(imagesPath))
+                {
+                    Directory.CreateDirectory(imagesPath);
+                }
+
+                // Check if the file was uploaded
+                if (file != null && file.Length > 0)
+                {
+                    // Get the filename of the uploaded file
+                    string fileName = Path.GetFileName(file.FileName);
+
+                    // Generate a unique filename
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+
+                    // Get the full path of the file
+                    string filePath = Path.Combine(imagesPath, uniqueFileName);
+
+                    // Save the file to the server
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    // Set the PhotoPath property of the PersonData object to the filename of the uploaded file
+                    data.PhotoPath = "/images/" + uniqueFileName;
+                }
+
+                // Initialize the dictionary
+                IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
+
+                // Read the existing data from the file, if it exists
+                string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+                if (System.IO.File.Exists(dataFilePath))
+                {
+                    string[] lines = System.IO.File.ReadAllLines(dataFilePath);
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split(',');
+                        int id = int.Parse(parts[0]);
+                        dictionary.Add(id, Tuple.Create(parts[1], parts[2], parts[3]));
+                    }
+                }
+
+
+                // Check if the ID already exists in the dictionary
+                int newId = dictionary.Count > 0 ? dictionary.Keys.Max() + 1 : 1;
+                while (dictionary.ContainsKey(newId))
+                {
+                    newId++;
+                }
+
+                // Add the new data to the dictionary
+                dictionary.Add(newId, Tuple.Create(FName, LName, data.PhotoPath));
+
+                // Write the data to the file
+                using (StreamWriter sw = System.IO.File.AppendText(dataFilePath))
+                {
+                    sw.WriteLine($"{newId},{FName},{LName},{data.PhotoPath}");
+                }
+
+                return View(dictionary);
+            }
+            else
+            {
+                return Content("Invalid password");
+            }
+
+        }
     }
 }
