@@ -1,25 +1,15 @@
 ﻿@model LinkedNewsChatApp.Models.PersonData
 
 
- <div>
-        <h2>Pass data using parameters</h2>
+<div>
+    <h2>Pass data using parameters</h2>
 
-        @using (Html.BeginForm("PostUsingParameters", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <input type="text" name="Fname" />
+    @using (Html.BeginForm("ChangeNews1", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <br />
+        <input type="password" name="pass" />
 
-            <br />
-            <input type="text" name="Lname" />
-
-            <br />
-            <input type="password" name="pass" />
-
-            <br />
-            <input type="file" name="file" />
-
-            <br />
-            <input type="submit" value="Click me" />
-        }
-  </div>
-
-
+        <br />
+        <input type="submit" value="Click me" />
+    }
+</div>

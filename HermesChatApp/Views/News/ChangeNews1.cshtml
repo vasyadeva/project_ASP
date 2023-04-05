@@ -1,0 +1,60 @@
+﻿@model IDictionary<int, Tuple<string, string, string>>
+@{
+    ViewData["Title"] = "Edit News";
+}
+
+<h2>Edit News</h2>
+
+@foreach (var news in Model)
+{
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">News @news.Key</h5>
+            <form asp-action="ChangeNews" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" name="Title" value="@news.Value.Item1" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea class="form-control" id="content" name="Content" rows="3" required>@news.Value.Item2</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image:</label>
+                    <input type="file" class="form-control-file" id="image" name="Image" accept=".jpg, .jpeg, .png">
+                    <small class="form-text text-muted">Supported image formats: .jpg, .jpeg, .png</small>
+                </div>
+                <input type="hidden" name="Id" value="@news.Key" />
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+            <form asp-action="DeleteNews" asp-route-id="@news.Key" method="post" style="margin-top: 10px">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    <br /><br /><br />
+    <!-- Delete confirmation modal
+    <div class="modal fade" id="deleteModal@news.Key" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this news item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <form asp-action="DeleteNews" asp-route-id="@news.Key" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+}

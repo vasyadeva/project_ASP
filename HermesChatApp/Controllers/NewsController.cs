@@ -13,7 +13,7 @@ namespace LinkedNewsChatApp.Controllers
 {
     public class NewsController : Controller
     {
-
+        
         List<string> data = new List<string>();
         private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -47,7 +47,7 @@ namespace LinkedNewsChatApp.Controllers
 
         // GET: Home
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Add()
         {
             return View();
         }
@@ -133,5 +133,125 @@ namespace LinkedNewsChatApp.Controllers
             }
 
         }
+
+        //-----------------------------------
+
+        [HttpPost]
+        public IActionResult ChangeNews1(string pass)
+        {
+            if (pass == "deva1234")
+            {
+                // Get the path of the wwwroot folder
+                string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+                // Initialize the dictionary
+                IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
+
+                // Read the existing data from the file, if it exists
+                string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+                if (System.IO.File.Exists(dataFilePath))
+                {
+                    string[] lines = System.IO.File.ReadAllLines(dataFilePath);
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split(',');
+                        int id = int.Parse(parts[0]);
+                        dictionary.Add(id, Tuple.Create(parts[1], parts[2], parts[3]));
+                    }
+                }
+
+                return View(dictionary);
+            }
+            else
+            {
+                return Content("Доступ відмовлено");
+            }
+            
+        }
+
+        [HttpPost]
+        public IActionResult ChangeNews(int id, string title, string content,string pass)
+        {
+            // Get the path of the wwwroot folder
+            string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+            // Initialize the dictionary
+            IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
+
+            // Read the existing data from the file, if it exists
+            string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+            if (System.IO.File.Exists(dataFilePath))
+            {
+                string[] lines = System.IO.File.ReadAllLines(dataFilePath);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+                    int itemId = int.Parse(parts[0]);
+                    if (itemId == id)
+                    {
+                        dictionary.Add(itemId, Tuple.Create(title, content, parts[3]));
+                    }
+                    else
+                    {
+                        dictionary.Add(itemId, Tuple.Create(parts[1], parts[2], parts[3]));
+                    }
+                }
+            }
+
+            // Rewrite the data to the file
+            using (StreamWriter sw = new StreamWriter(dataFilePath, false))
+            {
+                foreach (KeyValuePair<int, Tuple<string, string, string>> item in dictionary)
+                {
+                    sw.WriteLine($"{item.Key},{item.Value.Item1},{item.Value.Item2},{item.Value.Item3}");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteNews(int id)
+        {
+            // Get the path of the wwwroot folder
+            string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+            // Initialize the dictionary
+            IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
+
+            // Read the existing data from the file, if it exists
+            string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+            if (System.IO.File.Exists(dataFilePath))
+            {
+                string[] lines = System.IO.File.ReadAllLines(dataFilePath);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+                    int itemId = int.Parse(parts[0]);
+                    if (itemId != id)
+                    {
+                        dictionary.Add(itemId, Tuple.Create(parts[1], parts[2], parts[3]));
+                    }
+                }
+            }
+
+            // Rewrite the data to the file
+            using (StreamWriter sw = new StreamWriter(dataFilePath, false))
+            {
+                foreach (KeyValuePair<int, Tuple<string, string, string>> item in dictionary)
+                {
+                    sw.WriteLine($"{item.Key},{item.Value.Item1},{item.Value.Item2},{item.Value.Item3}");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit() { 
+            return View(); 
+        }
+
     }
+    
 }
