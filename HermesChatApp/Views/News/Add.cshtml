@@ -6,17 +6,17 @@
 
         @using (Html.BeginForm("PostUsingParameters", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <input type="text" name="Fname" />
+        <input type="text" name="Fname" required />
 
             <br />
-            <input type="text" name="Lname" />
+        <textarea class="form-control" name="Lname" rows="3" required></textarea>
 
             <br />
-            <input type="password" name="pass" />
+        <input type="password" name="pass" required />
 
             <br />
-            <input type="file" name="file" />
-
+        <input type="file" name="file" accept=".jpg, .jpeg, .png" required />
+        <small class="form-text text-muted">Supported image formats: .jpg, .jpeg, .png</small>
             <br />
             <input type="submit" value="Click me" />
         }

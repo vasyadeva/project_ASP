@@ -305,7 +305,7 @@ color: #5b5e6c
 .container {
 height: 100%;
 align-content: center;
-color: darkslategray;
+color: black;
 }
 
 .card {
@@ -372,7 +372,7 @@ width: 100%;
    
 }
 .news-color {
-    color: darkslategrey;
+    color: black;
     margin: 0px 0px 50px 0px;
     width: 480px;
     height : 320px;

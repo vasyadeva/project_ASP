@@ -125,7 +125,9 @@ namespace LinkedNewsChatApp.Controllers
                     sw.WriteLine($"{newId},{FName},{LName},{data.PhotoPath}");
                 }
 
-                return View(dictionary);
+                //return View(dictionary);
+                //спробую визвати index щоб не було два cshtml коди
+                return RedirectToAction("Index");   
             }
             else
             {
@@ -170,45 +172,67 @@ namespace LinkedNewsChatApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangeNews(int id, string title, string content,string pass)
+        public IActionResult ChangeNews(int id, string title, string content, IFormFile Image)
         {
             // Get the path of the wwwroot folder
             string wwwrootPath = _hostingEnvironment.WebRootPath;
 
-            // Initialize the dictionary
-            IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
+            // Get the path of the data file
+            string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
 
             // Read the existing data from the file, if it exists
-            string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
+            IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
             if (System.IO.File.Exists(dataFilePath))
             {
                 string[] lines = System.IO.File.ReadAllLines(dataFilePath);
                 foreach (string line in lines)
                 {
                     string[] parts = line.Split(',');
-                    int itemId = int.Parse(parts[0]);
-                    if (itemId == id)
-                    {
-                        dictionary.Add(itemId, Tuple.Create(title, content, parts[3]));
-                    }
-                    else
-                    {
-                        dictionary.Add(itemId, Tuple.Create(parts[1], parts[2], parts[3]));
-                    }
+                    int currentId = int.Parse(parts[0]);
+                    dictionary.Add(currentId, Tuple.Create(parts[1], parts[2], parts[3]));
                 }
             }
 
-            // Rewrite the data to the file
-            using (StreamWriter sw = new StreamWriter(dataFilePath, false))
+            // Update the data for the specified news item
+            dictionary[id] = Tuple.Create(title, content, "");
+
+            // If a new image was uploaded, save it to the images folder
+            if (Image != null && Image.Length > 0)
+            {
+                // Get the filename of the uploaded file
+                string fileName = Path.GetFileName(Image.FileName);
+
+                // Generate a unique filename
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+
+                // Get the path of the images folder
+                string imagesPath = Path.Combine(wwwrootPath, "images");
+
+                // Save the file to the images folder
+                string imagePath = Path.Combine(imagesPath, uniqueFileName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    Image.CopyTo(stream);
+                }
+
+                // Update the image filename in the dictionary
+                uniqueFileName = "/images/" + uniqueFileName;
+                dictionary[id] = Tuple.Create(title, content, uniqueFileName);
+            }
+
+            // Save the updated data to the file
+            using (StreamWriter writer = new StreamWriter(dataFilePath))
             {
                 foreach (KeyValuePair<int, Tuple<string, string, string>> item in dictionary)
                 {
-                    sw.WriteLine($"{item.Key},{item.Value.Item1},{item.Value.Item2},{item.Value.Item3}");
+                    writer.WriteLine($"{item.Key},{item.Value.Item1},{item.Value.Item2},{item.Value.Item3}");
                 }
             }
 
+            // Redirect to the index action
             return RedirectToAction("Index");
         }
+
 
         [HttpPost]
         public IActionResult DeleteNews(int id)
