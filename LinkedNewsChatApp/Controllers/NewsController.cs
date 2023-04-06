@@ -179,7 +179,7 @@ namespace LinkedNewsChatApp.Controllers
 
             // Get the path of the data file
             string dataFilePath = Path.Combine(wwwrootPath, "data.txt");
-
+            string photourl="";
             // Read the existing data from the file, if it exists
             IDictionary<int, Tuple<string, string, string>> dictionary = new Dictionary<int, Tuple<string, string, string>>();
             if (System.IO.File.Exists(dataFilePath))
@@ -189,12 +189,16 @@ namespace LinkedNewsChatApp.Controllers
                 {
                     string[] parts = line.Split(',');
                     int currentId = int.Parse(parts[0]);
+                    if (currentId == id)
+                    {
+                        photourl = parts[3];
+                    }
                     dictionary.Add(currentId, Tuple.Create(parts[1], parts[2], parts[3]));
                 }
             }
 
             // Update the data for the specified news item
-            dictionary[id] = Tuple.Create(title, content, "");
+            dictionary[id] = Tuple.Create(title, content, photourl);
 
             // If a new image was uploaded, save it to the images folder
             if (Image != null && Image.Length > 0)
