@@ -1,3 +1,4 @@
 1,rdgrdg,rdg,/images/063f82dd-a843-4ea0-b8fd-9f51b59e782e_new_image.jpg
 2,Вектор,Вектор поступив в лну,/images/313c8cbb-63c8-4a32-b34b-e00080bebf6e_jpeg.jpeg
 3,Дощ,Сьогоднішня погода надоїла,/images/e7c98b94-277f-4cf0-a3d4-d077701b5598_Знімок екрана (142).png
+4,Сенсація,Чат GPT погрожує. Рятуйтесь хто може. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,/images/367954a8-2f84-4b0b-b54d-3bab6b41ac4f_зображення_2023-04-08_184205251.png

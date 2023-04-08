@@ -23,13 +23,13 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index">Chat</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="nav_profile" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
                             </li>
                         }
                         else

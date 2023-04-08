@@ -373,34 +373,109 @@ width: 100%;
 }
 .news-color {
     color: black;
-    margin: 0px 0px 50px 0px;
+    background-color: white;
+    margin-left: 8px;
+    margin-bottom:3%;
     width: 480px;
     height : 320px;
-    flex-basis: 50%;
-
+}
+.news-img {
+    width: 580px;
+    height: 360px;
+    margin-right :102%;
+    
 }
 #news-img {
-    width: 360px;
-    height: 240px;
-    margin: auto;
-    display: block;
-    
+    margin-top: 5px;
+    margin-bottom: 3px;
+    margin-left: 1%;
 }
 .news-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 80%;
+    align-items: stretch;
     background-color: #F8F8F8;
     color: #444444;
     margin-bottom: 10px;
-    margin: 5px 10px 35px 5px;
+    margin: 0% 0% 0% 0%;
+    margin-bottom: 15px;
     border: 2px solid #CCCCCC;
     border-radius: 15px;
     padding: 5px;
-    width: 400px;
+}
+.p_style1{
+    margin-left:35%;
 }
 .p-style {
-    text-align: center;
     font-family: serif;
+    margin-right: 0%;
+    max-width: 450px;
+    max-height: 480px;
+    overflow: hidden;
+
+}
+.add_block {
+    margin-bottom: 1rem;
+}
+.add_input {
+    display: block;
+    width: 105%;
+    height: 25%;
+    padding-left: 60px;
+    padding: 1%;
+    max-height: auto;
+    max-width: auto;
+    font-family: inherit;
+    font-size: 0,5rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #bdbdbd;
+    border-radius: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.admin_ep {
+    max-width: 100px;
+}
+.edit_h {
+    display: flex;
+    color: orangered;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+    background-size: auto;
+    width: 50%;
+    margin-left: 25%;
+    border: 2px solid #bdbdbd;
+    border-radius: 1rem;
+}
+.edit_h1 {
+    display: flex;
+    color: orangered;
+    background-color: aqua;
+    justify-content: center;
+    align-items: center;
+    background-size: auto;
+    width: 50%;
+    margin-left: 25%;
+    border: 2px solid #bdbdbd;
+    border-radius: 1rem;
+}
+input:defined {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    color: white;
+    transition: .3s ease;
+    background-color: darkgrey;
+    border: 2px solid #515551;
+    border-radius: 1rem;
+    padding: 1%;
+    stroke-opacity: 1;
+}
+
+input:default {
+    background-color: lawngreen;
 }

@@ -2,14 +2,15 @@
 
 
 <div>
-    <h2>Pass data using parameters</h2>
+    <h2 class="edit_h1" >Pass data using parameters</h2>
 
     @using (Html.BeginForm("ChangeNews1", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <br />
-        <input type="password" name="pass" />
+        <input  type="password" name="pass" placeholder="Пароль" />
+        <label (for="pass") Пароль></label>
 
         <br />
-        <input type="submit" value="Click me" />
+        <input type="submit" value="Підтвердити" />
     }
 </div>
