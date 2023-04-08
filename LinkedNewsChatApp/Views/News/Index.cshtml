@@ -1,6 +1,6 @@
 ﻿@model IDictionary<int, Tuple<string, string, string>>
 
-@foreach (var item in Model)
+@foreach (var item in Model.Reverse())
 {
 <div class="news-container">
     <div class="news-color"; style="background-color:antiquewhite;">
