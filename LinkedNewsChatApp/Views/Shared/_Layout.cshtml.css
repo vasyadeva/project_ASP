@@ -26,9 +26,6 @@ a {
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
@@ -40,10 +37,20 @@ button.accept-policy {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+#header_imp {
+    background-image: linear-gradient(to bottom right, #0437F2, #27afc9);
+    border-bottom: 3px solid #e58e00;
+}
+#btn_logd {
+    color: #e58e00;
+}
+#btn_logi {
+    color: #e58e00;
 }
 

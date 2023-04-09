@@ -2,8 +2,12 @@
 
 @foreach (var item in Model.Reverse())
 {
+    <div id="widget">
+        <button onclick="scrollToTop()">Вверх</button>
+    </div>
+
 <div class="news-container">
-    <div class="news-color"; style="background-color:antiquewhite;">
+        <div class="news-color" ; style="background-image: linear-gradient(to bottom right, #27afc9, lightslategray);">
         <h2 class="p_style1">@item.Value.Item1</h2>
         <p class="p-style">@item.Value.Item2</p>
     </div>
