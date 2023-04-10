@@ -3900,7 +3900,7 @@ textarea.form-control-lg {
 .nav-tabs .nav-link {
   margin-bottom: -1px;
   background: none;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
@@ -3991,11 +3991,11 @@ textarea.form-control-lg {
   white-space: nowrap;
 }
 .navbar-nav {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
 }
 .navbar-nav .nav-link {
   padding-right: 0;
@@ -4018,7 +4018,7 @@ textarea.form-control-lg {
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;

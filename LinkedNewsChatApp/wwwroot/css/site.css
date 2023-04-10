@@ -383,7 +383,7 @@ width: 100%;
 .news-img {
     width: 580px;
     height: 360px;
-    margin-right: 102%;
+    margin-right: 100%;
     border: 2px solid #6d5c55;
 }
 #news-img {
@@ -487,9 +487,12 @@ input:default {
 #widget {
     position: fixed;
     bottom: 10%;
-    right: 3%;
+    right: 8%;
     display: none;
  
+}
+#widget.show{
+    display:block;
 }
 input:default {
     background: linear-gradient(0deg, rgba(96,9,240,1) 0%, rgba(129,5,240,1) 70%);
@@ -497,9 +500,7 @@ input:default {
     padding: 0;
     border: none;
 }
-
-
-    input:default:hover {
-        color: rgba(251,75,2,1);
-        background: transparent;
-    }
+input:default:hover {
+    color: rgba(251,75,2,1);
+    background: transparent;
+}
