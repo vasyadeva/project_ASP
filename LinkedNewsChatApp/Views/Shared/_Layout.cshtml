@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+      
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LinkedNews</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LinkedNewsChatApp.styles.css" asp-append-version="true" />
     <!--icon add-->
@@ -40,19 +41,22 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
+                            <li class="nav-item text-black">
                                 <a class="nav-link text-black" asp-area="" asp-controller="Chat" asp-action="Index">Chat</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item text-black">
                                 <a class="nav-link text-black " asp-area="" asp-controller="News" asp-action="Index">News</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item text-black">
                                 <a id="nav_profile" class="nav-link text-black" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
+                            </li>
+                            <li class="nav-item text-black">
+                                <a id="nav_profile" class="nav-link text-black" asp-area="" asp-controller="Home" asp-action="About">About</a>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
+                            <li class="nav-item text-black">
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Register">Register</a>
                             </li>
                         }
@@ -64,13 +68,13 @@
                                 Hello, @User.Identity.Name
                             </li>
                             <li class="nav-item">
-                                <a id="btn_logd" class="btn btn-outline-secondary" asp-controller="Home" asp-action="Logout">Logout</a>
+                                <a id="btn_logd" class="btn btn-outline-secondary text-black " asp-controller="Home" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a id="btn_logi" class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Login</a>
+                                <a id="btn_logi" class="btn btn-outline-secondary text-black tex-large" asp-controller="Home" asp-action="Index">Login</a>
                             </li>
                         }
                     </ul>
@@ -84,9 +88,10 @@
         </main>
     </div>
 
-    <footer class="FOOT-top">
-        <div class="container">
-            <p>LinkedNews Application 2023</p>
+    <footer >
+        <div id="FOOT-top">
+            <p>                 <b>LinkedNews Application 2023</b></p>
+            <a>                 <b>LinkedNewsApp@gmail.com</b></a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

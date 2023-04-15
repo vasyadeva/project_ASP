@@ -16,3 +16,14 @@ function scrollToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+
+function footer() {
+    const
+        main = document.getElementsByTagName('main')[0],
+        footer = document.getElementsByTagName('footer')[0]
+
+    main.style.paddingBottom = footer.clientHeight + 'px'
+}
+
+

@@ -14,7 +14,17 @@ min-height: 100%;
 }
 
 body {
-margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
 }
 
 html, body {
@@ -343,13 +353,6 @@ width: 100px;
     background-color: white;
 }
 
-footer {
-background-color: dimgray;
-position: fixed;
-height: 40px;
-bottom: 0;
-width: 100%;
-}
 /*End*/
 
 .footer-links a, .footer-links a:hover {
@@ -366,11 +369,6 @@ width: 100%;
 .row {
     color: lightcyan;
     filter: opacity(85%);
-}
-.FOOT-top {
-    background-image: linear-gradient(to bottom right, #e58e00, #ffbb02);
-    margin-bottom: -0.5%;
-    margin-top: 1%;
 }
 .news-color {
     color: black;
@@ -465,7 +463,7 @@ width: 100%;
 }
 input:hover, input:defined {
     width: 100%;
-    color: #ccc;
+    color:black;
     transition: .3s ease;
     background-color: lavenderblush; 
     border: 2px solid #515551;
@@ -503,4 +501,37 @@ input:default {
 input:default:hover {
     color: rgba(251,75,2,1);
     background: transparent;
+}
+
+.abt-h{
+    margin-left: 35%;
+}
+.abt-par {
+    border: solid 4px #ffbb02;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-image: linear-gradient(to bottom right, #27afc9, #b0a6a5);
+}
+.abt-data {
+    margin-top: 1%;
+    border: solid 4px #ffbb02;
+    border-radius: 1rem;
+    background-image: linear-gradient(to bottom right, #27afc9, #ffbb02);
+}
+.container-foot {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    align-content: center;
+    color: black;
+}
+.abt-member {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    margin-top: 1%;
+    margin-bottom:5%; 
+    border: solid 4px #ffbb02;
+    border-radius: 1rem;
+    background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
 }
