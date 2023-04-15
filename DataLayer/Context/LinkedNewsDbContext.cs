@@ -1,6 +1,7 @@
 ﻿using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using LinkedNewsChatApp.Hubs;
 
 namespace DataLayer.Context
 {
@@ -17,12 +18,19 @@ namespace DataLayer.Context
         public DbSet<Group> Groups => Set<Group>();
         public DbSet<GroupMember> GroupMembers => Set<GroupMember>();
         public DbSet<Message> Messages => Set<Message>();
+        public DbSet<HubUser> hubUsers => Set<HubUser>();
+        public DbSet<HubMessage> HubMessages => Set<HubMessage>();
+        public DbSet<PrivateChat> privateChats => Set<PrivateChat>();
+        public DbSet<HubGroupMessage> hubGroupMessages => Set<HubGroupMessage>();
+        public DbSet<HubGroup> hubGroups => Set<HubGroup>();
+
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config.GetConnectionString("HermesContextDb"));
+            optionsBuilder.UseSqlServer(_config.GetConnectionString("LinkedNewsDb"));
         }
     }
 }

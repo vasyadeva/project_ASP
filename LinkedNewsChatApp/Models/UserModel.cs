@@ -28,5 +28,13 @@ namespace LinkedNewsChatApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
         public string? ConfirmPassword { get; set; }
+
+        [Range(1, 10, ErrorMessage = "Value must be between 1 and 10")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Value must be an integer")]
+        public int AvatarId { get; set; }
+        [StringLength(100, ErrorMessage ="Value must be less than 100 symbols")]
+        public string? Biography { get; set; }
+
+        public string? Region { get; set; }
     }
 }

@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using ServiceLayer;
+using System.Timers;
+using DataLayer;
+using System.Text.RegularExpressions;
 
 namespace LinkedNewsChatApp.Hubs
 {
@@ -10,13 +15,22 @@ namespace LinkedNewsChatApp.Hubs
         public static List<HubUser> connectedUsers = new List<HubUser>();
         private static MessageDictionary _messageDictionary = new MessageDictionary();
         private static GroupDictionary _groupDictionary = new GroupDictionary();
-
+        private readonly LinkedNewsRepository _repository;
+        private readonly LoginOperations _loginOperator;
+        public ChatHub(LinkedNewsRepository repository, LoginOperations loginOperator)
+        {
+            _repository = repository;
+            _loginOperator = loginOperator;
+            
+        }
+        
         public override async Task OnConnectedAsync()
         {
             var hubUser = new HubUser()
             {
                 UserIdentifier = Context.UserIdentifier,
                 Name = Context.User.Identity.Name
+
             };
 
             //lock this list while completing method
@@ -27,17 +41,22 @@ namespace LinkedNewsChatApp.Hubs
                     connectedUsers.Add(hubUser);
                 }
             }
-
+            //---------------------
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            //---------------------
+            chatOperations.CheckMainChat();
             await Clients.Caller.SendAsync("IdentifyUser", hubUser);
             await Clients.All.SendAsync("RecieveOnlineUsers", connectedUsers);
-            await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
+            await Clients.All.SendAsync("RecieveOnlineGroups",chatOperations.GetListOfGroups()); //chatOperations.GetListOfGroups());
             //add user to general chat
             var generalChatName = "GeneralDefaultChat";
             await Groups.AddToGroupAsync(Context.ConnectionId, generalChatName);
             await Clients.User(hubUser.UserIdentifier).SendAsync("AddToMainChat", hubUser, generalChatName);
 
             //зчитування повідомлень зі словника
-            var messageList = _messageDictionary.GetLastMessageList(generalChatName);
+            var messageList1 = _messageDictionary.GetLastMessageList(generalChatName);
+         //   int AvaId = chatOperations.AvaId(Username);
+            var messageList = chatOperations.GetGroupMessages(generalChatName);
             if (messageList != null)
             {
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
@@ -50,6 +69,9 @@ namespace LinkedNewsChatApp.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
+            //---------------------
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            //---------------------
             var hubUser = connectedUsers.Find(x => x.UserIdentifier == Context.UserIdentifier);
             lock (connectedUsers)
             {                
@@ -59,7 +81,7 @@ namespace LinkedNewsChatApp.Hubs
                 }                
             }
             _groupDictionary.RemoveUserFromGroup(hubUser);
-            await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
+            await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups());
             await Clients.All.SendAsync("RecieveOnlineUsers", connectedUsers);           
             await base.OnDisconnectedAsync(exception);
         }
@@ -73,12 +95,14 @@ namespace LinkedNewsChatApp.Hubs
             };
 
             var groupName = CreatePrivateGroupName(hubUser.Name, toUser);
-            var messageList = _messageDictionary.GetLastMessageList(groupName);
-
+            //var messageList = _messageDictionary.GetLastMessageList(groupName);
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            var messageList = chatOperations.GetPrivateMessages(groupName);
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            int Avaid = chatOperations.AvaId(hubUser.Name);
             if (messageList != null)
             {
-                await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
+                await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList, Avaid);
             }
             await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " is here! ").ConfigureAwait(true);
         }
@@ -103,10 +127,18 @@ namespace LinkedNewsChatApp.Hubs
                 Time = timeNow.ToString("HH:mm:ss"),
                 Message = message
             };
-
-            _messageDictionary.Add(groupName, saveMessage);
-
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"));
+            //------------------
+            string FromUserName = hubUser.Name;
+            string Time = timeNow.ToString("HH:mm:ss");
+            string Message = message;
+            string groupname = groupName;
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            int Avaid = chatOperations.AvaId(hubUser.Name);
+            chatOperations.AddPrivateMessage(FromUserName, Time, Message, groupname,Avaid);
+            //------------------
+            //_messageDictionary.Add(groupName, saveMessage);
+         
+            await Clients.Group(groupName).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"), Avaid);
             //send notification to user
             await Clients.User(foundToUser.UserIdentifier).SendAsync("MessageNotification", hubUser);
         }
@@ -144,10 +176,21 @@ namespace LinkedNewsChatApp.Hubs
                 Time = timeNow.ToString("HH:mm:ss"),
                 Message = message
             };
+            //------------
+            string FromUserName = hubUser.Name;
+            string Time = timeNow.ToString("HH:mm:ss");
+            string Message = message;
+            string groupname = toGroup;
+           
+        var chatOperations = new ChatOperations(_repository,_loginOperator);
+            int Avaid = chatOperations.AvaId(hubUser.Name);
+            chatOperations.AddGroupMessage(FromUserName, Time, Message,groupname,Avaid);
 
-            _messageDictionary.Add(toGroup, saveMessage);
+
+            //-----------
+            //_messageDictionary.Add(toGroup, saveMessage);
             //кінець
-            await Clients.Group(toGroup).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"));
+            await Clients.Group(toGroup).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"), Avaid);
         }
 
         public async Task CreateGroup(string groupName)
@@ -158,28 +201,41 @@ namespace LinkedNewsChatApp.Hubs
                 Name = Context.User.Identity.Name
             };
             //add to dictionary
-            _groupDictionary.Add(groupName, hubUser);
-            
+            //_groupDictionary.Add(groupName, hubUser);
+            //-----------------------
+            var UserIdentifier = Context.UserIdentifier;
+            var Name = Context.User.Identity.Name;
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            chatOperations.AddGroup(groupName,UserIdentifier,Name);
+
+            //-----------------------
+
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
+            await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups());
             //add him immediatly to this chat
             await Clients.User(hubUser.UserIdentifier).SendAsync("AddCreatorToGroup", hubUser, groupName);
         }
 
         public async Task JoinRoom(string groupName)
         {
+            //---------------------
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            //---------------------
             var hubUser = new HubUser()
             {
                 UserIdentifier = Context.UserIdentifier,
                 Name = Context.User.Identity.Name
             };
-
+            var UserIdentifier = Context.UserIdentifier;
+            var Name = Context.User.Identity.Name;
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            _groupDictionary.Add(groupName, hubUser);
-            await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
-            
+            //_groupDictionary.Add(groupName, hubUser);
+            chatOperations.addMember(groupName, UserIdentifier, Name);
+            await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups());
+
             //апдейт: для особистих груп добавив читання історії повідомлень
-            var messageList = _messageDictionary.GetLastMessageList(groupName);
+            //var messageList = _messageDictionary.GetLastMessageList(groupName);
+            var messageList = chatOperations.GetGroupMessages(groupName);
             if (messageList != null)
             {
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
@@ -190,6 +246,9 @@ namespace LinkedNewsChatApp.Hubs
 
         public async Task LeaveRoom(string groupName)
         {
+            //---------------------
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            //---------------------
             var hubUser = new HubUser()
             {
                 UserIdentifier = Context.UserIdentifier,
@@ -199,7 +258,7 @@ namespace LinkedNewsChatApp.Hubs
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
             //remove from dictionary
             _groupDictionary.Remove(groupName, hubUser);
-            await Clients.All.SendAsync("RecieveOnlineGroups", _groupDictionary.GetListOfGroups());
+            await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups());
             if(groupName == "GeneralDefaultChat")
             {
                 await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " left General Chat").ConfigureAwait(true);

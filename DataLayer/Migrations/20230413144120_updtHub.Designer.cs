@@ -4,6 +4,7 @@ using DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(LinkedNewsDbContext))]
-    partial class LinkedNewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230413144120_updtHub")]
+    partial class updtHub
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +64,6 @@ namespace DataLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AvaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FromUserName")
                         .IsRequired()
@@ -158,21 +157,12 @@ namespace DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
-                    b.Property<int>("AvatarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Biography")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -192,9 +182,6 @@ namespace DataLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AvaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FromUserName")
                         .IsRequired()
@@ -221,27 +208,14 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("LinkedNewsChatApp.Hubs.HubUser", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<string>("GroupChatName")
-                        .IsRequired()
+                    b.Property<string>("UserIdentifier")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserIdentifier")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("GroupChatName");
+                    b.HasKey("UserIdentifier");
 
                     b.ToTable("hubUsers");
                 });
@@ -302,17 +276,6 @@ namespace DataLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("privateChat");
-                });
-
-            modelBuilder.Entity("LinkedNewsChatApp.Hubs.HubUser", b =>
-                {
-                    b.HasOne("DataLayer.Entities.HubGroup", "hubGroup")
-                        .WithMany()
-                        .HasForeignKey("GroupChatName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("hubGroup");
                 });
 #pragma warning restore 612, 618
         }

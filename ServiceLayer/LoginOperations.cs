@@ -45,7 +45,11 @@ namespace ServiceLayer
             {
                 Username = user.Username,
                 Password = BCrypt.Net.BCrypt.HashPassword(user.Password),
-                Email = user.Email
+                Email = user.Email,
+                AvatarId = user.AvatarId,
+                Biography = user.Biography,
+                Region = user.Region
+                
             };
             _repository.Register(hashedUser);
         }

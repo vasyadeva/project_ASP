@@ -22,9 +22,29 @@
         <dt style="font-size: 150%"; class = "col-sm-2">
                     @Html.DisplayNameFor(model => model.Email)
         </dt>
-    <dd style="font-size: 150%"; class="col-sm-10">
+         <dd style="font-size: 150%"; class="col-sm-10">
                     @Html.DisplayFor(model => model.Email)
         </dd>
+         <dt style="font-size: 150%"; class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Biography)
+        </dt>
+        <dd style="font-size: 150%"; class="col-sm-10">
+                    @Html.DisplayFor(model => model.Biography)
+        </dd>
+         <dt style="font-size: 150%"; class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd style="font-size: 150%"; class="col-sm-10">
+                    @Html.DisplayFor(model => model.Region)
+        </dd>
+    
+        @{var imageAv = Model.AvatarId;
+        }
+        <dd style="font-size: 150%"; class="col-sm-10">
+                 <img src="/avatars/@(imageAv).png"/>
+        </dd>
+      
+
         </dl>
     <div class="footer-links">
             @Html.ActionLink("Change Password", "ResetPassword")

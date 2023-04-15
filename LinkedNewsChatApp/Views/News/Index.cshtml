@@ -1,14 +1,62 @@
-﻿@model IDictionary<int, Tuple<string, string, string>>
+﻿@model IEnumerable<LinkedNewsChatApp.Data.News>
 
-@foreach (var item in Model.Reverse())
-{
-<div class="news-container">
-    <div class="news-color"; style="background-color:antiquewhite;">
-        <h2 class="p_style1">@item.Value.Item1</h2>
-        <p class="p-style">@item.Value.Item2</p>
-    </div>
-    <div id="news-img">
-        <img class="news-img"; src="@item.Value.Item3" />
-    </div>
-</div>
+@{
+    ViewData["Title"] = "Index";
+    <head>
+    <style>
+       .table{
+           display: block;
+                background-color: rgba(128,128,128,.5);
+       }
+    </style>
+    </head>
 }
+
+<h1>Новини</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.text)
+                </td>
+                <td>
+                    @{
+                        /*Html.DisplayFor(modelItem => item.photo)*/
+                    }
+                    @{
+                        string base64String = Convert.ToBase64String(item.photo);
+                    }
+                    <img src="data:image/png;base64, @(base64String)" width="256" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

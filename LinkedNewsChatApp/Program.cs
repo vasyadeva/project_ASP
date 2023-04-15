@@ -1,6 +1,8 @@
 using DataLayer.Context;
+using LinkedNewsChatApp.Data;
 using LinkedNewsChatApp.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,11 @@ builder.Services.AddSignalR();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<LinkedNewsDbContext>();
-
+//2 дб контекст
+var connectionString = builder.Configuration.GetConnectionString("LinkedNewsDb");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddScoped<LinkedNewsChatApp.Data.NewsRepository>();
 builder.Services.AddScoped<DataLayer.LinkedNewsRepository>();
 builder.Services.AddScoped<ServiceLayer.LoginOperations>();
 builder.Services.AddScoped<ServiceLayer.ChatOperations>();

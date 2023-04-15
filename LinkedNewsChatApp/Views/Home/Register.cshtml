@@ -6,6 +6,46 @@
 @section Scripts
 {
 <script src="~/js/passwordValidation.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity=
+"sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+        crossorigin="anonymous">
+  
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, 
+        then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity=
+"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+    </script>
+      
+    <script src=
+"https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity=
+"sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous">
+    </script>
+      
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity=
+"sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous">
+    </script>
+    <script>
+
+        function saveAvatarId(id) {
+  // Отримання посилання на поле AvatarId
+  var avatarIdInput = document.getElementById("AvatarId");
+  // Збереження значення ID обраного аватара в полі
+  avatarIdInput.value = id;
+}
+
+
+    </script>
 }
 @model UserModel
 
@@ -41,6 +81,7 @@
                         <input asp-for="Email" placeholder="Email" class="form-control" />
                         <span asp-validation-for="Email" class="text-warning"></span>
                     </div>
+
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key fa-spin"></i></span>
@@ -70,6 +111,64 @@
                             </ul>
                         </div>
                     </div>
+                     <div class="input-group form-group">
+                      <input type="hidden" name="AvatarId" id="AvatarId" value="" />
+
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Оберіть аватар
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <li class="dropdown-item">
+                                 <input type="hidden" name="AvatarId" id="AvatarId" value="" /> <img src="~/avatars/@(i).png" width="32" height="32" onclick="saveAvatarId(@i)" />
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                    </div>
+                     <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input asp-for="Biography" placeholder="Кілька слів про себе..." class="form-control" />
+                        <span asp-validation-for="Biography" class="text-warning"></span>
+                    </div>
+
+                <div class="input-group form-group">
+                     <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-map-marker"></i></span>                
+                  <select asp-for="Region" class="form-control">
+                    <option value="">Оберіть область</option>
+                    <option value="Вінницька область">Вінницька область</option>
+                    <option value="Волинська область">Волинська область</option>
+                    <option value="Дніпропетровська область">Дніпропетровська область</option>
+                    <option value="Донецька область">Донецька область</option>
+                    <option value="Житомирська область">Житомирська область</option>
+                    <option value="Закарпатська область">Закарпатська область</option>
+                    <option value="Запорізька область">Запорізька область</option>
+                    <option value="Івано-Франківська область">Івано-Франківська область</option>
+                    <option value="Київська область">Київська область</option>
+                    <option value="Кіровоградська область">Кіровоградська область</option>
+                    <option value="Луганська область">Луганська область</option>
+                    <option value="Львівська область">Львівська область</option>
+                    <option value="Миколаївська область">Миколаївська область</option>
+                    <option value="Одеська область">Одеська область</option>
+                    <option value="Полтавська область">Полтавська область</option>
+                    <option value="Рівненська область">Рівненська область</option>
+                    <option value="Сумська область">Сумська область</option>
+                    <option value="Тернопільська область">Тернопільська область</option>
+                    <option value="Харківська область">Харківська область</option>
+                    <option value="Херсонська область">Херсонська область </option>
+                    <option value="Хмельницька область">Хмельницька область</option>
+                    <option value="Черкаська область">Черкаська область</option>
+                    <option value="Чернівецька область">Чернівецька область</option>
+                    <option value="Чернігівська область">Чернігівська область</option>
+                    </select>
+                    <span asp-validation-for="Region" class="text-warning"></span>
+                
+]  </div> </div>
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn float-left login_btn" />
                     </div>

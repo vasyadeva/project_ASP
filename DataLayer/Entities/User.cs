@@ -13,5 +13,8 @@ namespace DataLayer
         public string? Password { get; set; }
         [Required]
         public string? Email { get; set; }
+        public string? Biography { get; set; }
+        public int AvatarId { get; set; }
+        public string? Region { get; set; }
     }
 }

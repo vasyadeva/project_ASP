@@ -100,6 +100,7 @@ connection.on("GetOldMessagesOnJoin", function (messageList) {
     var messageWindow = document.getElementById("messagesList");
     messageWindow.innerHTML = "";
     messageList.forEach(addLastTenMessages);
+   
 });
 
 function addLastTenMessages(message) {
@@ -107,7 +108,7 @@ function addLastTenMessages(message) {
     document.getElementById("messagesList").appendChild(li);
 
     li.innerHTML = `<div class="one-message ${currentUser.name === message.fromUserName ? "my-message" : ""}">
-<img src="/images/user.png"/>
+<img src="/avatars/${message.avaId}.png"/>
 <p class="username"><b>${message.fromUserName}</b></p>
 <div class="message">
 <p class="text-content"></p>
@@ -119,12 +120,11 @@ function addLastTenMessages(message) {
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 }
 
-connection.on("ReceiveMessage", function (user, message, timenow) {
+connection.on("ReceiveMessage", function (user, message, timenow,avaid) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
-
     li.innerHTML = `<div class="one-message ${currentUser.userIdentifier === user.userIdentifier ? "my-message" : ""}">
-<img src="/images/user.png"/>
+<img src="/avatars/${avaid}.png"/>
 <p class="username"><b>${user.name}</b></p>
 <div class="message">
 <p class="text-content"></p>
