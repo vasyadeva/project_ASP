@@ -41,9 +41,11 @@ main {
 }
 footer {
     flex-shrink: 0;
-    position: static;
     height: 80px;
     background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /*footer {
     position: absolute;
