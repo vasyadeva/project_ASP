@@ -19,6 +19,7 @@ namespace DataLayer
         public List<HubGroupMessageMdl> GetGroupMessages(string groupName);
         public void CheckMainChat();
         public int GetAvatarId(string Username);
+        public string Getregion(string Username);
 
     }
 }

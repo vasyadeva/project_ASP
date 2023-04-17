@@ -111,16 +111,20 @@ namespace DataLayer
 
         public void CheckMainChat()
         {
-            var main = _dbContext.hubGroups.Where(w => w.Name == "GeneralDefaultChat").Select(m => m.Name);
-            if (main.FirstOrDefault() == "GeneralDefaultChat")
+            string[] regionsOfUkraine = { "GeneralDefaultChat","Вінницька область", "Волинська область", "Дніпропетровська область", "Донецька область", "Житомирська область", "Закарпатська область", "Запорізька область", "Івано-Франківська область", "Київська область", "Кіровоградська область", "Луганська область", "Львівська область", "Миколаївська область", "Одеська область", "Полтавська область", "Рівненська область", "Сумська область", "Тернопільська область", "Харківська область", "Херсонська область", "Хмельницька область", "Черкаська область", "Чернівецька область", "Чернігівська область" };
+            foreach (string reg in regionsOfUkraine)
             {
+                var main = _dbContext.hubGroups.Where(w => w.Name == reg).Select(m => m.Name);
+                if (main.FirstOrDefault() == reg)
+                {
 
-            }
-            else
-            {
-                var data = new HubGroup() { Name = "GeneralDefaultChat" };
-                _dbContext.hubGroups.Add(data);
-                _dbContext.SaveChanges();
+                }
+                else
+                {
+                    var data = new HubGroup() { Name = reg };
+                    _dbContext.hubGroups.Add(data);
+                    _dbContext.SaveChanges();
+                }
             }
         }
 
@@ -128,6 +132,11 @@ namespace DataLayer
         {
            int AvaId = _dbContext.Users.Where(w =>w.Username == Username).Select(u => u.AvatarId).FirstOrDefault();
             return AvaId;
+        }
+        public string Getregion(string Username)
+        {
+            string reg = _dbContext.Users.Where(w => w.Username == Username).Select(u => u.Region).FirstOrDefault();
+            return reg;
         }
     }
 
