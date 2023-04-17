@@ -66,5 +66,9 @@ namespace ServiceLayer
         {
            return _repository.GetAvatarId(Username);
         }
+        public string GetReg(string Username)
+        {
+            return _repository.Getregion(Username);
+        }
     }
 }

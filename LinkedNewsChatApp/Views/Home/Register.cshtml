@@ -112,25 +112,8 @@
                         </div>
                     </div>
                      <div class="input-group form-group">
-                      <input type="hidden" name="AvatarId" id="AvatarId" value="" />
-
-                            <div class="dropdown">
-                                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Оберіть аватар
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @for (int i = 1; i <= 10; i++)
-                                    {
-                                        <li class="dropdown-item">
-                                 <input type="hidden" name="AvatarId" id="AvatarId" value="" /> <img src="~/avatars/@(i).png" width="32" height="32" onclick="saveAvatarId(@i)" />
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                    </div>
-                     <div class="input-group form-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                         </div>
                         <input asp-for="Biography" placeholder="Кілька слів про себе..." class="form-control" />
                         <span asp-validation-for="Biography" class="text-warning"></span>
@@ -167,8 +150,25 @@
                     <option value="Чернігівська область">Чернігівська область</option>
                     </select>
                     <span asp-validation-for="Region" class="text-warning"></span>
-                
+                 
 ]  </div> </div>
+                        <div class="input-group form-group text-center">
+                      <input type="hidden" name="AvatarId" id="AvatarId" value="" />
+
+                            <div class="dropdown text-center">
+                                <button class="btn btn-success dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Оберіть аватар
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <li class="dropdown-item text-center">
+                                 <input type="hidden" name="AvatarId" id="AvatarId" value="" /> <img src="~/avatars/@(i).png" width="48" height="48" onclick="saveAvatarId(@i)" />
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                    </div>
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn float-left login_btn" />
                     </div>
@@ -182,4 +182,5 @@
         </div>
     </div>
 </div>
+
 

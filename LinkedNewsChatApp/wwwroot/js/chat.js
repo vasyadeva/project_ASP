@@ -228,55 +228,136 @@ connection.on("AddToMainChat", function (user, groupName) {
     document.getElementById("messagesList").innerHTML = "";
 });
 
+const regionsOfUkraine = [
+    "Вінницька область",
+    "Волинська область",
+    "Дніпропетровська область",
+    "Донецька область",
+    "Житомирська область",
+    "Закарпатська область",
+    "Запорізька область",
+    "Івано-Франківська область",
+    "Київська область",
+    "Кіровоградська область",
+    "Луганська область",
+    "Львівська область",
+    "Миколаївська область",
+    "Одеська область",
+    "Полтавська область",
+    "Рівненська область",
+    "Сумська область",
+    "Тернопільська область",
+    "Харківська область",
+    "Херсонська область",
+    "Хмельницька область",
+    "Черкаська область",
+    "Чернівецька область",
+    "Чернігівська область",
+];
+
 // receiveing groups online
-connection.on("RecieveOnlineGroups", function (groupNames) {
+connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
     Array.from(groupNames);
     var groupNameWindow = document.getElementById("groupList");
     groupNameWindow.innerHTML = "";
-    groupNames.forEach(addOnlineGroupNames);
+    const sup = [superMainGroup]
+    // add supermaingroup to the beginning
+    if (superMainGroup) {
+        const separator = document.createElement("li");
+        separator.className = "group-separator";
+        separator.textContent = "Ваш місцевий чат";
+        groupNameWindow.appendChild(separator);
+        sup.forEach(addOnlineGroupNames);
+    }
+
+    // create an array of non-main groups
+    const nonMainGroups = groupNames.filter(function (group) {
+        return !regionsOfUkraine.includes(group);
+    });
+
+    // loop through regionsOfUkraine and add main groups
+    if (regionsOfUkraine.length > 0) {
+        const separator = document.createElement("li");
+        separator.className = "group-separator";
+        separator.textContent = "Чати регіонів";
+        groupNameWindow.appendChild(separator);
+        regionsOfUkraine.forEach(function (region) {
+            const groupsInRegion = groupNames.filter(function (group) {
+                return group.includes(region);
+            });
+            groupsInRegion.forEach(addOnlineGroupNames);
+        });
+    }
+
+    // add non-main groups to the end
+    if (nonMainGroups.length > 0) {
+        const separator = document.createElement("li");
+        separator.className = "group-separator";
+        separator.textContent = "Інші групи";
+        groupNameWindow.appendChild(separator);
+        nonMainGroups.forEach(addOnlineGroupNames);
+    }
+
+
     const scrollingElement = document.getElementsByClassName("groups-main")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
 
 function addOnlineGroupNames(group) {
-    var li = document.createElement("li");
-    var button = document.createElement("button");
+    const li = document.createElement("li");
+    const button = document.createElement("button");
 
-    // add class to style
+    // Додати клас, щоб візуально стилізувати кнопки
     button.className = "group-connected";
     button.textContent = group;
-    button.onclick = function (event) {
-        //dont join if you are already in a chat
-        if (toGroup === group) {
-            return;
-        }
-        document.getElementById("groupError").innerHTML = "";
-        // change header to see with whom you chat
-        document.getElementById("chat-intro").innerHTML = `You are now chatting in ${group} room`;
-        // allow to send messages and chat
-        document.getElementById("sendButton").disabled = false;
-        // user leave group chat
-        if (toGroup !== null && toGroup !== group) {
-            connection.invoke("LeaveRoom", toGroup);
-        }
-        // user leave private chat
-        if (toUser !== null) {
-            connection.invoke("LeavePrivateChat", toUser.name);
-        }
-        // set group for this button
-        toGroup = group;
-        // clean toUser
-        toUser = null;
-        //clean message list
-        document.getElementById("messagesList").innerHTML = "";
-        // add user to group chat
-        connection.invoke("JoinRoom", group);
-    };
-    // append items
+    button.onclick = handleGroupButtonClick;
+
+    // Додати кнопку до списку груп
     li.appendChild(button);
     document.getElementById("groupList").appendChild(li);
 }
-//Group rooms end
+
+function handleGroupButtonClick(event) {
+    const clickedButton = event.target;
+    const groupName = clickedButton.textContent;
+
+    // Не додавати користувача до чату, якщо він вже там знаходиться
+    if (toGroup === groupName) {
+        return;
+    }
+
+    // Очистити повідомлення про помилку, якщо воно було раніше
+    document.getElementById("groupError").innerHTML = "";
+
+    // Змінити заголовок для відображення з ким ведеться чат
+    document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;
+
+    // Увімкнути кнопку відправки повідомлень
+    document.getElementById("sendButton").disabled = false;
+
+    // Якщо користувач вже знаходиться в чаті, то він спочатку повинен вийти з нього
+    if (toGroup !== null && toGroup !== groupName) {
+        connection.invoke("LeaveRoom", toGroup);
+    }
+
+    // Якщо користувач знаходиться в приватному чаті, то він спочатку повинен вийти з нього
+    if (toUser !== null) {
+        connection.invoke("LeavePrivateChat", toUser.name);
+    }
+
+    // Встановити поточну групу
+    toGroup = groupName;
+
+    // Очистити поточного користувача
+    toUser = null;
+
+    // Очистити список повідомлень
+    document.getElementById("messagesList").innerHTML = "";
+
+    // Додати користувача до групового чату
+    connection.invoke("JoinRoom", groupName);
+}
+
 
 connection.start().then(function () {
     document.getElementById("sendButton").disabled;

@@ -1,52 +1,29 @@
 ﻿@model UserModel
 @{
-    ViewData["Title"] = "Profile";
-
-    var message = TempData["ResetPassword"];
+ViewData["Title"] = "Profile";
+var imageAv = Model.AvatarId;
 }
 
-<div class="text-center">
-    <h1 style="background-color:orange";class="display-4">User Profile</h1>
-</div>
-<div class="text-center">
-    <h6 style="color: green"><b>@message</b></h6> 
-</div>
-<div class="Profile-stylish">
-    <dl class="row">
-    <dt style="font-size: 150%"; class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Username)
-        </dt>
-    <dd style="font-size: 150%"; class="col-sm-10">
-                    @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt style="font-size: 150%"; class = "col-sm-2">
-                    @Html.DisplayNameFor(model => model.Email)
-        </dt>
-         <dd style="font-size: 150%"; class="col-sm-10">
-                    @Html.DisplayFor(model => model.Email)
-        </dd>
-         <dt style="font-size: 150%"; class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Biography)
-        </dt>
-        <dd style="font-size: 150%"; class="col-sm-10">
-                    @Html.DisplayFor(model => model.Biography)
-        </dd>
-         <dt style="font-size: 150%"; class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Region)
-        </dt>
-        <dd style="font-size: 150%"; class="col-sm-10">
-                    @Html.DisplayFor(model => model.Region)
-        </dd>
-    
-        @{var imageAv = Model.AvatarId;
-        }
-        <dd style="font-size: 150%"; class="col-sm-10">
-                 <img src="/avatars/@(imageAv).png"/>
-        </dd>
-      
-
-        </dl>
-    <div class="footer-links">
-            @Html.ActionLink("Change Password", "ResetPassword")
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 text-center">
+            <img src="/avatars/@(imageAv).png" width="256" height="256"/>
+        </div>
+        <div class="col-lg-6 px-xl-10">
+            <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                <h3 class="h2  mb-0">@Html.DisplayFor(model => model.Username)</h3>
+            </div>
+            <ul class="list-unstyled mb-5 text-white">
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-600">Email:</span>@Html.DisplayFor(model => model.Email)</li>
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-600">Region:</span>@Html.DisplayFor(model => model.Region)</li>
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-600">About Me:</span>@Html.DisplayFor(model => model.Biography)</li>
+            </ul>
+             @Html.ActionLink("Edit Profile", "Edit", new { }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="row mt-4">
+    <div class="col-lg-12 text-center">
+       
     </div>
 </div>
+</div> 
