@@ -35,17 +35,13 @@ button.accept-policy {
   line-height: inherit;
 }
 
-main {
-    /* Выставляем отступ с высотой footer по умолчанию */
-    padding-bottom: 30px;
-}
 footer {
     flex-shrink: 0;
-    height: 80px;
+    height: 70px;
     background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
-    display: flex;
     justify-content: center;
     align-items: center;
+    margin-top:10%
 }
 /*footer {
     position: absolute;

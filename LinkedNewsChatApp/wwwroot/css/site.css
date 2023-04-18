@@ -313,9 +313,10 @@ color: #5b5e6c
 
 /*For Log in & Register*/
 .container {
-height: 100%;
-align-content: center;
-color: black;
+    flex: 1;
+    height: 100%;
+    align-content: center;
+    color: black;
 }
 
 .card {
@@ -541,4 +542,17 @@ input:default:hover {
 }
 .new_ad12{
     margin-left:35%;
+}
+.news_hd{
+    margin-left: 45%;
+}
+.body_wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.table{
+    width:100%;
+    min-width:560px;
+    
 }
