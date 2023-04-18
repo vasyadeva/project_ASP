@@ -19,8 +19,11 @@ connection.on("IdentifyUser", function (user) {
 connection.on("RecieveOnlineUsers", function (userNames) {
     Array.from(userNames);
     var userNameWindow = document.getElementById("userOnlineList");
+    var userNameWindow2 = document.getElementById("userOnlineList2");
     userNameWindow.innerHTML = "";
+    userNameWindow2.innerHTML = "";
     userNames.forEach(addOnlineUserNames);
+    userNames2.forEach(addOnlineUserNames);
     const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
@@ -30,7 +33,9 @@ function addOnlineUserNames(user) {
         return;
     }
     var li = document.createElement("li");
+    var li2 = document.createElement("li");
     var button = document.createElement("button");
+    var button2 = document.createElement("button");
     // add class to style
     button.className = "user-connected";
     button.textContent = user.name;
@@ -63,9 +68,43 @@ function addOnlineUserNames(user) {
         // add user to private chat
         connection.invoke("JoinPrivateChat", user.name);
     };
+
+    button2.className = "user-connected";
+    button2.textContent = user.name;
+    button2.onclick = function (event) {
+        //dont join if you are already in a chat
+        if (toUser === user) {
+            return;
+        }
+        document.getElementById("groupError").innerHTML = "";
+        // change header to see with whom you chat
+        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        // allow to send messages and chat
+        document.getElementById("sendButton").disabled = false;
+        // reset button color
+        button2.style.backgroundColor = null;
+        // user leave group chat
+        if (toGroup !== null) {
+            connection.invoke("LeaveRoom", toGroup);
+            // clean to group
+            toGroup = null;
+        }
+        // user leave private chat
+        if (toUser !== null && toUser !== user) {
+            connection.invoke("LeavePrivateChat", toUser.name);
+        }
+        // set user for this button
+        toUser = user;
+        //clean message list
+        document.getElementById("messagesList").innerHTML = "";
+        // add user to private chat
+        connection.invoke("JoinPrivateChat", user.name);
+    };
     // append items
     li.appendChild(button);
+    li2.appendChild(button2);
     document.getElementById("userOnlineList").appendChild(li);
+    document.getElementById("userOnlineList2").appendChild(li2);
 }
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
@@ -260,6 +299,8 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
     Array.from(groupNames);
     var groupNameWindow = document.getElementById("groupList");
     groupNameWindow.innerHTML = "";
+    var groupNameWindow2 = document.getElementById("groupList2");
+    groupNameWindow2.innerHTML = "";
     const sup = [superMainGroup]
     // add supermaingroup to the beginning
     if (superMainGroup) {
@@ -267,6 +308,7 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
         separator.className = "group-separator";
         separator.textContent = "Ваш місцевий чат";
         groupNameWindow.appendChild(separator);
+        groupNameWindow2.appendChild(separator);
         sup.forEach(addOnlineGroupNames);
     }
 
@@ -281,6 +323,7 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
         separator.className = "group-separator";
         separator.textContent = "Чати регіонів";
         groupNameWindow.appendChild(separator);
+        groupNameWindow2.appendChild(separator);
         regionsOfUkraine.forEach(function (region) {
             const groupsInRegion = groupNames.filter(function (group) {
                 return group.includes(region);
@@ -295,26 +338,36 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
         separator.className = "group-separator";
         separator.textContent = "Інші групи";
         groupNameWindow.appendChild(separator);
+        groupNameWindow2.appendChild(separator);
         nonMainGroups.forEach(addOnlineGroupNames);
     }
 
 
     const scrollingElement = document.getElementsByClassName("groups-main")[0];
+   
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
 
 function addOnlineGroupNames(group) {
     const li = document.createElement("li");
+    const li2 = document.createElement("li"); // create new li element for groupList2
     const button = document.createElement("button");
+    const button2 = document.createElement("button");
 
     // Додати клас, щоб візуально стилізувати кнопки
     button.className = "group-connected";
     button.textContent = group;
     button.onclick = handleGroupButtonClick;
 
+    button2.className = "group-connected";
+    button2.textContent = group;
+    button2.onclick = handleGroupButtonClick;
+
     // Додати кнопку до списку груп
     li.appendChild(button);
+    li2.appendChild(button2); // append cloned button to new li element
     document.getElementById("groupList").appendChild(li);
+    document.getElementById("groupList2").appendChild(li2);
 }
 
 function handleGroupButtonClick(event) {
