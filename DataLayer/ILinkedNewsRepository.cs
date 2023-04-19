@@ -20,6 +20,6 @@ namespace DataLayer
         public void CheckMainChat();
         public int GetAvatarId(string Username);
         public string Getregion(string Username);
-
+        public void AddPrivateGroup(PrivateChat group);
     }
 }

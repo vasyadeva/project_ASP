@@ -45,6 +45,7 @@ function addOnlineUserNames(user) {
             return;
         }
         document.getElementById("groupError").innerHTML = "";
+        document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
         document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
         // allow to send messages and chat
@@ -77,6 +78,7 @@ function addOnlineUserNames(user) {
             return;
         }
         document.getElementById("groupError").innerHTML = "";
+        document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
         document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
         // allow to send messages and chat
@@ -225,6 +227,48 @@ document.getElementById("joinGroupButton").addEventListener("click", function (e
     event.preventDefault();
 });
 
+document.getElementById("joinGroupButton2").addEventListener("click", function (event) {
+    var group = document.getElementById("GroupChatName2").value;
+    var groups = Array.from(document.getElementsByClassName("group-connected"));
+
+    var listForGroupnames = [];
+    groups.forEach(function (groupButton) {
+        listForGroupnames.push(groupButton.textContent)
+    });
+    if (listForGroupnames.includes(group)) {
+        var error = document.getElementById("groupError2");
+        error.textContent = 'Group name already exists';
+        error.style = "color: red";
+        $("#GroupChatName2").val("");
+        return;
+    }
+    else if (group.length > 50) {
+        var error = document.getElementById("groupError2");
+        error.textContent = 'Group name is too long';
+        error.style = "color: red";
+        $("#GroupChatName2").val("");
+        return;
+    }
+    else if (!group || group === '') {
+        var error = document.getElementById("groupError2");
+        error.textContent = 'Please enter group name';
+        error.style = "color: red";
+        $("#GroupChatName2").val("");
+        return;
+    }
+    else {
+        var error = document.getElementById("groupError2");
+        error.textContent = 'Group successfully created!';
+        error.style = "color: green";
+        connection.invoke("CreateGroup", group).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+
+    $("#GroupChatName").val("");
+    event.preventDefault();
+});
+
 connection.on("AddCreatorToGroup", function (user, groupName) {    
     // change header to see with whom you chat
     document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;
@@ -298,55 +342,66 @@ const regionsOfUkraine = [
 connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
     Array.from(groupNames);
     var groupNameWindow = document.getElementById("groupList");
-    groupNameWindow.innerHTML = "";
     var groupNameWindow2 = document.getElementById("groupList2");
-    groupNameWindow2.innerHTML = "";
-    const sup = [superMainGroup]
-    // add supermaingroup to the beginning
-    if (superMainGroup) {
-        const separator = document.createElement("li");
-        separator.className = "group-separator";
-        separator.textContent = "Ваш місцевий чат";
-        groupNameWindow.appendChild(separator);
-        groupNameWindow2.appendChild(separator);
-        sup.forEach(addOnlineGroupNames);
+    const groupList1 = document.getElementById("groupList");
+    const groupList2 = document.getElementById("groupList2");
+    const buttons = groupList1.getElementsByTagName('button');
+    const buttons2 = groupList2.getElementsByTagName('button');
+    if (groupList1.childElementCount > 0) {
+        if ((buttons[0].textContent !== null && buttons[0].textContent !== '') && (buttons2[0].textContent !== null && buttons2[0].textContent !== '')) {
+            superMainGroup = buttons[0].textContent;
+        }
     }
+        groupNameWindow2.innerHTML = "";
+        groupNameWindow.innerHTML = "";
+        const sup = [superMainGroup]
+        // add supermaingroup to the beginning
+        if (superMainGroup) {
+            const separator = document.createElement("li");
+            separator.className = "group-separator";
+            separator.textContent = "Ваш місцевий чат";
+            groupNameWindow.appendChild(separator);
+            const separator2 = separator.cloneNode(true);
+            groupNameWindow2.appendChild(separator2);
+            sup.forEach(addOnlineGroupNames);
+        }
 
-    // create an array of non-main groups
-    const nonMainGroups = groupNames.filter(function (group) {
-        return !regionsOfUkraine.includes(group);
-    });
-
-    // loop through regionsOfUkraine and add main groups
-    if (regionsOfUkraine.length > 0) {
-        const separator = document.createElement("li");
-        separator.className = "group-separator";
-        separator.textContent = "Чати регіонів";
-        groupNameWindow.appendChild(separator);
-        groupNameWindow2.appendChild(separator);
-        regionsOfUkraine.forEach(function (region) {
-            const groupsInRegion = groupNames.filter(function (group) {
-                return group.includes(region);
-            });
-            groupsInRegion.forEach(addOnlineGroupNames);
+        // create an array of non-main groups
+        const nonMainGroups = groupNames.filter(function (group) {
+            return !regionsOfUkraine.includes(group);
         });
-    }
 
-    // add non-main groups to the end
-    if (nonMainGroups.length > 0) {
-        const separator = document.createElement("li");
-        separator.className = "group-separator";
-        separator.textContent = "Інші групи";
-        groupNameWindow.appendChild(separator);
-        groupNameWindow2.appendChild(separator);
-        nonMainGroups.forEach(addOnlineGroupNames);
-    }
+        // loop through regionsOfUkraine and add main groups
+        if (regionsOfUkraine.length > 0) {
+            const separator = document.createElement("li");
+            separator.className = "group-separator";
+            separator.textContent = "Чати регіонів";
+            groupNameWindow.appendChild(separator);
+            const separator2 = separator.cloneNode(true);
+            groupNameWindow2.appendChild(separator2);
+            regionsOfUkraine.forEach(function (region) {
+                const groupsInRegion = groupNames.filter(function (group) {
+                    return group.includes(region);
+                });
+                groupsInRegion.forEach(addOnlineGroupNames);
+            });
+        }
 
-
+        // add non-main groups to the end
+        if (nonMainGroups.length > 0) {
+            const separator = document.createElement("li");
+            separator.className = "group-separator";
+            separator.textContent = "Інші групи";
+            groupNameWindow.appendChild(separator);
+            const separator2 = separator.cloneNode(true);
+            groupNameWindow2.appendChild(separator2);
+            nonMainGroups.forEach(addOnlineGroupNames);
+        }
+    
     const scrollingElement = document.getElementsByClassName("groups-main")[0];
-   
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
+
 
 function addOnlineGroupNames(group) {
     const li = document.createElement("li");
@@ -355,6 +410,7 @@ function addOnlineGroupNames(group) {
     const button2 = document.createElement("button");
 
     // Додати клас, щоб візуально стилізувати кнопки
+    
     button.className = "group-connected";
     button.textContent = group;
     button.onclick = handleGroupButtonClick;
@@ -362,7 +418,7 @@ function addOnlineGroupNames(group) {
     button2.className = "group-connected";
     button2.textContent = group;
     button2.onclick = handleGroupButtonClick;
-
+    
     // Додати кнопку до списку груп
     li.appendChild(button);
     li2.appendChild(button2); // append cloned button to new li element
@@ -381,6 +437,7 @@ function handleGroupButtonClick(event) {
 
     // Очистити повідомлення про помилку, якщо воно було раніше
     document.getElementById("groupError").innerHTML = "";
+    document.getElementById("groupError2").innerHTML = "";
 
     // Змінити заголовок для відображення з ким ведеться чат
     document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;

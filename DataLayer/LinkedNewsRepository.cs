@@ -138,6 +138,16 @@ namespace DataLayer
             string reg = _dbContext.Users.Where(w => w.Username == Username).Select(u => u.Region).FirstOrDefault();
             return reg;
         }
+
+            public void AddPrivateGroup(PrivateChat group)
+            {
+                string chat = _dbContext.privateChats.Where(w => w.Name == group.Name).Select(u => u.Name).FirstOrDefault();
+                if (chat == null)
+                {
+                    _dbContext.privateChats.Add(group);
+                    _dbContext.SaveChanges();
+                }
+            }
     }
 
 }

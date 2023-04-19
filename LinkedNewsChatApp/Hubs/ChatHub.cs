@@ -123,7 +123,8 @@ namespace LinkedNewsChatApp.Hubs
             //time when message was sent
             var timeNow = DateTime.Now;
             var groupName = CreatePrivateGroupName(hubUser.Name, toUser);
-
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            chatOperations.AddChat(groupName);
             var saveMessage = new HubMessage()
             {
                 FromUserName = hubUser.Name,
@@ -135,7 +136,7 @@ namespace LinkedNewsChatApp.Hubs
             string Time = timeNow.ToString("HH:mm:ss");
             string Message = message;
             string groupname = groupName;
-            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            
             int Avaid = chatOperations.AvaId(hubUser.Name);
             chatOperations.AddPrivateMessage(FromUserName, Time, Message, groupname,Avaid);
             //------------------
