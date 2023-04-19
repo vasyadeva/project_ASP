@@ -70,5 +70,10 @@ namespace ServiceLayer
         {
             return _repository.Getregion(Username);
         }
+        public void AddChat(string groupName)
+        {
+            var grpname = new PrivateChat { Name = groupName };
+            _repository.AddPrivateGroup(grpname);
+        }
     }
 }
