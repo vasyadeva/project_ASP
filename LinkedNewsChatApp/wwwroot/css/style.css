@@ -33,14 +33,12 @@ button.accept-policy {
   font-size: 1.1rem;
   line-height: inherit;
 }
-
-footer {
-    flex-shrink: 0;
+.main_footer {
     height: 60px;
     background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
     justify-content: center;
     align-items: center;
-    margin-top:10%
+    margin-top: 15%
 }
 /*footer {
     position: absolute;

@@ -4,11 +4,119 @@
     ViewData["Title"] = "Index";
     <head>
     <style>
-       .table{
-           width:100%;
-           display: block;
-                background-color: rgba(128,128,128,.5);
-       }
+           
+
+            a {
+                text-decoration: none;
+            }
+
+            div, h2, p, figure {
+                margin: 0;
+                padding: 0;
+            }
+
+            .main {
+                margin: 0 auto;
+                max-width: 1040px;
+                padding: 20px;
+            }
+
+            .columns {
+                display: flex;
+            }
+
+            .column {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+            }
+
+            .main-column {
+                flex: 3;
+            }
+
+            .nested-column {
+                flex: 2;
+            }
+
+            .article {
+                background: white;
+                color: #666;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                flex-basis: auto;
+                margin: 10px;
+            }
+
+            .article-image {
+                background: #eee;
+                display: block;
+                padding-top: 75%;
+                position: relative;
+                width: 100%;
+            }
+
+                .article-image img {
+                    display: block;
+                    height: 100%;
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                }
+
+                .article-image.is-3by2 {
+                    padding-top: 66.6666%;
+                }
+
+                .article-image.is-16by9 {
+                    padding-top: 56.25%;
+                }
+
+            .article-body {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .article-title {
+                color: #333;
+                flex-shrink: 0;
+                font-size: 1.4em;
+                font-weight: bold;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .article-content {
+                flex: 1;
+                margin-top: 5px;
+            }
+
+            #article-info {
+                display: flex;
+                font-size: 0.85em;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+
+            .first-article {
+                flex-direction: row;
+            }
+
+                .first-article .article-body {
+                    flex: 1;
+                }
+
+                .first-article .article-image {
+                    height: 300px;
+                    order: 2;
+                    padding-top: 0;
+                    width: 400px;
+                }
+       
     </style>
     </head>
 }
@@ -16,48 +124,33 @@
 <h1 class="news_hd">Новини</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.text)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Time)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.text)
-                </td>
-                <td>
-                    @{
-                        /*Html.DisplayFor(modelItem => item.photo)*/
-                    }
+   <main class="main columns">
+@foreach (var item in Model)
+{
+  <section class="column">
+    <a class="article" href="#">
+      <figure class="article-image">
                     @{
                         string base64String = Convert.ToBase64String(item.photo);
                     }
                     <img src="data:image/png;base64, @(base64String)" width="256" />
+      </figure>
+      <div class="article-body">
+        <h2 class="article-title">
+                        @item.title
+        </h2>
+        <p class="article-content">
+                        @item.text
+        </p>
+        <footer id="article-info">
+                        <span>@item.Time</span>
+        </footer>
+      </div>
+    </a>
+  </section>
+}
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+</main>
+
+
+            
