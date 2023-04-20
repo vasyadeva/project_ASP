@@ -25,13 +25,14 @@ body {
     color: #212529;
     text-align: left;
     background-color: #fff;
+    
 }
 
 html, body {
 background-image: url('../images/mainphone.jpg');
 background-size: cover;
 background-repeat: no-repeat;
-height: 100%;
+height: auto;
 font-family: 'Numans', sans-serif;
 background-attachment: fixed;
 background-position: center;
@@ -329,6 +330,7 @@ color: #5b5e6c
     height: 100%;
     align-content: center;
     color: black;
+    margin-bottom: 10%;
 }
 
 .card {
@@ -555,10 +557,21 @@ input:default:hover {
 .new_ad12{
     margin-left:35%;
 }
-footer {
-    margin-top: 15%;
+.main_footer{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    overflow:hidden;
+    margin-top: 10%;
     max-height: 60px;
     text-align: center;
+}
+#article-info {
+    position: absolute;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+    color: #777;
 }
 
 

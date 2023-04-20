@@ -34,6 +34,7 @@ button.accept-policy {
   line-height: inherit;
 }
 .main_footer {
+
     height: 60px;
     background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
     justify-content: center;
