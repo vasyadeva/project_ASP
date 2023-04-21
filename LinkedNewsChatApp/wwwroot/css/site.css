@@ -148,11 +148,12 @@ margin-bottom: auto;*/
 
 .one-message {
     display: flex;
+    overflow:hidden;
     background: #FFE4B5;
     padding: 10px 10px 0 10px;
     border-radius: 0 6px 6px 0;
     margin-bottom: 8px;
-    max-width: 80%;
+    max-width: 96%;
     width: auto;
     box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
     overflow-wrap: break-word;
@@ -160,6 +161,7 @@ margin-bottom: auto;*/
 }
 
 .my-message {
+    overflow: hidden;
     background: #bfd4ac;
     position: relative;
 }
@@ -548,7 +550,7 @@ input:default:hover {
     margin-bottom:5%; 
     border: solid 4px #ffbb02;
     border-radius: 1rem;
-    background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
+    background-image: linear-gradient(to bottom left, #ffbb02, #27afc9);
 }
 #Ne_Ed{
     width: 100%;
@@ -570,9 +572,10 @@ input:default:hover {
     position: absolute;
     text-align: center;
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 1%;
     color: #777;
 }
+
 
 
 #show-groups-btn {
@@ -698,4 +701,27 @@ input:default:hover {
     border: 2px solid #bdbdbd;
     border-radius: 1rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#LeaveButton {
+    font-weight: 500;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    width: 70%;
+    margin-left: 15%;
+    opacity: 60%;
+}
+    #LeaveButton:hover {
+        background-color: #FF3333;
+        opacity: 60%;
+    }
+#sendButton {
+    background-image: linear-gradient(to bottom right, #f8f8f8, #f58b26);
+}
+.col-lg-6{
+    font-size:24px !important;
+}
+.h2 {
+    border-radius:1rem;
+    border: 1px solid #e87428;
+    padding: 0.25rem;
 }
