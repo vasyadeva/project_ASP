@@ -15,9 +15,13 @@ namespace ServiceLayer
             _loginOperator = loginOperator;
         }
 
-        public List<string>? GetListOfGroups()
+        public List<string>? GetListOfGroups(string name)
         {
-            return _repository.GetListOfGroups();
+            return _repository.GetListOfGroups(name);
+        }
+        public List<string>? GetAllListOfGroups()
+        {
+            return _repository.GetAllListOfGroups();
         }
 
         public void AddGroup(string groupName, string userid, string username)
@@ -74,6 +78,11 @@ namespace ServiceLayer
         {
             var grpname = new PrivateChat { Name = groupName };
             _repository.AddPrivateGroup(grpname);
+        }
+
+        public void LeaveFromGroup(string username, string group)
+        {
+            _repository.LeaveFromGroup(username, group);
         }
     }
 }

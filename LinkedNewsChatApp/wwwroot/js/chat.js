@@ -11,6 +11,7 @@ var toUser = null;
 var currentUser = null;
 //filled on join
 var toGroup = null;
+var allgroups= null;
 
 connection.on("IdentifyUser", function (user) {
     currentUser = user;
@@ -27,6 +28,10 @@ connection.on("RecieveOnlineUsers", function (userNames) {
     const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
+
+connection.on("RecieveAllOnlineGroups", function (groupall) {
+    allgroups = Array.from(groupall);
+})
 
 function addOnlineUserNames(user) {
     if (user.userIdentifier === currentUser.userIdentifier) {
@@ -187,13 +192,9 @@ connection.on("NotifyGroup", function (user, message) {
 //validation
 document.getElementById("joinGroupButton").addEventListener("click", function (event) {
     var group = document.getElementById("GroupChatName").value;    
-    var groups = Array.from(document.getElementsByClassName("group-connected"));
-
-    var listForGroupnames = [];
-    groups.forEach(function (groupButton) {
-        listForGroupnames.push(groupButton.textContent)
-    });
-    if (listForGroupnames.includes(group)) {
+    //var groups = Array.from(document.getElementsByClassName("group-connected"));
+    var groups = allgroups;
+    if (groups.includes(group)) {
         var error = document.getElementById("groupError");
         error.textContent = 'Group name already exists';
         error.style = "color: red";
@@ -229,13 +230,10 @@ document.getElementById("joinGroupButton").addEventListener("click", function (e
 
 document.getElementById("joinGroupButton2").addEventListener("click", function (event) {
     var group = document.getElementById("GroupChatName2").value;
-    var groups = Array.from(document.getElementsByClassName("group-connected"));
+    //var groups = Array.from(document.getElementsByClassName("group-connected"));
+    var groups = allgroups;
 
-    var listForGroupnames = [];
-    groups.forEach(function (groupButton) {
-        listForGroupnames.push(groupButton.textContent)
-    });
-    if (listForGroupnames.includes(group)) {
+    if (groups.includes(group)) {
         var error = document.getElementById("groupError2");
         error.textContent = 'Group name already exists';
         error.style = "color: red";
@@ -267,6 +265,68 @@ document.getElementById("joinGroupButton2").addEventListener("click", function (
 
     $("#GroupChatName").val("");
     event.preventDefault();
+});
+
+document.getElementById("joinButton").addEventListener("click", function (event) {
+    var group = document.getElementById("GroupJoin").value;
+    var groups = allgroups;
+    if (groups.includes(group)) {
+        var error = document.getElementById("groupError");
+        error.textContent = '';
+        // Встановити поточну групу
+        toGroup = group;
+
+        // Очистити поточного користувача
+        toUser = null;
+
+        // Очистити список повідомлень
+        document.getElementById("messagesList").innerHTML = "";
+
+        // Додати користувача до групового чату
+        connection.invoke("JoinRoom", group);
+        return;
+    }
+    else {
+        var error = document.getElementById("groupError");
+        error.textContent = 'Group dont exists';
+        error.style = "color: red";
+        $("#GroupChatName2").val("");
+        return;
+    }
+});
+
+
+document.getElementById("joinButton2").addEventListener("click", function (event) {
+    var group = document.getElementById("GroupJoin2").value;
+    var groups = allgroups;
+    if (groups.includes(group)) {
+        var error = document.getElementById("groupError2");
+        error.textContent = '';
+        // Встановити поточну групу
+        toGroup = group;
+
+        // Очистити поточного користувача
+        toUser = null;
+
+        // Очистити список повідомлень
+        document.getElementById("messagesList").innerHTML = "";
+
+        // Додати користувача до групового чату
+        connection.invoke("JoinRoom", group);
+        return;
+    }
+    else {
+        var error = document.getElementById("groupError2");
+        error.textContent = 'Group dont exists';
+        error.style = "color: red";
+        $("#GroupChatName2").val("");
+        return;
+    }
+});
+
+document.getElementById("LeaveButton").addEventListener("click", function (event) {
+    connection.invoke("LeaveFromGroup", toGroup);
+    return;
 });
 
 connection.on("AddCreatorToGroup", function (user, groupName) {    

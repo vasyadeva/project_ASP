@@ -47,12 +47,22 @@ namespace DataLayer
          }*/
         public void addMember(HubUser user)
         {
-            _dbContext.hubUsers.Add(user);
-            _dbContext.SaveChanges();
+            var valid = _dbContext.hubUsers.Where(m => m.GroupChatName == user.GroupChatName).Select(g => g.GroupChatName).FirstOrDefault();
+            if (valid == null)
+            {
+                _dbContext.hubUsers.Add(user);
+                _dbContext.SaveChanges();
+            }
         }
-        public List<string> GetListOfGroups()
+        public List<string> GetListOfGroups(string name)
         {
-            var groupList = _dbContext.hubGroups.Where(m => m.Name!= "GeneralDefaultChat").Select(g => g.Name).ToList();
+            var usergroups = _dbContext.hubUsers.Where(w => w.Name == name).Select(h => h.GroupChatName).ToList();
+            var groupList = _dbContext.hubGroups.Where(k => usergroups.Contains(k.Name)).Where(m => m.Name != "GeneralDefaultChat").Select(g => g.Name).ToList();
+            return groupList;
+        }
+        public List<string> GetAllListOfGroups()
+        {
+            var groupList = _dbContext.hubGroups.Where(m => m.Name != "GeneralDefaultChat").Select(g => g.Name).ToList();
             return groupList;
         }
         public void AddGroup(HubGroup group, HubUser user)
@@ -148,6 +158,16 @@ namespace DataLayer
                     _dbContext.SaveChanges();
                 }
             }
+
+        public void LeaveFromGroup(string username, string group)
+        {
+            var user = _dbContext.hubUsers.Where(g => g.Name == username).Where(k=>k.GroupChatName==group).FirstOrDefault();
+            if (user != null)
+            {
+                _dbContext.hubUsers.Remove(user);
+                _dbContext.SaveChanges();
+            }
+        }
     }
 
 }
