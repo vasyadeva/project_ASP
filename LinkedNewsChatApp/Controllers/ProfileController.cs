@@ -49,7 +49,7 @@ namespace LinkedNewsChatApp.Controllers
         {
             int userId = GetCurrentUserId();
 
-            bool isUpdated = await _repository.UpdateProfileAsync(userId, model.Username, model.Email, model.Region, model.Biography);
+            bool isUpdated = await _repository.UpdateProfileAsync(userId, model.Email, model.Region, model.AvatarId, model.Biography);
 
             if (isUpdated)
             {

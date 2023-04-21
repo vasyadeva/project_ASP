@@ -7,8 +7,9 @@ namespace LinkedNewsChatApp.Data
     public interface IUserManagerRepository
     {
         public Task<User> GetCurrentAsync(int userId);
-        public Task<bool> UpdateProfileAsync(int userId, string username, string email, string region, string biography);
-       
+        public Task<bool> UpdateProfileAsync(int userId, string email, string region, int avaid, string biography);
+
+
     }
 
 }
