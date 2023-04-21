@@ -18,7 +18,7 @@ var imageAv = Model.AvatarId;
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-600">Region:</span>@Html.DisplayFor(model => model.Region)</li>
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-600">About Me:</span>@Html.DisplayFor(model => model.Biography)</li>
             </ul>
-             @Html.ActionLink("Edit Profile", "Edit", new { }, new { @class = "btn btn-primary" })
+          @Html.ActionLink("Edit", "Edit", "Profile", new { id = Model.UserId }, new { @class = "btn btn-primary" })
         </div>
     </div>
     <div class="row mt-4">

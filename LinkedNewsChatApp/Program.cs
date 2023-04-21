@@ -1,7 +1,9 @@
 using DataLayer.Context;
 using LinkedNewsChatApp.Data;
 using LinkedNewsChatApp.Hubs;
+using LinkedNewsChatApp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +25,8 @@ builder.Services.AddScoped<DataLayer.LinkedNewsRepository>();
 builder.Services.AddScoped<ServiceLayer.LoginOperations>();
 builder.Services.AddScoped<ServiceLayer.ChatOperations>();
 builder.Services.AddScoped<ServiceLayer.MailService>();
-
+builder.Services.AddScoped<UserManagerRepository>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
