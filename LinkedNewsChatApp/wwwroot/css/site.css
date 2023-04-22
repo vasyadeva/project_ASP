@@ -24,14 +24,14 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-image: linear-gradient( #8ef763, #42f87a ) !important;
+    background-image: url(/images/mainphone.jpg) !important;
 }
 
 html, body {
  
-    background-image: cross-fade(#8ef763, #42f87a) !important;
+    background-image: url(/images/mainphone.jpg) !important;
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     height: auto;
     font-family: 'Numans', sans-serif;
     background-attachment: fixed;
@@ -99,12 +99,12 @@ For chat
 width: 320px;
 padding: 100px;
 border: 5px solid gray;
-margin-top: 50px;
-margin-bottom: 100px;
+margin-top: 20px;
+margin-bottom: 200px;
 margin-right: 150px;
 margin-left: 80px;
 /*margin: 0;*/
-/*position: center;*/
+position: center;
 /*position: relative;*/
 /*left: 25px;*/
 /*left: 15%;
@@ -261,18 +261,18 @@ flex-grow: 1;
 .sidenavRight {
     border: 2px solid #6d5c55;
     border-radius: 5px;
-    height: 75%;
-    overflow-x: scroll;
+    height: 70%;
+    overflow-x: hidden;
     width: 13%;
     min-width: 20px;
     right: 0;
     position: absolute;
     top: 58px;
-    padding-top: 40px;
+    padding-top: 20px;
     background-color: rgba(0,0,0,0.5) !important;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 100px;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-left: 80px;
 }
 
@@ -295,17 +295,17 @@ position: center;
 .sidenavLeft {
     border: 2px solid #6d5c55;
     border-radius: 5px;
-    height: 75%;
-    overflow-x: scroll;
+    height: 70%;
+    overflow-x: hidden;
     width: 13%;
     min-width: 10px;
     left: 0;
     position: absolute;
     top: 58px;
-    padding-top: 40px;
+    padding-top: 20px;
     text-align: center;
     background-color: rgba(0,0,0,0.5) !important;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 100px;
     margin-right: 80px;
     margin-left: 10px;
@@ -640,7 +640,7 @@ input:default:hover {
     border: 2px solid #6d5c55;
     border-radius: 5px;
     height: 75%;
-    overflow-x: scroll;
+    overflow-x: hidden;
     width: 13%;
     min-width: 150px;
     min-width: 220px;
@@ -660,7 +660,7 @@ input:default:hover {
     border: 2px solid #6d5c55;
     border-radius: 5px;
     height: 75%;
-    overflow-x: scroll;
+    overflow-x: hidden;
     width: 13%;
     min-width: 150px;
     max-width: 220px;
@@ -703,15 +703,16 @@ input:default:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 #LeaveButton {
-    font-weight: 500;
-    background-color: #FF0000;
+    font-weight: 900;
+    background-color: #d70114;
     color: #FFFFFF;
-    width: 70%;
-    margin-left: 15%;
+    width: 30%;
+    font-size: 20px;
+    margin-left: 35%;
     opacity: 90%;
 }
     #LeaveButton:hover {
-        background-color: #FF3333;
+        background-color: #FF4444;
         opacity: 90%;
     }
 #sendButton {
@@ -736,12 +737,14 @@ input:default:hover {
     }
 .col-lg-6 {
     font-size: 24px !important;
-    
     color: deepskyblue;
-    
 }
 .h2 {
     border-radius: 1rem;
-    border: 1px solid #8ef763;
+    border: 1px solid #ea8f4b;
     padding: 0.25rem;
+}
+.mb-2{
+    color: forestgreen !important;
+    
 }
