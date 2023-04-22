@@ -228,6 +228,8 @@ namespace LinkedNewsChatApp.Hubs
             await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups(hubUser.Name), reg);
             //add him immediatly to this chat
             await Clients.User(hubUser.UserIdentifier).SendAsync("AddCreatorToGroup", hubUser, groupName);
+     
+
         }
 
         public async Task JoinRoom(string groupName)
@@ -320,8 +322,14 @@ namespace LinkedNewsChatApp.Hubs
             var chatOperations = new ChatOperations(_repository, _loginOperator);
             chatOperations.AddFriend(hubUser.Name, user);
             await JoinPrivateChat(user);
-            await OnConnectedAsync();
+
+            // Отримуємо оновлений список друзів з бази даних
+            var updatedFriendsList = chatOperations.GetHubFriends(hubUser.Name);
+
+            // Отправляємо повідомлення тільки користувачу, який додав нового друга
+            await Clients.Caller.SendAsync("RecieveOnlineFriends", connectedUsers, updatedFriendsList);
         }
+
     }
 }
 

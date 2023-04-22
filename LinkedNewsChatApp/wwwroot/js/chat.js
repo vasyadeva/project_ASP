@@ -18,32 +18,23 @@ var allusers = null;
 connection.on("IdentifyUser", function (user) {
     currentUser = user;
 });
-
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
     var userNameWindow2 = document.getElementById("FriendOnlineList2");
 
-    if (userNameWindow.childElementCount > 0) {
-
-    }
-    else {
+    if (friendslst) {
+        const separator = document.createElement("li");
+        separator.className = "group-separator";
+        separator.textContent = "Друзі:";
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
-
-        if (friendslst) {
-            const separator = document.createElement("li");
-            separator.className = "group-separator";
-            separator.textContent = "Друзі:";
-            userNameWindow.appendChild(separator);
-            const separator2 = separator.cloneNode(true);
-            userNameWindow2.appendChild(separator2);
-            friendslst.forEach(addFriends);
-        }
-    
+        userNameWindow.appendChild(separator);
+        const separator2 = separator.cloneNode(true);
+        userNameWindow2.appendChild(separator2);
+        friendslst.forEach(addFriends);
     }
-    const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
-    scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
+
 
 connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
@@ -452,7 +443,13 @@ document.getElementById("FriendButton").addEventListener("click", function (even
     var friend = document.getElementById("FriendJoin").value;
     var allfriends = friends;
     var fusers = allusers;
-
+    if (friend === currentUser) {
+        var error = document.getElementById("userError")
+        error.textContent = "Sorry, you can't add yourself as a friend.";
+        error.style = "color: red";
+        $("#FriendJoin").val("");
+        return;
+    }
     if (fusers.includes(friend)) {
 
         if (allfriends.includes(friend)) {
@@ -462,6 +459,7 @@ document.getElementById("FriendButton").addEventListener("click", function (even
             $("#FriendJoin").val("");
             return;
         }
+
         else if (friend.length > 50) {
             var error = document.getElementById("userError");
             error.textContent = 'friend name is too long';
@@ -544,6 +542,7 @@ document.getElementById("FriendButton2").addEventListener("click", function (eve
     //connection.invoke("AddFriend", user);
     //return;
 });
+
 
 connection.on("AddCreatorToGroup", function (user, groupName) {    
     // change header to see with whom you chat
