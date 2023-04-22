@@ -47,7 +47,8 @@ namespace DataLayer
          }*/
         public void addMember(HubUser user)
         {
-            var valid = _dbContext.hubUsers.Where(m => m.GroupChatName == user.GroupChatName).Select(g => g.GroupChatName).FirstOrDefault();
+            var valid = _dbContext.hubUsers.Where(m => m.GroupChatName == user.GroupChatName).Where(m => m.Name == user.Name).Select(g => g.GroupChatName).FirstOrDefault();
+            int a = 0;
             if (valid == null)
             {
                 _dbContext.hubUsers.Add(user);

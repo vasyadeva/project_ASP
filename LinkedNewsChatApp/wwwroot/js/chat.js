@@ -19,28 +19,47 @@ connection.on("IdentifyUser", function (user) {
     currentUser = user;
 });
 
+connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
+    var userNameWindow = document.getElementById("FriendOnlineList");
+    var userNameWindow2 = document.getElementById("FriendOnlineList2");
+
+    if (userNameWindow.childElementCount > 0) {
+
+    }
+    else {
+        userNameWindow.innerHTML = "";
+        userNameWindow2.innerHTML = "";
+
+        if (friendslst) {
+            const separator = document.createElement("li");
+            separator.className = "group-separator";
+            separator.textContent = "Друзі:";
+            userNameWindow.appendChild(separator);
+            const separator2 = separator.cloneNode(true);
+            userNameWindow2.appendChild(separator2);
+            friendslst.forEach(addFriends);
+        }
+    
+    }
+    const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
+});
+
 connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
     var userNameWindow2 = document.getElementById("userOnlineList2");
-    userNameWindow.innerHTML = "";
-    userNameWindow2.innerHTML = "";
 
-    if (friendslst) {
-        const separator = document.createElement("li");
-        separator.className = "group-separator";
-        separator.textContent = "Друзі:";
-        userNameWindow.appendChild(separator);
-        const separator2 = separator.cloneNode(true);
-        userNameWindow2.appendChild(separator2);
-        friendslst.forEach(addOnlineUserNames);
-    }
-    const separator3 = document.createElement("li");
-    separator3.className = "group-separator";
-    separator3.textContent = "Юзери онлайн";
-    userNameWindow.appendChild(separator3);
-    const separator4 = separator3.cloneNode(true);
-    userNameWindow2.appendChild(separator4);
-    userNames.forEach(addOnlineUserNames);
+
+        userNameWindow.innerHTML = "";
+        userNameWindow2.innerHTML = "";
+        const separator3 = document.createElement("li");
+        separator3.className = "group-separator";
+        separator3.textContent = "Юзери онлайн";
+        userNameWindow.appendChild(separator3);
+        const separator4 = separator3.cloneNode(true);
+        userNameWindow2.appendChild(separator4);
+        userNames.forEach(addOnlineUserNames);
+
     const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
@@ -51,6 +70,87 @@ connection.on("RecieveAllOnlineGroups", function (groupall, friendsList, usersal
     friends = Array.from(friendsList);
     allusers = Array.from(usersall);
 })
+
+function addFriends(user) {
+    if (user.userIdentifier === currentUser.userIdentifier) {
+        return;
+    }
+    var li = document.createElement("li");
+    var li2 = document.createElement("li");
+    var button = document.createElement("button");
+    var button2 = document.createElement("button");
+    // add class to style
+    button.className = "user-connected";
+    button.textContent = user.name;
+    button.onclick = function (event) {
+        //dont join if you are already in a chat
+        if (toUser === user) {
+            return;
+        }
+        document.getElementById("groupError").innerHTML = "";
+        document.getElementById("groupError2").innerHTML = "";
+        // change header to see with whom you chat
+        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        // allow to send messages and chat
+        document.getElementById("sendButton").disabled = false;
+        // reset button color
+        button.style.backgroundColor = null;
+        // user leave group chat
+        if (toGroup !== null) {
+            connection.invoke("LeaveRoom", toGroup);
+            // clean to group
+            toGroup = null;
+        }
+        // user leave private chat
+        if (toUser !== null && toUser !== user) {
+            connection.invoke("LeavePrivateChat", toUser.name);
+        }
+        // set user for this button
+        toUser = user;
+        //clean message list
+        document.getElementById("messagesList").innerHTML = "";
+        // add user to private chat
+        connection.invoke("JoinPrivateChat", user.name);
+    };
+
+    button2.className = "user-connected";
+    button2.textContent = user.name;
+    button2.onclick = function (event) {
+        //dont join if you are already in a chat
+        if (toUser === user) {
+            return;
+        }
+        document.getElementById("groupError").innerHTML = "";
+        document.getElementById("groupError2").innerHTML = "";
+        // change header to see with whom you chat
+        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        // allow to send messages and chat
+        document.getElementById("sendButton").disabled = false;
+        // reset button color
+        button2.style.backgroundColor = null;
+        // user leave group chat
+        if (toGroup !== null) {
+            connection.invoke("LeaveRoom", toGroup);
+            // clean to group
+            toGroup = null;
+        }
+        // user leave private chat
+        if (toUser !== null && toUser !== user) {
+            connection.invoke("LeavePrivateChat", toUser.name);
+        }
+        // set user for this button
+        toUser = user;
+        //clean message list
+        document.getElementById("messagesList").innerHTML = "";
+        // add user to private chat
+        connection.invoke("JoinPrivateChat", user.name);
+    };
+    // append items
+    li.appendChild(button);
+    li2.appendChild(button2);
+    document.getElementById("FriendOnlineList").appendChild(li);
+    document.getElementById("FriendOnlineList2").appendChild(li2);
+}
 
 function addOnlineUserNames(user) {
     if (user.userIdentifier === currentUser.userIdentifier) {
@@ -528,6 +628,7 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
             superMainGroup = buttons[0].textContent;
         }
     }
+    else {
         groupNameWindow2.innerHTML = "";
         groupNameWindow.innerHTML = "";
         const sup = [superMainGroup]
@@ -573,6 +674,8 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
             groupNameWindow2.appendChild(separator2);
             nonMainGroups.forEach(addOnlineGroupNames);
         }
+    }
+        
     
     const scrollingElement = document.getElementsByClassName("groups-main")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;

@@ -48,6 +48,7 @@ namespace LinkedNewsChatApp.Hubs
             string reg = chatOperations.GetReg(hubUser.Name);
 
             await Clients.Caller.SendAsync("IdentifyUser", hubUser);
+            await Clients.All.SendAsync("RecieveOnlineFriends", connectedUsers, chatOperations.GetHubFriends(hubUser.Name));
             await Clients.All.SendAsync("RecieveOnlineUsers", connectedUsers,chatOperations.GetHubFriends(hubUser.Name));
             await Clients.All.SendAsync("RecieveAllOnlineGroups", chatOperations.GetAllListOfGroups(), chatOperations.GetFriends(hubUser.Name), chatOperations.GetUsers(hubUser.Name));
             await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups(hubUser.Name), reg); //chatOperations.GetListOfGroups());
@@ -87,6 +88,7 @@ namespace LinkedNewsChatApp.Hubs
             _groupDictionary.RemoveUserFromGroup(hubUser);
             await Clients.All.SendAsync("RecieveAllOnlineGroups", chatOperations.GetAllListOfGroups(), chatOperations.GetFriends(hubUser.Name), chatOperations.GetUsers(hubUser.Name));
             await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups(hubUser.Name), reg);
+            await Clients.All.SendAsync("RecieveOnlineFriends", connectedUsers, chatOperations.GetHubFriends(hubUser.Name));
             await Clients.All.SendAsync("RecieveOnlineUsers", connectedUsers, chatOperations.GetHubFriends(hubUser.Name));
             await base.OnDisconnectedAsync(exception);
         }
@@ -318,6 +320,7 @@ namespace LinkedNewsChatApp.Hubs
             var chatOperations = new ChatOperations(_repository, _loginOperator);
             chatOperations.AddFriend(hubUser.Name, user);
             await JoinPrivateChat(user);
+            await OnConnectedAsync();
         }
     }
 }
