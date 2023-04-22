@@ -22,18 +22,41 @@ namespace LinkedNewsChatApp.Data
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         }
 
-        public async Task<bool> UpdateProfileAsync(int userId, string username, string email, string region, string biography)
+        public async Task<bool> UpdateProfileAsync(int userId,  string email, string region, int avaid, string biography)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (avaid == 0)
+            {
+                avaid = user.AvatarId;
+            }
 
             if (user == null)
             {
                 return false;
             }
 
-            user.Username = username;
+            var hubMessages = _context.HubMessages.Where(cm => cm.AvaId == user.AvatarId).ToList();
+            if (hubMessages != null)
+            {
+                foreach (var cm in hubMessages)
+                {
+                   cm.AvaId = avaid;
+                    _context.HubMessages.Update(cm);
+                }
+            }
+            var hubGMessages = _context.hubGroupMessages.Where(cm => cm.AvaId == user.AvatarId).ToList();
+            if (hubGMessages != null)
+            {
+                foreach (var cm in hubGMessages)
+                {
+                    cm.AvaId = avaid;
+                    _context.hubGroupMessages.Update(cm);
+                }
+            }
+
             user.Email = email;
             user.Region = region;
+            user.AvatarId = avaid;
             user.Biography = biography;
 
             await _context.SaveChangesAsync();
