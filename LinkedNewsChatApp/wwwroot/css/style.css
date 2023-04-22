@@ -2,16 +2,9 @@
     white-space: normal;
     text-align: center;
     word-break: break-all;
+    color: #fff;
 }
-html, body {
-    background-image: cross-fade(#8ef763, #42f87a) !important;
-    background-size: cover;
-    background-repeat: repeat;
-    height: auto;
-    font-family: 'Numans', sans-serif;
-    background-attachment: fixed;
-    background-position: center;
-}
+
 a {
   color: #0077cc;
 }
@@ -63,16 +56,21 @@ button.accept-policy {
     width: 100%;
     line-height: 80px;
 }*/
+/*#header_imp {
+    background: linear-gradient(to right, #E67E22, #D35400, #E67E22);
+    color: #fff;
+    border-radius: 0 0 25px 0; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
+    */
 #header_imp {
-    background-image: linear-gradient(to bottom right, #0437F2, #27afc9);
-    border-bottom: 3px solid #e58e00;
+    background: linear-gradient(to right, #D35400,#E67E22, #D35400); /* Градієнтний фон з темнішими відтінками оранжевого */
+    padding: 10px;
+    color: #fff;
+    border-radius: 0 0 25px 10px; /* Закруглені кути тільки зправа знизу */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-#btn_logd {
-    color: #e58e00;
-}
-#btn_logi {
-    color: #e58e00;
-}
+
 .abt-h {
     text-align:center;
     margin: auto;

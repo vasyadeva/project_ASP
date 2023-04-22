@@ -4,26 +4,25 @@
     ViewData["Title"] = "Index";
     <head>
     <style>
-            html{
-                height: auto;
-            }
             .column {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 20px; /* Задати відступ вниз, якщо потрібно */
+                margin-bottom: 10px; /* Задати відступ вниз, якщо потрібно */
             }
-            
-            .news_hd{
-                margin-left:45%;
+
+            .news_hd {
+                margin-left: 45%;
             }
 
             .article {
                 display: flex;
                 text-decoration: none;
+                height: 190px; /* Задати фіксовану висоту 128px */
                 color: #000; /* Задати колір тексту, якщо потрібно */
                 background-color: #f5f5f5; /* Задати колір фону, якщо потрібно */
                 padding: 10px; /* Задати відступи всередині елементу, якщо потрібно */
                 border-radius: 5px; /* Задати радіус кутів, якщо потрібно */
+                position: relative; /* Додати відносне позиціонування */
             }
 
                 .article:hover {
@@ -31,10 +30,17 @@
                 }
 
             .article-image {
-                flex: 0 0 256px; /* Задати ширину зображення, якщо потрібно */
-                margin-right: 10px; /* Задати відступ між зображенням та текстом, якщо потрібно */
+                flex: 0 0 150px; /* Змінити flex на flex: 0 0 150px, щоб фіксувати ширину на 150px */
+                height: auto; /* Задати висоту на auto, щоб зберегти відношення сторін */
+                margin-right: 10px;
+                overflow: hidden; /* Додати overflow: hidden, щоб обрізати зайвий контент */
             }
 
+                .article-image img {
+                    width: 100%; /* Задати ширину зображення на 100%, щоб воно повністю заповнювало батьківський блок */
+                    height: auto; /* Задати висоту на auto, щоб зберегти відношення сторін */
+                    object-fit: contain; /* Додати object-fit: contain, щоб зображення масштабувалося, зберігаючи відношення сторін та поміщалося повністю в блок */
+                }
             .article-body {
                 flex: 1; /* Заповнити залишок доступного простору */
             }
@@ -49,16 +55,15 @@
                 margin-top: 5px; /* Задати відступи тексту, якщо потрібно */
             }
 
-            
-
-                #article-info span::before {
-                    position: absolute;
-                    text-align: center;
-                    font-size: 12px;
-                    margin-top: 10px;
-                    color: #777;
-                    content: "Опубліковано: "; /* Задати текст перед датою, якщо потрібно */
-                }
+            #article-info {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                text-align: center;
+                font-size: 12px;
+                color: #777;
+                content: "Опубліковано: "; /* Задати текст перед датою, якщо потрібно */
+            }
 /*
             a {
                 text-decoration: none;
