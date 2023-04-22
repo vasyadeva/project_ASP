@@ -24,18 +24,18 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff;
-    
+    background-image: linear-gradient( #8ef763, #42f87a ) !important;
 }
 
 html, body {
-background-image: url('../images/mainphone.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: auto;
-font-family: 'Numans', sans-serif;
-background-attachment: fixed;
-background-position: center;
+ 
+    background-image: cross-fade(#8ef763, #42f87a) !important;
+    background-size: cover;
+    background-repeat: repeat;
+    height: auto;
+    font-family: 'Numans', sans-serif;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Numans');
@@ -708,20 +708,40 @@ input:default:hover {
     color: #FFFFFF;
     width: 70%;
     margin-left: 15%;
-    opacity: 60%;
+    opacity: 90%;
 }
     #LeaveButton:hover {
         background-color: #FF3333;
-        opacity: 60%;
+        opacity: 90%;
     }
 #sendButton {
-    background-image: linear-gradient(to bottom right, #f8f8f8, #f58b26);
+    /* Задаємо вигляд кнопки */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #27afc9; /* Колір фону */
+    color: #ffffff; /* Колір тексту */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    /* Додаємо стилі при наведенні курсору */
+    transition: background-color 0.3s ease;
 }
-.col-lg-6{
-    font-size:24px !important;
+
+    #sendButton:hover {
+        background-color: #1d869e; /* Колір фону при наведенні */
+        color: whitesmoke;
+    }
+.col-lg-6 {
+    font-size: 24px !important;
+    
+    color: deepskyblue;
+    
 }
 .h2 {
-    border-radius:1rem;
-    border: 1px solid #e87428;
+    border-radius: 1rem;
+    border: 1px solid #8ef763;
     padding: 0.25rem;
 }

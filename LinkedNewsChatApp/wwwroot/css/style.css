@@ -3,7 +3,15 @@
     text-align: center;
     word-break: break-all;
 }
-
+html, body {
+    background-image: cross-fade(#8ef763, #42f87a) !important;
+    background-size: cover;
+    background-repeat: repeat;
+    height: auto;
+    font-family: 'Numans', sans-serif;
+    background-attachment: fixed;
+    background-position: center;
+}
 a {
   color: #0077cc;
 }
@@ -36,7 +44,7 @@ button.accept-policy {
 .main_footer {
 
     height: 60px;
-    background-image: linear-gradient(to bottom right, #ffbb02, #27afc9);
+    background-image: repeating-linear-gradient( to left, #ffbb02, #27afc9);
     justify-content: center;
     align-items: center;
     margin-top: 15%
