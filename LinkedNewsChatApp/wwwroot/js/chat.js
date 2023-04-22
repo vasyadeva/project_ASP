@@ -11,26 +11,45 @@ var toUser = null;
 var currentUser = null;
 //filled on join
 var toGroup = null;
-var allgroups= null;
+var allgroups = null;
+var friends = null;
+var allusers = null;
 
 connection.on("IdentifyUser", function (user) {
     currentUser = user;
 });
 
-connection.on("RecieveOnlineUsers", function (userNames) {
-    Array.from(userNames);
+connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
     var userNameWindow2 = document.getElementById("userOnlineList2");
     userNameWindow.innerHTML = "";
     userNameWindow2.innerHTML = "";
+
+    if (friendslst) {
+        const separator = document.createElement("li");
+        separator.className = "group-separator";
+        separator.textContent = "Друзі:";
+        userNameWindow.appendChild(separator);
+        const separator2 = separator.cloneNode(true);
+        userNameWindow2.appendChild(separator2);
+        friendslst.forEach(addOnlineUserNames);
+    }
+    const separator3 = document.createElement("li");
+    separator3.className = "group-separator";
+    separator3.textContent = "Юзери онлайн";
+    userNameWindow.appendChild(separator3);
+    const separator4 = separator3.cloneNode(true);
+    userNameWindow2.appendChild(separator4);
     userNames.forEach(addOnlineUserNames);
-    userNames2.forEach(addOnlineUserNames);
     const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
 
-connection.on("RecieveAllOnlineGroups", function (groupall) {
+
+connection.on("RecieveAllOnlineGroups", function (groupall, friendsList, usersall) {
     allgroups = Array.from(groupall);
+    friends = Array.from(friendsList);
+    allusers = Array.from(usersall);
 })
 
 function addOnlineUserNames(user) {
@@ -327,6 +346,103 @@ document.getElementById("joinButton2").addEventListener("click", function (event
 document.getElementById("LeaveButton").addEventListener("click", function (event) {
     connection.invoke("LeaveFromGroup", toGroup);
     return;
+});
+
+document.getElementById("FriendButton").addEventListener("click", function (event) {
+    var friend = document.getElementById("FriendJoin").value;
+    var allfriends = friends;
+    var fusers = allusers;
+
+    if (fusers.includes(friend)) {
+
+        if (allfriends.includes(friend)) {
+            var error = document.getElementById("userError")
+            error.textContent = 'Friend already added!';
+            error.style = "color: red";
+            $("#FriendJoin").val("");
+            return;
+        }
+        else if (friend.length > 50) {
+            var error = document.getElementById("userError");
+            error.textContent = 'friend name is too long';
+            error.style = "color: red";
+            $("#FriendJoin").val("");
+            return;
+        }
+        else if (!friend || friend === '') {
+            var error = document.getElementById("userError");
+            error.textContent = 'Please enter friend name';
+            error.style = "color: red";
+            $("#FriendJoin").val("");
+            return;
+        }
+        else {
+            var error = document.getElementById("userError");
+            error.textContent = 'friend successfully added!';
+            error.style = "color: green";
+            connection.invoke("AddFriend", friend).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+    }
+    else {
+        var error = document.getElementById("userError")
+        error.textContent = 'User doesnt exist!';
+        error.style = "color: red";
+        $("#FriendJoin").val("");
+        return;
+    }
+    $("#FriendJoin").val("");
+    event.preventDefault();
+    //connection.invoke("AddFriend", user);
+    //return;
+});
+document.getElementById("FriendButton2").addEventListener("click", function (event) {
+    var friend = document.getElementById("FriendJoin2").value;
+    var allfriends = friends;
+    var fusers = allusers;
+    if (fusers.includes(friend)) {
+        if (allfriends.includes(friend)) {
+            var error = document.getElementById("userError2")
+            error.textContent = 'Friend already added!';
+            error.style = "color: red";
+            $("#FriendJoin2").val("");
+            return;
+        }
+        else if (friend.length > 50) {
+            var error = document.getElementById("userError2");
+            error.textContent = 'friend name is too long';
+            error.style = "color: red";
+            $("#FriendJoin2").val("");
+            return;
+        }
+        else if (!friend || friend === '') {
+            var error = document.getElementById("userError2");
+            error.textContent = 'Please enter friend name';
+            error.style = "color: red";
+            $("#FriendJoin2").val("");
+            return;
+        }
+        else {
+            var error = document.getElementById("userError2");
+            error.textContent = 'friend successfully added!';
+            error.style = "color: green";
+            connection.invoke("AddFriend", friend).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+    }
+    else {
+        var error = document.getElementById("userError2")
+        error.textContent = 'User doesnt exist!';
+        error.style = "color: red";
+        $("#FriendJoin2").val("");
+        return;
+    }
+    $("#FriendJoin2").val("");
+    event.preventDefault();
+    //connection.invoke("AddFriend", user);
+    //return;
 });
 
 connection.on("AddCreatorToGroup", function (user, groupName) {    

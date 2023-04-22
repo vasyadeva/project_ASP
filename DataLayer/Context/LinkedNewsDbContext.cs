@@ -23,8 +23,8 @@ namespace DataLayer.Context
         public DbSet<PrivateChat> privateChats => Set<PrivateChat>();
         public DbSet<HubGroupMessage> hubGroupMessages => Set<HubGroupMessage>();
         public DbSet<HubGroup> hubGroups => Set<HubGroup>();
+        public DbSet<UserFriends> Friends => Set<UserFriends>();
 
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
