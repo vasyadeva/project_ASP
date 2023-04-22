@@ -19,7 +19,7 @@ namespace DataLayer
             var userList = _dbContext.Users.ToList();
             return userList;
         }
-
+        
         public User UpdateUserPassword(User user)
         {
             _dbContext.Update(user);
@@ -47,7 +47,8 @@ namespace DataLayer
          }*/
         public void addMember(HubUser user)
         {
-            var valid = _dbContext.hubUsers.Where(m => m.GroupChatName == user.GroupChatName).Select(g => g.GroupChatName).FirstOrDefault();
+            var valid = _dbContext.hubUsers.Where(m => m.GroupChatName == user.GroupChatName).Where(m => m.Name == user.Name).Select(g => g.GroupChatName).FirstOrDefault();
+            int a = 0;
             if (valid == null)
             {
                 _dbContext.hubUsers.Add(user);
@@ -86,7 +87,15 @@ namespace DataLayer
             _dbContext.HubMessages.Add(message);
             _dbContext.SaveChanges();
         }
-
+        public void AddFriend(UserFriends friends)
+        {
+            var friend = _dbContext.Friends.Where(g => g.username == friends.username).Where(k => k.friend == friends.friend).FirstOrDefault();
+            if (friend == null)
+            {
+                _dbContext.Friends.Add(friends);
+                _dbContext.SaveChanges();
+            }
+        }
         public List<HubMessageMdl> GetPrivateMessages(string chatName)
         {
             var messages = _dbContext.HubMessages
@@ -101,6 +110,15 @@ namespace DataLayer
                 .ToList();
 
             return messages;
+        }
+        public List<string> GetUsers(string username)
+        {
+            var usernames = _dbContext.Users
+                .Where(k => k.Username != username)
+                .Select(m => m.Username)
+                .ToList();
+
+            return usernames;
         }
 
         public List<HubGroupMessageMdl> GetGroupMessages(string groupName)
@@ -118,7 +136,25 @@ namespace DataLayer
 
             return messages;
         }
-
+        public List<string> GetFriends(string username)
+        {
+                      var friends = _dbContext.Friends.Where(m => m.username == username).Select(m => m.friend
+                       )
+                       .ToList() ;
+                       return friends;
+        }
+        public List<HubFriend> GetHubFriends(string username)
+        {
+            var friends = _dbContext.Friends.Where(m => m.username == username).Select(m => m.friend
+                       )
+                       .ToList();
+            var hubfriends = _dbContext.Users.Where(l => friends.Contains(l.Username)).Select(m => new HubFriend
+            {
+                name = m.Username,
+                userIdentifier = Convert.ToString(m.UserId)
+            }).ToList();
+            return hubfriends;
+        }
         public void CheckMainChat()
         {
             string[] regionsOfUkraine = { "GeneralDefaultChat","Вінницька область", "Волинська область", "Дніпропетровська область", "Донецька область", "Житомирська область", "Закарпатська область", "Запорізька область", "Івано-Франківська область", "Київська область", "Кіровоградська область", "Луганська область", "Львівська область", "Миколаївська область", "Одеська область", "Полтавська область", "Рівненська область", "Сумська область", "Тернопільська область", "Харківська область", "Херсонська область", "Хмельницька область", "Черкаська область", "Чернівецька область", "Чернігівська область" };
@@ -168,6 +204,7 @@ namespace DataLayer
                 _dbContext.SaveChanges();
             }
         }
+        
     }
 
 }

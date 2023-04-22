@@ -16,12 +16,17 @@ namespace DataLayer
         public void AddGroup(HubGroup group,HubUser user);
         public void AddGroupMessage(HubGroupMessage message);
         public void AddPrivateMessage(HubMessage message);
+        public void AddFriend(UserFriends friends);
         public List<HubMessageMdl> GetPrivateMessages(string chatName);
         public List<HubGroupMessageMdl> GetGroupMessages(string groupName);
+        public List<string> GetFriends(string username);
+        public List<HubFriend> GetHubFriends(string username);
+        public List<string> GetUsers(string username);
         public void CheckMainChat();
         public int GetAvatarId(string Username);
         public string Getregion(string Username);
         public void AddPrivateGroup(PrivateChat group);
         public void LeaveFromGroup(string username,string group);
+       
     }
 }

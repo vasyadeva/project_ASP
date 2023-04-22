@@ -115,7 +115,18 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
     <div id="mySidenavUsers2" class="sidenavRight2">
         <p style="text-align:center;font-weight: bold;color:white;">Users Online</p>
+        <div class="text-center">
+            <h6 id="userError2"></h6>
+        </div>
+        <div class="form-group">
+            <label style="color:white;">Enter friend to add</label>
+            <input id="FriendJoin2" name="groupName" class="form-control" placeholder="  ..." />
+        </div>
+        <div class="form-group">
+            <input type="button" id="FriendButton2" style="font-weight: 500;background-color:aliceblue" value="Add Friend" />
+        </div>
         <div class="row text-center">
+            <ul id="FriendOnlineList2"></ul>
             <ul id="userOnlineList2"></ul>
         </div>
     </div>
@@ -186,7 +197,18 @@
 
 <div id="mySidenavUsers" class="sidenavRight">
     <p style="text-align:center;font-weight: bold;color:white;">Users Online</p>
+    <div class="text-center">
+        <h6 id="userError"></h6>
+    </div>
+    <div class="form-group">
+        <label style="color:white;">Enter friend to add</label>
+        <input id="FriendJoin" name="groupName" class="form-control" placeholder="  ..." />
+    </div>
+    <div class="form-group">
+        <input type="button" id="FriendButton" style="font-weight: 500;background-color:aliceblue" value="Add friend" />
+    </div>
     <div class="row text-center">
+        <ul id="FriendOnlineList"></ul>
         <ul id="userOnlineList"></ul>
     </div>
 </div>

@@ -62,6 +62,14 @@ namespace ServiceLayer
             return _repository.GetPrivateMessages(chatName);
 
         }
+        public List<string> GetFriends(string username)
+        {
+            return _repository.GetFriends(username);
+        }
+        public List<HubFriend> GetHubFriends(string username)
+        {
+            return _repository.GetHubFriends(username);
+        }
         public void CheckMainChat()
         {
             _repository.CheckMainChat();
@@ -79,10 +87,19 @@ namespace ServiceLayer
             var grpname = new PrivateChat { Name = groupName };
             _repository.AddPrivateGroup(grpname);
         }
-
+        public void AddFriend(string username, string friendname)
+        {
+            var friend = new UserFriends { username = username, friend = friendname };
+            _repository.AddFriend(friend);
+        }
         public void LeaveFromGroup(string username, string group)
         {
             _repository.LeaveFromGroup(username, group);
         }
+        public List<string> GetUsers(string username)
+        {
+            return _repository.GetUsers(username);  
+        }
+
     }
 }
