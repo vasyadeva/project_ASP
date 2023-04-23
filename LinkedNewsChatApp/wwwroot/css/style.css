@@ -37,7 +37,7 @@ button.accept-policy {
 .main_footer {
 
     height: 60px;
-    background-image: repeating-linear-gradient( to left, #ffbb02, #27afc9);
+   /* background-image: repeating-linear-gradient( to left, #ffbb02, #27afc9);*/
     justify-content: center;
     align-items: center;
     margin-top: 15%
@@ -64,9 +64,11 @@ button.accept-policy {
 } 
     */
 #header_imp {
-    background: linear-gradient(to right, #D35400,#E67E22, #D35400); /* Градієнтний фон з темнішими відтінками оранжевого */
+    /* background: linear-gradient(to right, #D35400,#E67E22, #D35400); */
+    background-color: #3366FF; /* Колір фона */
+    color: #FFF; /* Колір тексту */
     padding: 10px;
-    color: #fff;
+    background-image: linear-gradient(to bottom, #3366FF, #6699FF);
     border-radius: 0 0 25px 10px; /* Закруглені кути тільки зправа знизу */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }

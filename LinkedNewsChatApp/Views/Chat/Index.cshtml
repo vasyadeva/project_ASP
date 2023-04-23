@@ -6,35 +6,39 @@
 <script src="~/js/chat.js"></script>
 <style>
         .sidenav {
-            height: 100%;
-            width: 0;
+            height: 80%;
+            width: 51%;
             position: absolute;
             z-index: 1;
             margin-left: 0;
             left: 0;
             background-color: #111;
             overflow-x: hidden;
+            
             transition: 0.5s;
-            padding-top: 20px;
+            padding-top: 10px;
         }
 
             .sidenav a {
-                padding: 8px 8px 8px 32px;
+                padding: 8px 12px 8px 8px;
                 text-decoration: none;
                 font-size: 25px;
                 color: #818181;
                 display: block;
+                opacity: 100%;
                 transition: 0.3s;
             }
 
                 .sidenav a:hover {
                     color: #f1f1f1;
+                    opacity: 100%;
                 }
 
             .sidenav .closebtn {
                 position: absolute;
                 top: 0;
                 right: 25px;
+                opacity: 100%;
                 font-size: 36px;
                 margin-left: 50px;
             }
@@ -42,8 +46,8 @@
 
      /*------------------------------*/
         .sidenav2 {
-            height: 100%;
-            width: 0;
+            height: 80%;
+            width: 40%;
             position: absolute;
             z-index: 1;
             right: 0;
@@ -54,16 +58,18 @@
         }
 
             .sidenav2 a {
-                padding: 8px 8px 8px 32px;
+                padding: 8px 12px 8px 8px;
                 text-decoration: none;
                 font-size: 25px;
                 color: #818181;
                 display: block;
+                opacity: 100%;
                 transition: 0.3s;
             }
 
                 .sidenav2 a:hover {
                     color: #f1f1f1;
+                    opacity: 100%;
                 }
 
             .sidenav2 .closebtn {
@@ -72,13 +78,14 @@
                 left: 25px;
                 font-size: 36px;
                 margin-right: 50px;
+                opacity: 100%;
             }
 </style>
 }
-<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav" style="opacity: 80%;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="groups-main2">
-        <div id="mySidenavGroups" class="sidenavLeft2">
+        <div id="mySidenavGroups" class="sidenavLeft2" >
         <p style="text-align:center;font-weight: bold;color:white;">Group Chat Rooms</p>
         <button id="backToMain" class="btn btn-warning btn-lg" onclick="location.href='@Url.Action("Index", "Chat")'">Main Chat</button>
         <div>
@@ -111,7 +118,7 @@
 
 
 
-<div id="mySidenav2" class="sidenav2">
+<div id="mySidenav2" class="sidenav2" style="opacity: 80%;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
     <div id="mySidenavUsers2" class="sidenavRight2">
         <p style="text-align:center;font-weight: bold;color:white;">Users Online</p>

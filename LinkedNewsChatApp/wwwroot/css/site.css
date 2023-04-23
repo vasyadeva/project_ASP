@@ -24,11 +24,11 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-image: url(/images/mainphone.jpg) !important;
+ 
+    
 }
 
 html, body {
- 
     background-image: url(/images/mainphone.jpg) !important;
     background-size: cover;
     background-repeat: no-repeat;
@@ -37,6 +37,7 @@ html, body {
     background-attachment: fixed;
     background-position: center;
 }
+
 
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
@@ -559,11 +560,15 @@ input:default:hover {
 .new_ad12{
     margin-left:35%;
 }
-.main_footer{
+.main_footer {
+    background-color: #3366FF; /* Колір фона */
+    background-image: linear-gradient(to top, #3366FF, #6699FF);
+    color: #FFF; /* Колір тексту */
     position: absolute;
-    bottom:0;
-    width:100%;
-    overflow:hidden;
+    bottom: 0;
+    width: 100%;
+    border-radius: 10px 25px 0px 0px;
+    overflow: hidden;
     margin-top: 10%;
     max-height: 60px;
     text-align: center;
@@ -603,6 +608,7 @@ input:default:hover {
         display: none; /* Сховати блок з групами */
     }
     .message-box {
+        
         min-width: 90%;
         margin-right: auto;
         margin-left: auto;
