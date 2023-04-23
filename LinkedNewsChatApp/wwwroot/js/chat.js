@@ -23,45 +23,46 @@ connection.on("AddFriendToList", function (userName) {
     addFriends({ name: userName }); // додати нового друга до списку друзів на клієнті
 });
 
-
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
     var userNameWindow2 = document.getElementById("FriendOnlineList2");
+
     if (userNameWindow.childElementCount > 0) {
 
-    } else {
+    }
+    else {
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
+
         if (friendslst) {
             const separator = document.createElement("li");
             separator.className = "group-separator";
             separator.textContent = "Друзі:";
-            userNameWindow.innerHTML = "";
-            userNameWindow2.innerHTML = "";
             userNameWindow.appendChild(separator);
             const separator2 = separator.cloneNode(true);
             userNameWindow2.appendChild(separator2);
-            const friendsArr = Object.values(friendslst);
-            friendsArr.forEach(addFriends);
+            friendslst.forEach(addFriends);
         }
 
-      
     }
+    const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
-
 
 connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
     var userNameWindow2 = document.getElementById("userOnlineList2");
-        userNameWindow.innerHTML = "";
-        userNameWindow2.innerHTML = "";
-        const separator3 = document.createElement("li");
-        separator3.className = "group-separator";
-        separator3.textContent = "Юзери онлайн";
-        userNameWindow.appendChild(separator3);
-        const separator4 = separator3.cloneNode(true);
-        userNameWindow2.appendChild(separator4);
-        userNames.forEach(addOnlineUserNames);
+
+
+    userNameWindow.innerHTML = "";
+    userNameWindow2.innerHTML = "";
+    const separator3 = document.createElement("li");
+    separator3.className = "group-separator";
+    separator3.textContent = "Юзери онлайн";
+    userNameWindow.appendChild(separator3);
+    const separator4 = separator3.cloneNode(true);
+    userNameWindow2.appendChild(separator4);
+    userNames.forEach(addOnlineUserNames);
 
     const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
@@ -80,7 +81,6 @@ function addFriends(user) {
     }
     var li = document.createElement("li");
     var li2 = document.createElement("li");
-    // add user to friends list
     var button = document.createElement("button");
     var button2 = document.createElement("button");
     // add class to style
@@ -113,7 +113,6 @@ function addFriends(user) {
         toUser = user;
         //clean message list
         document.getElementById("messagesList").innerHTML = "";
-      
         // add user to private chat
         connection.invoke("JoinPrivateChat", user.name);
     };
@@ -165,7 +164,6 @@ function addOnlineUserNames(user) {
     var li2 = document.createElement("li");
     var button = document.createElement("button");
     var button2 = document.createElement("button");
-    
     // add class to style
     button.className = "user-connected";
     button.textContent = user.name;
@@ -191,9 +189,9 @@ function addOnlineUserNames(user) {
         // user leave private chat
         if (toUser !== null && toUser !== user) {
             connection.invoke("LeavePrivateChat", toUser.name);
-        }        
+        }
         // set user for this button
-        toUser = user;        
+        toUser = user;
         //clean message list
         document.getElementById("messagesList").innerHTML = "";
         // add user to private chat
@@ -271,7 +269,7 @@ connection.on("GetOldMessagesOnJoin", function (messageList) {
     var messageWindow = document.getElementById("messagesList");
     messageWindow.innerHTML = "";
     messageList.forEach(addLastTenMessages);
-   
+
 });
 
 function addLastTenMessages(message) {
@@ -291,7 +289,7 @@ function addLastTenMessages(message) {
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 }
 
-connection.on("ReceiveMessage", function (user, message, timenow,avaid) {
+connection.on("ReceiveMessage", function (user, message, timenow, avaid) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
     li.innerHTML = `<div class="one-message ${currentUser.userIdentifier === user.userIdentifier ? "my-message" : ""}">
@@ -316,7 +314,7 @@ connection.on("NotifyGroup", function (user, message) {
 });
 //validation
 document.getElementById("joinGroupButton").addEventListener("click", function (event) {
-    var group = document.getElementById("GroupChatName").value;    
+    var group = document.getElementById("GroupChatName").value;
     //var groups = Array.from(document.getElementsByClassName("group-connected"));
     var groups = allgroups;
     if (groups.includes(group)) {
@@ -398,6 +396,8 @@ document.getElementById("joinButton").addEventListener("click", function (event)
     if (groups.includes(group)) {
         var error = document.getElementById("groupError");
         error.textContent = '';
+        // Змінити заголовок для відображення з ким ведеться чат
+        document.getElementById("chat-intro").innerHTML = `You are now chatting in ${group} room`;
         // Встановити поточну групу
         toGroup = group;
 
@@ -427,6 +427,8 @@ document.getElementById("joinButton2").addEventListener("click", function (event
     if (groups.includes(group)) {
         var error = document.getElementById("groupError2");
         error.textContent = '';
+        // Змінити заголовок для відображення з ким ведеться чат
+        document.getElementById("chat-intro").innerHTML = `You are now chatting in ${group} room`;
         // Встановити поточну групу
         toGroup = group;
 
@@ -458,13 +460,7 @@ document.getElementById("FriendButton").addEventListener("click", function (even
     var friend = document.getElementById("FriendJoin").value;
     var allfriends = friends;
     var fusers = allusers;
-    if (friend === currentUser) {
-        var error = document.getElementById("userError")
-        error.textContent = "Sorry, you can't add yourself as a friend.";
-        error.style = "color: red";
-        $("#FriendJoin").val("");
-        return;
-    }
+
     if (fusers.includes(friend)) {
 
         if (allfriends.includes(friend)) {
@@ -474,7 +470,6 @@ document.getElementById("FriendButton").addEventListener("click", function (even
             $("#FriendJoin").val("");
             return;
         }
-
         else if (friend.length > 50) {
             var error = document.getElementById("userError");
             error.textContent = 'friend name is too long';
@@ -558,12 +553,7 @@ document.getElementById("FriendButton2").addEventListener("click", function (eve
     //return;
 });
 
-
-connection.on("AddGroupToList", function (groupname) {
-    addOnlineGroupNames(groupname) // додати нового друга до списку друзів на клієнті
-});
-
-connection.on("AddCreatorToGroup", function (user, groupName) {    
+connection.on("AddCreatorToGroup", function (user, groupName) {
     // change header to see with whom you chat
     document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;
     // allow to send messages and chat
@@ -579,7 +569,7 @@ connection.on("AddCreatorToGroup", function (user, groupName) {
         toUser = null;
     }
     // set group for this button
-    toGroup = groupName;    
+    toGroup = groupName;
     //clean message list
     document.getElementById("messagesList").innerHTML = "";
 });
@@ -633,7 +623,7 @@ const regionsOfUkraine = [
 ];
 
 // receiveing groups online
-connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
+connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup, user) {
     Array.from(groupNames);
     var groupNameWindow = document.getElementById("groupList");
     var groupNameWindow2 = document.getElementById("groupList2");
@@ -641,9 +631,12 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
     const groupList2 = document.getElementById("groupList2");
     const buttons = groupList1.getElementsByTagName('button');
     const buttons2 = groupList2.getElementsByTagName('button');
-    if (groupList1.childElementCount > 0) {
-        if ((buttons[0].textContent !== null && buttons[0].textContent !== '') && (buttons2[0].textContent !== null && buttons2[0].textContent !== '')) {
-            superMainGroup = buttons[0].textContent;
+
+    if (user.userIdentifier !== currentUser.userIdentifier) {
+        if (groupList1.childElementCount > 0) {
+            if ((buttons[0].textContent !== null && buttons[0].textContent !== '') && (buttons2[0].textContent !== null && buttons2[0].textContent !== '')) {
+                superMainGroup = buttons[0].textContent;
+            }
         }
     }
     else {
@@ -693,8 +686,8 @@ connection.on("RecieveOnlineGroups", function (groupNames, superMainGroup) {
             nonMainGroups.forEach(addOnlineGroupNames);
         }
     }
-        
-    
+
+
     const scrollingElement = document.getElementsByClassName("groups-main")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
@@ -707,7 +700,7 @@ function addOnlineGroupNames(group) {
     const button2 = document.createElement("button");
 
     // Додати клас, щоб візуально стилізувати кнопки
-    
+
     button.className = "group-connected";
     button.textContent = group;
     button.onclick = handleGroupButtonClick;
@@ -715,7 +708,7 @@ function addOnlineGroupNames(group) {
     button2.className = "group-connected";
     button2.textContent = group;
     button2.onclick = handleGroupButtonClick;
-    
+
     // Додати кнопку до списку груп
     li.appendChild(button);
     li2.appendChild(button2); // append cloned button to new li element
