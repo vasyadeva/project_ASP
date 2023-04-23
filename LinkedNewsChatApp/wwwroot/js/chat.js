@@ -19,37 +19,40 @@ connection.on("IdentifyUser", function (user) {
     currentUser = user;
 });
 
+connection.on("AddFriendToList", function (userName) {
+    addFriends({ name: userName }); // додати нового друга до списку друзів на клієнті
+});
+
+
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
     var userNameWindow2 = document.getElementById("FriendOnlineList2");
-
     if (userNameWindow.childElementCount > 0) {
 
-    }
-    else {
+    } else {
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
-
         if (friendslst) {
             const separator = document.createElement("li");
             separator.className = "group-separator";
             separator.textContent = "Друзі:";
+            userNameWindow.innerHTML = "";
+            userNameWindow2.innerHTML = "";
             userNameWindow.appendChild(separator);
             const separator2 = separator.cloneNode(true);
             userNameWindow2.appendChild(separator2);
-            friendslst.forEach(addFriends);
+            const friendsArr = Object.values(friendslst);
+            friendsArr.forEach(addFriends);
         }
-    
+
+      
     }
-    const scrollingElement = document.getElementsByClassName("sidenavRight")[0];
-    scrollingElement.scrollTop = scrollingElement.scrollHeight;
 });
+
 
 connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
     var userNameWindow2 = document.getElementById("userOnlineList2");
-
-
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
         const separator3 = document.createElement("li");
@@ -77,6 +80,7 @@ function addFriends(user) {
     }
     var li = document.createElement("li");
     var li2 = document.createElement("li");
+    // add user to friends list
     var button = document.createElement("button");
     var button2 = document.createElement("button");
     // add class to style
@@ -109,6 +113,7 @@ function addFriends(user) {
         toUser = user;
         //clean message list
         document.getElementById("messagesList").innerHTML = "";
+      
         // add user to private chat
         connection.invoke("JoinPrivateChat", user.name);
     };
@@ -160,6 +165,7 @@ function addOnlineUserNames(user) {
     var li2 = document.createElement("li");
     var button = document.createElement("button");
     var button2 = document.createElement("button");
+    
     // add class to style
     button.className = "user-connected";
     button.textContent = user.name;
@@ -452,7 +458,13 @@ document.getElementById("FriendButton").addEventListener("click", function (even
     var friend = document.getElementById("FriendJoin").value;
     var allfriends = friends;
     var fusers = allusers;
-
+    if (friend === currentUser) {
+        var error = document.getElementById("userError")
+        error.textContent = "Sorry, you can't add yourself as a friend.";
+        error.style = "color: red";
+        $("#FriendJoin").val("");
+        return;
+    }
     if (fusers.includes(friend)) {
 
         if (allfriends.includes(friend)) {
@@ -462,6 +474,7 @@ document.getElementById("FriendButton").addEventListener("click", function (even
             $("#FriendJoin").val("");
             return;
         }
+
         else if (friend.length > 50) {
             var error = document.getElementById("userError");
             error.textContent = 'friend name is too long';
@@ -543,6 +556,11 @@ document.getElementById("FriendButton2").addEventListener("click", function (eve
     event.preventDefault();
     //connection.invoke("AddFriend", user);
     //return;
+});
+
+
+connection.on("AddGroupToList", function (groupname) {
+    addOnlineGroupNames(groupname) // додати нового друга до списку друзів на клієнті
 });
 
 connection.on("AddCreatorToGroup", function (user, groupName) {    
