@@ -18,20 +18,34 @@ var allusers = null;
 connection.on("IdentifyUser", function (user) {
     currentUser = user;
 });
+
+connection.on("AddFriendToList", function (userName) {
+    addFriends({ name: userName }); // додати нового друга до списку друзів на клієнті
+});
+
+
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
     var userNameWindow2 = document.getElementById("FriendOnlineList2");
+    if (userNameWindow.childElementCount > 0) {
 
-    if (friendslst) {
-        const separator = document.createElement("li");
-        separator.className = "group-separator";
-        separator.textContent = "Друзі:";
+    } else {
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
-        userNameWindow.appendChild(separator);
-        const separator2 = separator.cloneNode(true);
-        userNameWindow2.appendChild(separator2);
-        friendslst.forEach(addFriends);
+        if (friendslst) {
+            const separator = document.createElement("li");
+            separator.className = "group-separator";
+            separator.textContent = "Друзі:";
+            userNameWindow.innerHTML = "";
+            userNameWindow2.innerHTML = "";
+            userNameWindow.appendChild(separator);
+            const separator2 = separator.cloneNode(true);
+            userNameWindow2.appendChild(separator2);
+            const friendsArr = Object.values(friendslst);
+            friendsArr.forEach(addFriends);
+        }
+
+      
     }
 });
 
@@ -39,8 +53,6 @@ connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
 connection.on("RecieveOnlineUsers", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("userOnlineList");
     var userNameWindow2 = document.getElementById("userOnlineList2");
-
-
         userNameWindow.innerHTML = "";
         userNameWindow2.innerHTML = "";
         const separator3 = document.createElement("li");
@@ -68,6 +80,7 @@ function addFriends(user) {
     }
     var li = document.createElement("li");
     var li2 = document.createElement("li");
+    // add user to friends list
     var button = document.createElement("button");
     var button2 = document.createElement("button");
     // add class to style
@@ -100,6 +113,7 @@ function addFriends(user) {
         toUser = user;
         //clean message list
         document.getElementById("messagesList").innerHTML = "";
+      
         // add user to private chat
         connection.invoke("JoinPrivateChat", user.name);
     };
@@ -151,6 +165,7 @@ function addOnlineUserNames(user) {
     var li2 = document.createElement("li");
     var button = document.createElement("button");
     var button2 = document.createElement("button");
+    
     // add class to style
     button.className = "user-connected";
     button.textContent = user.name;
@@ -543,6 +558,10 @@ document.getElementById("FriendButton2").addEventListener("click", function (eve
     //return;
 });
 
+
+connection.on("AddGroupToList", function (groupname) {
+    addOnlineGroupNames(groupname) // додати нового друга до списку друзів на клієнті
+});
 
 connection.on("AddCreatorToGroup", function (user, groupName) {    
     // change header to see with whom you chat

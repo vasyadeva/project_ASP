@@ -228,7 +228,9 @@ namespace LinkedNewsChatApp.Hubs
             await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups(hubUser.Name), reg);
             //add him immediatly to this chat
             await Clients.User(hubUser.UserIdentifier).SendAsync("AddCreatorToGroup", hubUser, groupName);
-     
+            await Clients.User(hubUser.UserIdentifier).SendAsync("AddGroupToList", groupName);
+
+
 
         }
 
@@ -244,7 +246,17 @@ namespace LinkedNewsChatApp.Hubs
             };
             var UserIdentifier = Context.UserIdentifier;
             var Name = Context.User.Identity.Name;
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            var listofAllGroups = chatOperations.GetAllListOfGroups();
+            var listOfGroups = chatOperations.GetListOfGroups(Name);
+            List<string> ukraineRegions = new List<string> { "Вінницька область", "Волинська область", "Дніпропетровська область", "Донецька область", "Житомирська область", "Закарпатська область", "Запорізька область", "Івано-Франківська область", "Київська область", "Кіровоградська область", "Луганська область", "Львівська область", "Миколаївська область", "Одеська область", "Полтавська область", "Рівненська область", "Сумська область", "Тернопільська область", "Харківська область", "Херсонська область", "Хмельницька область", "Черкаська область", "Чернівецька область", "Чернігівська область" };
+
+            if (!listOfGroups.Contains(groupName) && !ukraineRegions.Contains(groupName)) 
+            {         
+                    await Clients.User(hubUser.UserIdentifier).SendAsync("AddGroupToList", groupName);
+               
+             }
+           
+                await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             //_groupDictionary.Add(groupName, hubUser);
             chatOperations.addMember(groupName, UserIdentifier, Name);
             string reg = chatOperations.GetReg(hubUser.Name);
@@ -258,8 +270,9 @@ namespace LinkedNewsChatApp.Hubs
             {
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
             }
-            //кінець 
-            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " joined " + groupName).ConfigureAwait(true);
+          
+
+
         }
 
         public async Task LeaveRoom(string groupName)
@@ -323,11 +336,9 @@ namespace LinkedNewsChatApp.Hubs
             chatOperations.AddFriend(hubUser.Name, user);
             await JoinPrivateChat(user);
 
-            // Отримуємо оновлений список друзів з бази даних
             var updatedFriendsList = chatOperations.GetHubFriends(hubUser.Name);
-
-            // Отправляємо повідомлення тільки користувачу, який додав нового друга
             await Clients.Caller.SendAsync("RecieveOnlineFriends", connectedUsers, updatedFriendsList);
+            await Clients.Caller.SendAsync("AddFriendToList", user);
         }
 
     }
