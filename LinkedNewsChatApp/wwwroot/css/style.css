@@ -2,7 +2,9 @@
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    color: #fff;
+    color: #fff !important;
+    font-size:23px;
+    font-weight:600;
 }
 
 a {
@@ -10,9 +12,10 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
+  color: #fff !important;
   background-color: #1b6ec2;
   border-color: #1861ac;
+  font-size: 20px;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -68,7 +71,8 @@ button.accept-policy {
     background-color: #3366FF; /* Колір фона */
     color: #FFF; /* Колір тексту */
     padding: 10px;
-    background-image: linear-gradient(to bottom, #3366FF, #6699FF);
+    font-size:20px;
+    background-image: linear-gradient(to bottom,#0d62bf, #032a9e);
     border-radius: 0 0 10px 5px; /* Закруглені кути тільки зправа знизу */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
@@ -76,5 +80,8 @@ button.accept-policy {
 .abt-h {
     text-align:center;
     margin: auto;
+}
+.nav-item{
+    color: #fff !important;
 }
 

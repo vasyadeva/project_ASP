@@ -29,7 +29,8 @@ body {
 }
 
 html, body {
-    background-image: url(/images/mainphone.jpg) !important;
+    /*background-image: url(/images/mainphone.jpg) !important;*/
+    background-color: #76b4f8 !important;
     background-size: cover;
     background-repeat: no-repeat;
     height: auto;
@@ -270,7 +271,7 @@ flex-grow: 1;
     position: absolute;
     top: 58px;
     padding-top: 20px;
-    background-color: rgba(0,0,0,0.5) !important;
+    background-color: rgba(0,0,0,0.6) !important;
     margin-top: 10px;
     margin-bottom: 100px;
     margin-right: 20px;
@@ -305,7 +306,7 @@ position: center;
     top: 58px;
     padding-top: 20px;
     text-align: center;
-    background-color: rgba(0,0,0,0.5) !important;
+    background-color: rgba(0,0,0,0.6) !important;
     margin-top: 10px;
     margin-bottom: 100px;
     margin-right: 80px;
@@ -511,30 +512,33 @@ input:default {
     display:block;
 }
 input:default {
-    background: linear-gradient(0deg, rgba(96,9,240,1) 0%, rgba(129,5,240,1) 70%);
+    background: #eda103;
     line-height: 42px;
     padding: 0;
     border: none;
 }
 input:default:hover {
     color: rgba(251,75,2,1);
-    background: transparent;
+    background: #0f9605;
+    transition: 1.5s;
 }
 
 .abt-h{
     margin-left: 35%;
 }
 .abt-par {
-    border: solid 4px #ffbb02;
+    border: solid 3px #032a9e;
     border-radius: 1rem;
+    text-shadow: 1em;
     padding: 1rem;
-    background-image: linear-gradient(to bottom right, #27afc9, #b0a6a5);
+    font-size:20px;
+    background-color: #2756e4;
 }
 .abt-data {
     margin-top: 1%;
-    border: solid 4px #ffbb02;
-    border-radius: 1rem;
-    background-image: linear-gradient(to bottom right, #27afc9, #ffbb02);
+    border: solid 3px #032a9e;
+    border-radius: 0.5rem;
+    background-color: #2756e4;
 }
 .container-foot {
     display: flex;
@@ -548,10 +552,10 @@ input:default:hover {
     flex-wrap: wrap;
     height: 100%;
     margin-top: 1%;
-    margin-bottom:5%; 
-    border: solid 4px #ffbb02;
+    margin-bottom: 5%;
+    border: solid 3px #032a9e;
     border-radius: 1rem;
-    background-image: linear-gradient(to bottom left, #ffbb02, #27afc9);
+    background-color: #2756e4;
 }
 #Ne_Ed{
     width: 100%;
@@ -562,14 +566,14 @@ input:default:hover {
 }
 .main_footer {
     background-color: #3366FF; /* Колір фона */
-    background-image: linear-gradient(to top, #3366FF, #6699FF);
+    background-image: linear-gradient(to bottom,#032a9e, #0d62bf);
     color: #FFF; /* Колір тексту */
     position: absolute;
     bottom: 0;
     width: 100%;
-    border-radius: 10px 25px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
     overflow: hidden;
-    margin-top: 10%;
+    margin-top: 5%;
     max-height: 60px;
     text-align: center;
 }
@@ -709,12 +713,13 @@ input:default:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 #LeaveButton {
+    max-width:35%;
     font-weight: 900;
     background-color: #d70114;
     color: #FFFFFF;
-    width: 30%;
+    width: 32%;
     font-size: 20px;
-    margin-left: 35%;
+    margin-left: 36%;
     opacity: 90%;
 }
     #LeaveButton:hover {
@@ -725,7 +730,8 @@ input:default:hover {
     /* Задаємо вигляд кнопки */
     display: inline-block;
     padding: 10px 20px;
-    background-color: #27afc9; /* Колір фону */
+    border-radius: 0.25rem;
+    background-color: #0a38a4;
     color: #ffffff; /* Колір тексту */
     font-size: 16px;
     font-weight: bold;
@@ -738,7 +744,7 @@ input:default:hover {
 }
 
     #sendButton:hover {
-        background-color: #1d869e; /* Колір фону при наведенні */
+        background-color: #0d62bf; /* Колір фону при наведенні */
         color: whitesmoke;
     }
 .col-lg-6 {
@@ -747,10 +753,10 @@ input:default:hover {
 }
 .h2 {
     border-radius: 1rem;
-    border: 1px solid #ea8f4b;
+    border: 1px solid #53a1f7;
     padding: 0.25rem;
 }
 .mb-2{
-    color: forestgreen !important;
+    color: #f0e2c3 !important;
     
 }
