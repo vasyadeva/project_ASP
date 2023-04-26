@@ -760,6 +760,7 @@ input:default:hover {
 .mb-2 {
     color: #f0e2c3 !important;
 }
+/*
 @media only screen and (max-width: 700px) {
     .column_NI {
         display: flex;
@@ -768,13 +769,13 @@ input:default:hover {
     }
 
     .news_hd {
-        margin-left: 30%; /* Зменшено масштаб з 45% на 30% */
+        margin-left: 30%;  Зменшено масштаб з 45% на 30% 
     }
 
     .article_NI {
         display: flex;
         text-decoration: none;
-        height: 130px; /* Зменшено висоту з 170px на 120px */
+        height: 130px; 
         color: #000;
         background-color: #f0e2c3;
         padding: 10px;
@@ -787,7 +788,7 @@ input:default:hover {
         }
 
     .article_image {
-        flex: auto 0 100px; /* Зменшено розмір з 128px на 100px */
+        flex: auto 0 100px;
         max-height:100px;
         max-width:180px;
         margin-right: 10px;
@@ -798,7 +799,7 @@ input:default:hover {
     }
 
     .article_title {
-        font-size: 16px; /* Зменшено розмір шрифту з 18px на 16px */
+        font-size: 16px; 
         margin: 0;
     }
 
@@ -845,7 +846,7 @@ input:default:hover {
 
     .article_image {
         flex: auto 0 128px;
-        max-height: 1000%; /* Змінено height на max-height */
+        max-height: 1000%; 
         margin-right: 10px;
     }
 
@@ -872,4 +873,89 @@ input:default:hover {
         color: #777;
         content: "Опубліковано: ";
     }
+}
+    */
+.news_hd {
+    font-size: 48px;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Стиль головного блоку */
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Стиль колонок */
+.columns .column_NI {
+    margin: 20px;
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Стиль зображення новини */
+.article_image {
+    position: relative;
+    overflow: hidden;
+}
+
+    .article_image img {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .article_image:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .article_image:hover:before {
+        opacity: 1;
+    }
+
+    .article_image:hover img {
+        transform: scale(1.1);
+    }
+
+/* Стиль тексту новини */
+.article_body {
+    padding: 20px;
+    text-align: justify;
+}
+
+.article_title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0.1, 0.1, 0.2, 1);
+}
+
+.article_content {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Стиль дати новини */
+#article_info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaa;
+    text-align: right;
 }
