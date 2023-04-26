@@ -4,66 +4,7 @@
     ViewData["Title"] = "Index";
     <head>
        
-    <style>
-            html {
-                height: auto;
-            }
 
-            .column {
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 10px;
-            }
-
-            .news_hd {
-                margin-left: 45%;
-            }
-
-            .article {
-                display: flex;
-                text-decoration: none;
-                height: 170px;
-                color: #000;
-                background-color: #f0e2c3;
-                padding: 10px;
-                border-radius: 5px;
-                position: relative;
-            }
-
-                .article:hover {
-                    background-color: #e0e0e0;
-                }
-
-            .article-image {
-                flex: auto 0 128px;
-                max-height: 1000%; /* Змінено height на max-height */
-                margin-right: 10px;
-            }
-
-            .article-body {
-                flex: 1;
-            }
-
-            .article-title {
-                font-size: 18px;
-                margin: 0;
-            }
-
-            .article-content {
-                font-size: 14px;
-                margin-top: 5px;
-            }
-
-            #article-info {
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                text-align: center;
-                font-size: 12px;
-                color: #777;
-                content: "Опубліковано: ";
-            }
-    </style>
     </head>
 }
 
@@ -73,22 +14,22 @@
    <main class="main columns">
 @foreach (var item in Model)
 {
-  <section class="column">
-    <a class="article" href="#">
-      <figure class="article-image">
+  <section class="column_NI">
+    <a class="article_NI" href="#">
+      <figure class="article_image">
                     @{
                         string base64String = Convert.ToBase64String(item.photo);
                     }
-                    <img src="data:image/png;base64, @(base64String)" width="256" />
+                    <img src="data:image/png;base64, @(base64String)" width="180" />
       </figure>
-      <div class="article-body">
-        <h2 class="article-title">
+      <div class="article_body">
+        <h2 class="article_title">
                         @item.title
         </h2>
-        <p class="article-content">
+        <p class="article_content">
                         @item.text
         </p>
-        <footer id="article-info">
+        <footer id="article_info">
                         <span>@item.Time</span>
         </footer>
       </div>

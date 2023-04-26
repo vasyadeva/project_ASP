@@ -713,13 +713,14 @@ input:default:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 #LeaveButton {
-    max-width:35%;
+    
+    max-width:40%;
     font-weight: 900;
     background-color: #d70114;
     color: #FFFFFF;
     width: 32%;
     font-size: 20px;
-    margin-left: 36%;
+    margin-left: 37%;
     opacity: 90%;
 }
     #LeaveButton:hover {
@@ -756,7 +757,119 @@ input:default:hover {
     border: 1px solid #53a1f7;
     padding: 0.25rem;
 }
-.mb-2{
+.mb-2 {
     color: #f0e2c3 !important;
-    
+}
+@media only screen and (max-width: 700px) {
+    .column_NI {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .news_hd {
+        margin-left: 30%; /* «меншено масштаб з 45% на 30% */
+    }
+
+    .article_NI {
+        display: flex;
+        text-decoration: none;
+        height: 130px; /* «меншено висоту з 170px на 120px */
+        color: #000;
+        background-color: #f0e2c3;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+        .article_NI:hover {
+            background-color: #e0e0e0;
+        }
+
+    .article_image {
+        flex: auto 0 100px; /* «меншено розм≥р з 128px на 100px */
+        max-height:100px;
+        max-width:180px;
+        margin-right: 10px;
+    }
+
+    .article_body {
+        flex: 1;
+    }
+
+    .article_title {
+        font-size: 16px; /* «меншено розм≥р шрифту з 18px на 16px */
+        margin: 0;
+    }
+
+    .article_content {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    #article_info {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        content: "ќпубл≥ковано: ";
+    }
+}
+@media only screen and (min-width: 700px) {
+    .column_NI {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .news_hd {
+        margin-left: 45%;
+    }
+
+    .article_NI {
+        display: flex;
+        text-decoration: none;
+        height: 140px;
+        color: #000;
+        background-color: #f0e2c3;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+        .article_NI:hover {
+            background-color: #e0e0e0;
+        }
+
+    .article_image {
+        flex: auto 0 128px;
+        max-height: 1000%; /* «м≥нено height на max-height */
+        margin-right: 10px;
+    }
+
+    .article_body {
+        flex: 1;
+    }
+
+    .article_title {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .article_content {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    #article_info {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        content: "ќпубл≥ковано: ";
+    }
 }
