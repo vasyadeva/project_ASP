@@ -81,6 +81,47 @@
                 opacity: 100%;
             }
 </style>
+    <!-- JavaScript код -->
+    <script>
+        // Отримання списку і кнопки за допомогою їх id
+        var myList = document.getElementById("FriendOnlineList");
+        var myButton = document.getElementById("myButton");
+
+        // Початково ховаємо список
+        myList.style.display = "none";
+
+        // Додавання обробника події для кнопки
+        myButton.addEventListener("click", function () {
+            // Перевірка, чи список прихований
+            if (myList.style.display === "none") {
+                // Якщо список прихований, показуємо його
+                myList.style.display = "block";
+            } else {
+                // Якщо список відображається, приховуємо його
+                myList.style.display = "none";
+            }
+        });
+
+
+        // Отримання списку і кнопки за допомогою їх id
+        var myList2 = document.getElementById("FriendOnlineList2");
+        var myButton2 = document.getElementById("myButton2");
+
+        // Початково ховаємо список
+        myList2.style.display = "none";
+
+        // Додавання обробника події для кнопки
+        myButton2.addEventListener("click", function () {
+            // Перевірка, чи список прихований
+            if (myList2.style.display === "none") {
+                // Якщо список прихований, показуємо його
+                myList2.style.display = "block";
+            } else {
+                // Якщо список відображається, приховуємо його
+                myList2.style.display = "none";
+            }
+        });
+    </script>
 }
 <div id="mySidenav" class="sidenav" style="opacity: 95%;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -132,6 +173,8 @@
         <div class="form-group">
             <input type="button" id="FriendButton2" style="font-weight: 500;background-color:aliceblue" value="Add Friend" />
         </div>
+
+        <button id="myButton2" style="font-weight: 500;background-color:aliceblue; border-radius:7%; right:auto;left:auto;">Show/Hide Friends</button>
         <div class="row text-center">
             <ul id="FriendOnlineList2"></ul>
         </div>
@@ -210,6 +253,8 @@
     <div class="form-group">
         <input type="button" id="FriendButton" style="font-weight: 500;background-color:aliceblue" value="Add friend" />
     </div>
+    <button id="myButton" style="font-weight: 500;background-color:aliceblue; border-radius:7%; right:auto;left:auto;">Show/Hide Friends</button>
+
     <div class="row text-center">
         <ul id="FriendOnlineList"></ul>
     </div>
