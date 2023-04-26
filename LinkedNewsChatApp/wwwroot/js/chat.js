@@ -17,11 +17,19 @@ var allusers = null;
 
 connection.on("IdentifyUser", function (user) {
     currentUser = user;
+
 });
 
 connection.on("AddFriendToList", function (userName) {
     addFriends({ name: userName }); // додати нового друга до списку друзів на клієнті
+    document.getElementById("chat-intro").innerHTML = `Private Chat with ${userName}`;
+    connection.invoke("JoinPrivateChat", userName);
 });
+
+connection.on("RemoveFriendFromList", function () {
+    location.reload();
+   });
+
 
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
@@ -458,8 +466,25 @@ document.getElementById("LeaveButton").addEventListener("click", function (event
 
 document.getElementById("FriendButton").addEventListener("click", function (event) {
     var friend = document.getElementById("FriendJoin").value;
-    var allfriends = friends;
-    var fusers = allusers;
+    connection.invoke("FriendValid", friend).catch(function (err) {
+        return console.error(err.toString());
+    });
+    //connection.invoke("AddFriend", user);
+    //return;
+});
+document.getElementById("FriendButton2").addEventListener("click", function (event) {
+    var friend = document.getElementById("FriendJoin2").value;
+    connection.invoke("FriendValid2", friend).catch(function (err) {
+        return console.error(err.toString());
+    });
+    //connection.invoke("AddFriend", user);
+    //return;
+});
+
+
+connection.on("addfriendjs", function (friend, users, friends) {
+    var allfriends = Array.from(friends);
+    var fusers = Array.from(users);
 
     if (fusers.includes(friend)) {
 
@@ -501,14 +526,10 @@ document.getElementById("FriendButton").addEventListener("click", function (even
         return;
     }
     $("#FriendJoin").val("");
-    event.preventDefault();
-    //connection.invoke("AddFriend", user);
-    //return;
 });
-document.getElementById("FriendButton2").addEventListener("click", function (event) {
-    var friend = document.getElementById("FriendJoin2").value;
-    var allfriends = friends;
-    var fusers = allusers;
+connection.on("addfriendjs2", function (friend, users, friends) {
+    var allfriends = Array.from(friends);
+    var fusers = Array.from(users);
     if (fusers.includes(friend)) {
         if (allfriends.includes(friend)) {
             var error = document.getElementById("userError2")
@@ -548,7 +569,61 @@ document.getElementById("FriendButton2").addEventListener("click", function (eve
         return;
     }
     $("#FriendJoin2").val("");
-    event.preventDefault();
+});
+connection.on("deletefriendjs", function (friend, friends) {
+    var allfriends = Array.from(friends);
+    if (allfriends.includes(friend)) {
+        var error = document.getElementById("userError");
+        error.textContent = 'friend successfully removed!';
+        error.style = "color: green";
+        connection.invoke("DeleteFriend", friend).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+    else {
+        var error = document.getElementById("userError")
+        error.textContent = 'Friend doesnt exist!';
+        error.style = "color: red";
+        $("#FriendDelete").val("");
+        return;
+    }
+    $("#FriendDelete").val("");
+});
+connection.on("deletefriendjs2", function (friend, friends) {
+    var allfriends = Array.from(friends);
+    if (allfriends.includes(friend)) {
+        var error = document.getElementById("userError2");
+        error.textContent = 'friend successfully removed!';
+        error.style = "color: green";
+        connection.invoke("DeleteFriend", friend).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+    else {
+        var error = document.getElementById("userError2")
+        error.textContent = 'Friend doesnt exist!';
+        error.style = "color: red";
+        $("#FriendDelete2").val("");
+        return;
+    }
+    $("#FriendDelete2").val("");
+});
+
+
+document.getElementById("FriendRemove").addEventListener("click", function (event) {
+    var friend = document.getElementById("FriendDelete").value;
+    connection.invoke("FriendDeleteValid", friend).catch(function (err) {
+        return console.error(err.toString());
+    });
+    //connection.invoke("AddFriend", user);
+    //return;
+});
+
+document.getElementById("FriendRemove2").addEventListener("click", function (event) {
+    var friend = document.getElementById("FriendDelete2").value;
+    connection.invoke("FriendDeleteValid2", friend).catch(function (err) {
+        return console.error(err.toString());
+    });
     //connection.invoke("AddFriend", user);
     //return;
 });
@@ -573,6 +648,7 @@ connection.on("AddCreatorToGroup", function (user, groupName) {
     //clean message list
     document.getElementById("messagesList").innerHTML = "";
 });
+
 
 connection.on("AddToMainChat", function (user, groupName) {
     // change header to see with whom you chat
