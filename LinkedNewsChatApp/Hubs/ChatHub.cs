@@ -319,11 +319,78 @@ namespace LinkedNewsChatApp.Hubs
             };
             var chatOperations = new ChatOperations(_repository, _loginOperator);
             chatOperations.AddFriend(hubUser.Name, user);
-            await JoinPrivateChat(user);
+            //await JoinPrivateChat(user);
 
             var updatedFriendsList = chatOperations.GetHubFriends(hubUser.Name);
             await Clients.Caller.SendAsync("RecieveOnlineFriends", connectedUsers, updatedFriendsList);
             await Clients.Caller.SendAsync("AddFriendToList", user);
+        }
+
+        public async Task DeleteFriend(string user)
+        {
+            var hubUser = new HubUser()
+            {
+                UserIdentifier = Context.UserIdentifier,
+                Name = Context.User.Identity.Name
+            };
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            chatOperations.DeleteFriend(hubUser.Name, user);
+            
+
+            var updatedFriendsList = chatOperations.GetHubFriends(hubUser.Name);
+            await Clients.Caller.SendAsync("RecieveOnlineFriends", connectedUsers, updatedFriendsList);
+            await Clients.Caller.SendAsync("RemoveFriendFromList");
+        }
+
+        public async Task FriendValid(string user)
+        {
+            var hubUser = new HubUser()
+            {
+                UserIdentifier = Context.UserIdentifier,
+                Name = Context.User.Identity.Name
+            };
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            var friends = chatOperations.GetFriends(hubUser.Name);
+            var users = chatOperations.GetUsers(hubUser.Name);
+            await Clients.Caller.SendAsync("addfriendjs", user, users, friends);
+
+        }
+
+        public async Task FriendValid2(string user)
+        {
+            var hubUser = new HubUser()
+            {
+                UserIdentifier = Context.UserIdentifier,
+                Name = Context.User.Identity.Name
+            };
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            var friends = chatOperations.GetFriends(hubUser.Name);
+            var users = chatOperations.GetUsers(hubUser.Name);
+            await Clients.Caller.SendAsync("addfriendjs2", user, users, friends);
+
+        }
+
+        public async Task FriendDeleteValid(string user)
+        {
+            var hubUser = new HubUser()
+            {
+                UserIdentifier = Context.UserIdentifier,
+                Name = Context.User.Identity.Name
+            };
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            var friends = chatOperations.GetFriends(hubUser.Name);
+            await Clients.Caller.SendAsync("deletefriendjs", user, friends);
+        }
+        public async Task FriendDeleteValid2(string user)
+        {
+            var hubUser = new HubUser()
+            {
+                UserIdentifier = Context.UserIdentifier,
+                Name = Context.User.Identity.Name
+            };
+            var chatOperations = new ChatOperations(_repository, _loginOperator);
+            var friends = chatOperations.GetFriends(hubUser.Name);
+            await Clients.Caller.SendAsync("deletefriendjs2", user, friends);
         }
     }
 }

@@ -204,7 +204,16 @@ namespace DataLayer
                 _dbContext.SaveChanges();
             }
         }
-        
+        public void DeleteFriend(UserFriends friends)
+        {
+            var friend = _dbContext.Friends.Where(g => g.username == friends.username).Where(k => k.friend == friends.friend).FirstOrDefault();
+            if (friend != null)
+            {
+                _dbContext.Friends.Remove(friend);
+                _dbContext.SaveChanges();
+            }
+        }
+
     }
 
 }

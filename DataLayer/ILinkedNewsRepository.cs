@@ -27,6 +27,7 @@ namespace DataLayer
         public string Getregion(string Username);
         public void AddPrivateGroup(PrivateChat group);
         public void LeaveFromGroup(string username,string group);
-       
+        public void DeleteFriend(UserFriends friends);
+
     }
 }

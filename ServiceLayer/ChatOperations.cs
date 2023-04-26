@@ -92,6 +92,11 @@ namespace ServiceLayer
             var friend = new UserFriends { username = username, friend = friendname };
             _repository.AddFriend(friend);
         }
+        public void DeleteFriend(string username, string friendname)
+        {
+            var friend = new UserFriends { username = username, friend = friendname };
+            _repository.DeleteFriend(friend);
+        }
         public void LeaveFromGroup(string username, string group)
         {
             _repository.LeaveFromGroup(username, group);
