@@ -1,4 +1,4 @@
-﻿a.navbar-brand {
+﻿/*a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -6,7 +6,7 @@
     font-size:23px;
     font-weight:600;
 }
-
+    */
 a {
   color: #0077cc;
 }
@@ -59,29 +59,89 @@ button.accept-policy {
     width: 100%;
     line-height: 80px;
 }*/
-/*#header_imp {
-    background: linear-gradient(to right, #E67E22, #D35400, #E67E22);
-    color: #fff;
-    border-radius: 0 0 25px 0; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} 
-    */
+
+/*
 #header_imp {
-    /* background: linear-gradient(to right, #D35400,#E67E22, #D35400); */
-    background-color: #3366FF; /* Колір фона */
-    color: #FFF; /* Колір тексту */
+    
+    background-color: #3366FF; 
+    color: #FFF; 
     padding: 10px;
     font-size:20px;
     background-image: linear-gradient(to bottom,#0d62bf, #032a9e);
-    border-radius: 0 0 10px 5px; /* Закруглені кути тільки зправа знизу */
+    border-radius: 0 0 10px 5px; 
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
-.abt-h {
-    text-align:center;
-    margin: auto;
+    #header_imp {
+        background-color: #111;
+        height: 65px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    a.navbar-brand {
+        white-space: normal;
+        text-align: center;
+        word-break: break-all;
+        font-size: 32px;
+        color: #0077cc !important;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+
+    .nav-link {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-right: 15px;
+    }
+
+        .nav-item.active .nav-link,
+        .nav-link:hover {
+            color: #FF69B4;
+        }
+
+
+@media (max-width: 768px) {
+    #header_imp {
+        height: 50px;
+    }
+
+    a.navbar-brand {
+        font-size: 18px;
+        margin-bottom:auto;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    .navbar-toggler {
+        margin-bottom: 3% !important;
+        color: darkgray !important;
+        opacity: 100% !important;
+        background-color: #161616 !important;
+    }
+
+    .navbar-toggler-icon {
+        background-color:#2f2f2f !important;
+        opacity: 100% !important;
+        color: darkgray !important;
+        border: none !important;
+        height: 20px !important;
+    }
 }
-.nav-item{
-    color: #fff !important;
-}
+    .abt-h {
+        text-align: center;
+        margin: auto;
+    }
+
+    .nav-item {
+        color: #fff !important;
+    }
 
