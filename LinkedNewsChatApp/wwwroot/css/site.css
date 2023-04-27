@@ -29,8 +29,8 @@ body {
 }
 
 html, body {
-    /*background-image: url(/images/mainphone.jpg) !important;*/
-    background-color: #76b4f8 !important;
+    background-image: url(/images/back_phon.jpg) ;
+    /*background-color: #76b4f8 !important;*/
     background-size: cover;
     background-repeat: no-repeat;
     height: auto;
@@ -523,9 +523,8 @@ input:default:hover {
     transition: 1.5s;
 }
 
-.abt-h{
-    margin-left: 35%;
-}
+
+
 .abt-par {
     border: solid 3px #032a9e;
     border-radius: 1rem;
