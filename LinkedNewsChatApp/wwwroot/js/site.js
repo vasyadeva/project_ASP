@@ -26,4 +26,5 @@ function footer() {
     main.style.paddingBottom = footer.clientHeight + 'px'
 }
 
-
+const container = document.querySelector('.container-fluid');
+container.classList.add('active');

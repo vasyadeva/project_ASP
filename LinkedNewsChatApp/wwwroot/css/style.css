@@ -110,7 +110,7 @@ button.accept-policy {
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 999;
+        
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     }
 
@@ -141,7 +141,7 @@ button.accept-policy {
 
 @media (max-width: 768px) {
     #header_imp {
-        height: 50px;
+        height: 60px;
     }
 
     a.navbar-brand {
@@ -154,19 +154,45 @@ button.accept-policy {
         margin-right: 5px;
     }
     .navbar-toggler {
+        display: inline-block;
+        vertical-align: middle;
+        content: "";
+        background: no-repeat center center;
+        background-size: 100% 100%;
         margin-bottom: 3% !important;
         color: darkgray !important;
         opacity: 100% !important;
         background-color: #161616 !important;
+        transition: box-shadow 0.15s ease-in-out !important;
     }
 
     .navbar-toggler-icon {
-        background-color:#2f2f2f !important;
+        background-color: #2f2f2f !important;
         opacity: 100% !important;
         color: darkgray !important;
         border: none !important;
         height: 20px !important;
+        transition: box-shadow 0.15s ease-in-out;
     }
+    
+    .container-fluid {
+        position: relative;
+        z-index: 9999;
+        padding: 1% !important;
+        margin-bottom: 15px;
+        background-color: #111;
+        opacity: 0;
+        transform: translateY(-5px);
+        transition: opacity 0.4s ease-out, transform 0.3s ease-out;
+    }
+
+        .container-fluid.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    
+
+    
 }
     .abt-h {
         text-align: center;
