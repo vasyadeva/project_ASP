@@ -4,6 +4,18 @@
     
     var message = TempData["ResetPassword"];
     <link rel="stylesheet" href="~/css/about.css">
+    
+    <head>
+    <script>
+           $(".imgBx").on("click", function () {
+               $(this).addClass("active");
+                    $(".card2").removeClass("active");
+                
+                    $(this).addClass("active");
+                
+           
+    </script>
+    </head>
 }
 
 <body style="background-color: black !important;">
@@ -31,40 +43,48 @@
 <div class="about-member">
 		
       <div class="card">
-        <div class="imgBx">
+          <div class="card2">
+            <div class="imgBx" id="imgBx1">
             <img src="~/img/1.jpg" alt="images">
         </div>
         <div class="details">
                     <h2>Черниш Оксана<br><span>.Net Backend Developer</span></h2>
         </div>
+            </div>
       </div>
     
        <div class="card">
-         <div class="imgBx">
+            <div class="card2">
+            <div class="imgBx" id="imgBx2">
                     <img src="~/img/2.jpg" alt="images">
                 </div>
          <div class="details">
                     <h2>Мандзюк Анастасія<br><span>UI/UX Designer</span></h2>
           </div>
+            </div>
        </div>
 
      
        
        <div class="card">
-         <div class="imgBx">
+                <div class="card2">
+            <div class="imgBx" id="imgBx3">
                     <img src="~/img/3.jpg" alt="images">
                 </div>
          <div class="details">
                     <h2>Дева Василь<br><span>.Net Backend Developer</span></h2>
           </div>
+                </div>
        </div>
 
             <div class="card">
-                <div class="imgBx">
+                    <div class="card2">
+            <div class="imgBx" id="imgBx4">
                     <img src="~/img/4.jpg" alt="images">
                 </div>
                 <div class="details">
                     <h2>Клуб Віктор<br><span>UI/UX Designer</span></h2>
+                </div>
                 </div>
             </div>
        

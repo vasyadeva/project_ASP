@@ -239,7 +239,7 @@ body{
 		transition: 0.5s;
 		z-index: -1;
 	}
-
+	
 	.card:hover:before {
 		transform: rotate(20deg);
 		box-shadow: 0 2px 20px rgba(0,0,0,.2);
@@ -264,6 +264,21 @@ body{
 	.card:hover .imgBx {
 		bottom: 80px;
 	}
+
+
+	 .card2.active:before {
+		transform: rotate(20deg);
+		box-shadow: 0 2px 20px rgba(0,0,0,.2);
+	}
+
+	 .card2.active:after {
+		transform: rotate(10deg);
+		box-shadow: 0 2px 20px rgba(0,0,0,.2);
+	}
+	 .card2.active .imgBx {
+		bottom: 80px;
+	}
+
 
 	.card .imgBx img {
 		position: absolute;
