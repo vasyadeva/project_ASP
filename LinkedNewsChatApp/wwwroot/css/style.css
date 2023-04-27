@@ -38,13 +38,45 @@ button.accept-policy {
   line-height: inherit;
 }
 .main_footer {
-
-    height: 60px;
-   /* background-image: repeating-linear-gradient( to left, #ffbb02, #27afc9);*/
-    justify-content: center;
+    position: absolute;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    height:60px;
+    bottom: 0;
+    overflow: hidden;
+    width: 100%;
     align-items: center;
-    margin-top: 15%
+    justify-content: center;
+    text-align: center;
 }
+
+    /* Стилі для посилань в футері */
+.main_footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .main_footer a:hover {
+        color: #ff0000;
+    }
+
+/* Стилі для медіа запитів */
+
+/*.main_footer {
+    background-color: #3366FF; /* Колір фона 
+    background-image: linear-gradient(to bottom,#032a9e, #0d62bf);
+    color: #FFF; /* Колір тексту 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    margin-top: 5%;
+    max-height: 60px;
+    text-align: center;
+}
+    */
 /*footer {
     position: absolute;
     bottom: 0;
