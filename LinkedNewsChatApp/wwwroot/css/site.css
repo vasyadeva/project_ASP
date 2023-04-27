@@ -48,20 +48,20 @@ align-items: center;
 margin-right: 20px;
 }
 
-/*For reset password & register page div to show jquery validation*/
-.pswd-security {
-position: absolute;
-top: 65px;
-left: 0;
-width: 310px;
-padding: 15px;
-background: #fefefe;
-font-size: .875em;
-border-radius: 5px;
-box-shadow: 0 1px 3px #ccc;
-border: 1px solid #ddd;
-z-index: 999;
-}
+    /*For reset password & register page div to show jquery validation*/
+    .pswd-security {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 310px;
+        padding: 15px;
+        background: #fefefe;
+        font-size: .875em;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #ccc;
+        border: 1px solid #ddd;
+        z-index: 999;
+    }
 .p
 
 .pswd-security ul, .pswd-security li {
