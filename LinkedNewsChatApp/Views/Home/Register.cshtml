@@ -60,7 +60,7 @@
 </div>
 <div class="container">
     <div class="d-flex justify-content-center h-100">
-        <div class="card">
+        <div class="card" style="height:auto;">
             <div class="card-header">
                 <h3>Register</h3>
             </div>
@@ -121,7 +121,8 @@
 
                 <div class="input-group form-group">
                      <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-map-marker"></i></span>                
+                  <span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+                        </div>
                   <select asp-for="Region" class="form-control">
                     <option value="">Оберіть область</option>
                     <option value="Вінницька область">Вінницька область</option>
@@ -149,14 +150,16 @@
                     <option value="Чернівецька область">Чернівецька область</option>
                     <option value="Чернігівська область">Чернігівська область</option>
                     </select>
-                    <span asp-validation-for="Region" class="text-warning"></span>
-                 
-  </div> </div>
+
+
+                         <span asp-validation-for="Region" class="text-warning"></span>
+                    </div>
                         <div class="input-group form-group text-center">
                       <input type="hidden" name="AvatarId" id="AvatarId" value="" />
 
+                        
                             <div class="dropdown text-center">
-                                <button class="btn btn-success dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-warning dropdown-toggle text-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:#FFC312;border-color:#FFC312;width:auto;text-align:center; ">
                                     Оберіть аватар
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -169,11 +172,13 @@
                                 </ul>
                             </div>
                     </div>
+                    
                     <div class="form-group">
                         <input type="submit" value="Register" class="btn float-left login_btn" />
                     </div>
                 </form>
             </div>
+            
             <div class="card-footer">
                 <div class="d-flex justify-content-center footer-links">
                     @Html.ActionLink("Already have an account? Login", "Index")

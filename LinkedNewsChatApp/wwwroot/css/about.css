@@ -3,6 +3,10 @@ body{
 	height:auto;
 	background-image: url() !important;
 }
+.background {
+
+
+}
 .full-wh {
 	position: absolute;
 	top: 0px;
@@ -237,12 +241,12 @@ body{
 	}
 	
 	.card:hover:before {
-		transform: rotate(20deg);
+		/*transform: rotate(20deg);*/
 		box-shadow: 0 2px 20px rgba(0,0,0,.2);
 	}
 
 	.card:hover:after {
-		transform: rotate(10deg);
+		/*transform: rotate(10deg);*/
 		box-shadow: 0 2px 20px rgba(0,0,0,.2);
 	}
 
@@ -263,12 +267,12 @@ body{
 
 
 	 .card2.active:before {
-		transform: rotate(20deg);
+		/*transform: rotate(20deg);*/
 		box-shadow: 0 2px 20px rgba(0,0,0,.2);
 	}
 
 	 .card2.active:after {
-		transform: rotate(10deg);
+		/*transform: rotate(10deg);*/
 		box-shadow: 0 2px 20px rgba(0,0,0,.2);
 	}
 	 .card2.active .imgBx {
@@ -299,7 +303,7 @@ body{
 			padding: 0;
 			font-weight: 600;
 			font-size: 20px;
-			color: #777;
+			color: white;
 			text-transform: uppercase;
 		}
 

@@ -35,6 +35,8 @@ namespace LinkedNewsChatApp.Models
         [StringLength(100, ErrorMessage ="Value must be less than 100 symbols")]
         public string? Biography { get; set; }
 
-        public string? Region { get; set; }
+        [StringLength(100, ErrorMessage = "Choose region!", MinimumLength =1)]
+        public string Region { get; set; }
+
     }
 }
