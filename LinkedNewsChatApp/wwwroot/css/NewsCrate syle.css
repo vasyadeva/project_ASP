@@ -1,0 +1,54 @@
+﻿#Crt_main {
+    font-size: 36px;
+    color: #333;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+    form label {
+        width:80%;
+        font-size: 1.2em;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        background-color: #444;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 1.2em;
+    }
+
+    form input[type="file"] {
+        margin-top: 10px;
+    }
+
+    form input[type="submit"] {
+        display: inline-block;
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+
+        form input[type="submit"]:hover {
+            background-color: #2980b9;
+        }

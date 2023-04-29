@@ -725,9 +725,12 @@ input:default:hover {
     border-radius: 1rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+#Edit_text{
+    overflow:revert;
+}
 #LeaveButton {
-    margin-top:.5em;
-    max-width:45%;
+    margin-top: .5em;
+    max-width: 45%;
     min-width: 45%;
     font-weight: 900;
     background-color: #d70114;
@@ -735,7 +738,7 @@ input:default:hover {
     width: 32%;
     font-size: 20px;
     margin-bottom: .5em;
-    text-align:center;
+    text-align: center;
     margin-left: 28%;
     opacity: 90%;
 }
