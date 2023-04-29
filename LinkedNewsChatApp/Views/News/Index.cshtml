@@ -10,12 +10,15 @@
 
 <h1 class="news_hd">Новини</h1>
 
-
+<div class="scroll-up-btn">
+    <i class="fas fa-angle-up"></i>
+</div>
    <main class="main columns">
 @foreach (var item in Model)
 {
+
   <section class="column_NI">
-    <a class="article_NI" href="#">
+            <a class="article_NI"  asp-action="Data" asp-route-id="@item.id">
       <figure class="article_image">
                     @{
                         string base64String = Convert.ToBase64String(item.photo);
@@ -26,9 +29,6 @@
         <h2 class="article_title">
                         @item.title
         </h2>
-        <p class="article_content">
-                        @item.text
-        </p>
         <footer id="article_info">
                         <span>@item.Time</span>
         </footer>

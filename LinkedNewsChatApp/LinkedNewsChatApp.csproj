@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\NewsEdit\News Page.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\News\Data.cshtml" />
     <None Include="wwwroot\css\widget.css" />
   </ItemGroup>
 
@@ -26,6 +31,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\NewsEdit\News Page.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\NewsEdit\News Page.cshtml" />
   </ItemGroup>
 
 </Project>

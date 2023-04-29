@@ -1,0 +1,41 @@
+﻿@model LinkedNewsChatApp.Data.News
+
+@{
+    ViewData["Title"] = "Details";
+}
+<head>
+    <link rel="stylesheet" href="~/css/data.css" asp-append-version="true" />
+</head>
+
+<h1 id="Nh1">ОПИС НОВИНИ</h1>
+
+<div>
+    <h4 id="Nh4">News</h4>
+    <hr id="Nhr"/>
+    <dl id="Ndl" class="row">
+
+        <dd  class="Data_title">
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dd class="Data_text">
+            @Html.DisplayFor(model => model.text)
+        </dd>
+
+        <dd class="Data_image">
+
+            @{
+                string base64String = Convert.ToBase64String(Model.photo);
+            }
+            <img src="data:image/png;base64, @(base64String)" width="930" />
+        </dd>
+        <dd id="Data_info" >
+
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <a id="Na" asp-action="Index">Back to List</a>
+</div>

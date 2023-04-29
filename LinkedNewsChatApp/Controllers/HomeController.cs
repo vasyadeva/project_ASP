@@ -236,5 +236,9 @@ namespace LinkedNewsChatApp.Controllers
         {
             return View();
         }
+        public IActionResult Data()
+        {
+            return View();
+        }
     }
 }

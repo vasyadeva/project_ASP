@@ -35,6 +35,22 @@ namespace LinkedNewsChatApp.Controllers
                         View(await _context.news.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.news'  is null.");
         }
+        public async Task<IActionResult> Data(int? id)
+        {
+            if (id == null || _context.news == null)
+            {
+                return NotFound();
+            }
+
+            var news = await _context.news
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+
+            return View(news);
+        }
 
     }
     

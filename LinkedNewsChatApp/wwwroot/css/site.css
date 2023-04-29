@@ -296,6 +296,7 @@ flex-grow: 1;
     position: absolute;
     top: 58px;
     padding-top: 20px;
+    text-align:center;
     background-color: rgba(0,0,0,0.6) !important;
     margin-top: 10px;
     margin-bottom: 100px;
@@ -769,7 +770,7 @@ input:default:hover {
 }
 .h2 {
     border-radius: 1rem;
-    border: 1px solid #53a1f7;
+    border: 1px solid black;
     padding: 0.25rem;
 }
 .mb-2 {
@@ -798,7 +799,7 @@ input:default:hover {
     max-width: 300px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(1, 1, 1, 5);
     overflow: hidden;
 }
 
@@ -842,21 +843,17 @@ input:default:hover {
 
 .article_title {
     font-size: 24px;
-    margin-bottom: 10px;
-    color: #ffffff !important;
+    margin-bottom: 20px;
+    color: #434343 !important;
     text-decoration: wavy;
-    text-shadow:  -2px 1px 4px rgba(1, 1, 1, 5);
+    
 }
 
-.article_content {
-    font-size: 18px;
-    line-height: 1.5;
-    color: #555;
-}
+
 
 /* Стиль дати новини */
 #article_info {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 14px;
     color: #aaa;
     text-align: right;
@@ -875,3 +872,33 @@ h1, h2, h3, h4, h5, h6, center {
     box-shadow: 0 0 0 .2rem rgba(255 195 18,.5) !important;
     
 }
+
+.scroll-up-btn {
+    position: fixed;
+    height: 45px;
+    width: 42px;
+    background: #1bb83d;
+    right: 30px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 45px;
+    color: #fff;
+    z-index: 9999;
+    font-size: 30px;
+    border-radius: 6px;
+    border-bottom-width: 2px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+    .scroll-up-btn.show {
+        bottom: 30px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .scroll-up-btn:hover {
+        filter: brightness(90%);
+    }

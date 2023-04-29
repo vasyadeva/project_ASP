@@ -205,7 +205,7 @@ button.accept-policy {
     text-align: center;
     margin: auto;
 }
-
+/*
 #my_Btn {
     display: none;
     position: fixed;
@@ -234,7 +234,7 @@ button.accept-policy {
     }
 }
 
-/* Для екранів з шириною менше 480px */
+
 @media only screen and (max-width: 480px) {
     #my_Btn {
         bottom: 20px;
@@ -243,8 +243,10 @@ button.accept-policy {
         background-color: transparent;
         border-radius: 4rem;
     }
-}
+}*/
 .nav-item {
     color: #fff !important;
 }
-
+.bg-secondary{
+    width: auto !important;
+}
