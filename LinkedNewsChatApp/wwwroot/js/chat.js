@@ -245,6 +245,38 @@ function addOnlineUserNames(user) {
     document.getElementById("userOnlineList2").appendChild(li2);
 }
 
+document.getElementById("emoji-button").addEventListener("click", function (event) {
+    const emojiWindow = document.getElementById('emoji-window');
+    if (emojiWindow.style.display === 'block') {
+        emojiWindow.style.display = 'none';
+    } else {
+        const emojis = Array.from({ length: 80 }, (_, i) => String.fromCodePoint(0x1F600 + i));
+        let emojiHTML = '';
+        for (let i = 0; i < emojis.length; i++) {
+            emojiHTML += '<span>' + emojis[i] + '</span>';
+            if ((i + 1) % 16 === 0) {
+                emojiHTML += '<br>';
+            }
+        }
+        emojiWindow.innerHTML = emojiHTML;
+        emojiWindow.style.display = 'block';
+        const emojiElements = document.querySelectorAll('#emoji-window span');
+        for (let i = 0; i < emojiElements.length; i++) {
+            emojiElements[i].classList.add('emoji');
+            emojiElements[i].addEventListener('click', function () {
+                const emoji = emojiElements[i].innerHTML;
+                const messageInput = document.getElementById('messageInput');
+                messageInput.value += emoji;
+            });
+        }
+    }
+});
+
+
+
+
+
+
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var message = document.getElementById("messageInput").value;
     //send private message

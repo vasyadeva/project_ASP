@@ -84,7 +84,25 @@
 
 
             /*---------------------------*/
-
+            #emoji-window {
+    position: absolute;
+    bottom: 310px; /* змініть це значення, щоб встановити бажану відстань */
+    left: 310px;
+     cursor: pointer;
+    background-color: black;
+    border: 3px solid darkblue;
+    padding: 5px;
+    z-index: 1; /* забезпечує, що вікно з емоджі буде знаходитись над іншими елементами */
+     }
+     #emoji-window ul li {
+  display: inline-block;
+  font-size: 30px;
+  padding: 5px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
      
 </style>
     <!-- JavaScript код -->
@@ -245,6 +263,8 @@
     </div>
 
     <div class="chat-input">
+        <div id="emoji-window" style="display: none;"></div>
+       <button id="emoji-button" style="background-color:black; width:100px">🙂</button>
         <textarea id="messageInput" placeholder="Your text here..."></textarea>
         <button id="sendButton" style="font-weight: bold"> Send <i class="fa fa-paper-plane fa-x "></i></button>
     </div>
