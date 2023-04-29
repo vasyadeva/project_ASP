@@ -843,8 +843,9 @@ input:default:hover {
 .article_title {
     font-size: 24px;
     margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0.1, 0.1, 0.2, 1);
+    color: #ffffff !important;
+    text-decoration: wavy;
+    text-shadow:  -2px 1px 4px rgba(1, 1, 1, 5);
 }
 
 .article_content {

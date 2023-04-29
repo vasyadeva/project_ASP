@@ -192,14 +192,59 @@ button.accept-policy {
         }
     
 
+        #my_Btn.show {
+            opacity: 1;
+        }
+
+        #my_Btn:hover {
+            background-color: #555;
+        }
+}
+
+.abt-h {
+    text-align: center;
+    margin: auto;
+}
+
+#my_Btn {
+    display: none;
+    position: fixed;
+    bottom: 30%;
+    right: 10%;
+    border: 3px groove black;
+    outline: none;
+    background-color: #787878;
+    padding: 2rem;
+    border-radius: 2rem;
     
 }
-    .abt-h {
-        text-align: center;
-        margin: auto;
+
+
+    #my_Btn:hover {
+        background-color: #555; 
     }
 
-    .nav-item {
-        color: #fff !important;
+@media only screen and (max-width: 768px) {
+    #my_Btn {
+        bottom: 50px;
+        right: 25px;
+        
+        padding: 32px;
+        border-radius: 3rem;
     }
+}
+
+/* Для екранів з шириною менше 480px */
+@media only screen and (max-width: 480px) {
+    #my_Btn {
+        bottom: 20px;
+        right: 15px;
+        padding: 32px;
+        background-color: transparent;
+        border-radius: 4rem;
+    }
+}
+.nav-item {
+    color: #fff !important;
+}
 
