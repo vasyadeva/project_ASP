@@ -197,13 +197,22 @@ namespace LinkedNewsChatApp.Hubs
 
             var chatOperations = new ChatOperations(_repository, _loginOperator);
             int Avaid = chatOperations.AvaId(hubUser.Name);
-            chatOperations.AddGroupMessage(FromUserName, Time, Message, groupname, Avaid);
-
+            bool isbanned = chatOperations.CheckBan(hubUser.Name);
+            if (isbanned == true)
+            {
+                await Clients.Caller.SendAsync("BanAllert");
+                await OnConnectedAsync();
+            }
+            else
+            {
+                chatOperations.AddGroupMessage(FromUserName, Time, Message, groupname, Avaid);
+                await Clients.Group(toGroup).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"), Avaid);
+            }
 
             //-----------
             //_messageDictionary.Add(toGroup, saveMessage);
             //кінець
-            await Clients.Group(toGroup).SendAsync("ReceiveMessage", hubUser, message, timeNow.ToString("HH:mm:ss"), Avaid);
+           
         }
 
         public async Task CreateGroup(string groupName)

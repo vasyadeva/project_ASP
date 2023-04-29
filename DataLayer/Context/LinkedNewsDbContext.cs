@@ -25,7 +25,6 @@ namespace DataLayer.Context
         public DbSet<HubGroup> hubGroups => Set<HubGroup>();
         public DbSet<UserFriends> Friends => Set<UserFriends>();
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

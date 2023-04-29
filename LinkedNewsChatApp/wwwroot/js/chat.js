@@ -31,6 +31,11 @@ connection.on("RemoveFriendFromList", function () {
    });
 
 
+connection.on("BanAllert", function () {
+    alert("Вас забанили на тиждень за порушення правил чату");
+});
+
+
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {
     var userNameWindow = document.getElementById("FriendOnlineList");
     var userNameWindow2 = document.getElementById("FriendOnlineList2");
@@ -867,8 +872,18 @@ function handleGroupButtonClick(event) {
 }
 
 
-connection.start().then(function () {
-    document.getElementById("sendButton").disabled;
-}).catch(function (err) {
-    return console.error(err.toString());
+connection.start()
+    .then(function () {
+        document.getElementById("sendButton").disabled;
+    })
+    .catch(function (err) {
+        //alert("Ваш сеанс завершився, оновити сторінку?");
+        //location.reload();
+        console.error(err.toString());
+    });
+
+
+connection.onclose(function (e) {
+    alert("Ваш сеанс завершився, оновити сторінку?");
+    location.reload();
 });

@@ -1,5 +1,6 @@
 ﻿using DataLayer.Context;
 using DataLayer.Entities;
+using DataLayer.Migrations;
 using LinkedNewsChatApp.Hubs;
 using Microsoft.EntityFrameworkCore;
 
@@ -214,6 +215,49 @@ namespace DataLayer
             }
         }
 
+        public bool CheckBan(string username)
+        {
+            var ban = _dbContext.Users.Where(m => m.Username == username).Select(n => n.BannedDate).FirstOrDefault();
+            if (ban != null)
+            {
+                DateTime day = DateTime.Now.Date;
+                TimeSpan elapsed = (TimeSpan)(day - ban);
+                if (elapsed.TotalDays >= 7)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+         }
+
+        public void Ban(string username)
+        {
+            var user = _dbContext.Users.Where(m=>m.Username==username).Select(k=>k.Username).FirstOrDefault();
+            if (user != null)
+            {
+
+                var ban = _dbContext.Users.First(g => g.Username == username);
+                ban.BannedDate = DateTime.Now;
+                _dbContext.SaveChanges();
+            }
+        }
+        public void UnBan(string username)
+        {
+            var user = _dbContext.Users.Where(m => m.Username == username).Select(k => k.Username).FirstOrDefault();
+            if (user != null)
+            {
+                var ban = _dbContext.Users.First(g => g.Username == username);
+                ban.BannedDate = null;
+                _dbContext.SaveChanges();
+            }
+        }
     }
 
 }

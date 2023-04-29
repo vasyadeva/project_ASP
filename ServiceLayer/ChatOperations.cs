@@ -105,6 +105,7 @@ namespace ServiceLayer
         {
             return _repository.GetUsers(username);  
         }
-
+        public bool CheckBan(string username)
+        { return _repository.CheckBan(username);}
     }
 }

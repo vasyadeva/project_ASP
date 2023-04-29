@@ -28,6 +28,9 @@ namespace DataLayer
         public void AddPrivateGroup(PrivateChat group);
         public void LeaveFromGroup(string username,string group);
         public void DeleteFriend(UserFriends friends);
+        public bool CheckBan(string username);
+        public void Ban(string username);
+        public void UnBan(string username);
 
     }
 }
