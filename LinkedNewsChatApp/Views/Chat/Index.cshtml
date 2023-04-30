@@ -5,107 +5,86 @@
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
 <style>
-        .sidenav {
-            height: 80%;
-            width: 0;
-            position: absolute;
-            z-index: 1;
-            margin-left: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
+.sidenav {
+height: 80%;
+width: 0;
+position: absolute;
+z-index: 1;
+margin-left: 0;
+left: 0;
+background-color: #111;
+overflow-x: hidden;
             
-            transition: 0.5s;
-            padding-top: 10px;
-        }
-
-            .sidenav a {
-                padding: 8px 12px 8px 8px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                opacity: 100%;
-                transition: 0.3s;
-            }
-
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                    opacity: 100%;
-                }
-
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                opacity: 100%;
-                font-size: 36px;
-                margin-left: 50px;
-            }
-
-
-     /*------------------------------*/
-        .sidenav2 {
-            height: 80%;
-            width: 0;
-            opacity: 0.9 !important;
-            position: absolute;
-            z-index: 1;
-            right: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: width 0.5s, right 0.5s;
-            padding-top: 10px;
-        }
-
-            .sidenav2 a {
-                padding: 8px 12px 8px 8px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                opacity: 100%;
-                transition: 0.3s;
-            }
-
-                .sidenav2 a:hover {
-                    color: #f1f1f1;
-                    opacity: 100%;
-                }
-
-            .sidenav2 .closebtn {
-                position: absolute;
-                top: 0;
-                left: 25px;
-                font-size: 36px;
-                margin-right: 10px;
-                opacity: 100%;
-            }
-
-
-            /*---------------------------*/
-            #emoji-window {
-    position: absolute;
-    bottom: 310px; /* змініть це значення, щоб встановити бажану відстань */
-    left: 310px;
-     cursor: pointer;
-    background-color: black;
-    border: 3px solid darkblue;
-    padding: 5px;
-    z-index: 1; /* забезпечує, що вікно з емоджі буде знаходитись над іншими елементами */
-     }
-     #emoji-window ul li {
-  display: inline-block;
-  font-size: 30px;
-  padding: 5px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+transition: 0.5s;
+padding-top: 10px;
 }
-     
+
+.sidenav a {
+    padding: 8px 12px 8px 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    opacity: 100%;
+    transition: 0.3s;
+}
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+        opacity: 100%;
+    }
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    opacity: 100%;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+  
+.sidenav2 {
+height: 80%;
+width: 0;
+opacity: 0.9 !important;
+position: absolute;
+z-index: 1;
+right: 0;
+background-color: #111;
+overflow-x: hidden;
+transition: width 0.5s, right 0.5s;
+padding-top: 10px;
+}
+
+.sidenav2 a {
+    padding: 8px 12px 8px 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    opacity: 100%;
+    transition: 0.3s;
+}
+
+    .sidenav2 a:hover {
+        color: #f1f1f1;
+        opacity: 100%;
+    }
+
+.sidenav2 .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-right: 10px;
+    opacity: 100%;
+}
+
+
 </style>
-    <!-- JavaScript код -->
+    
     <script>
         // Отримання списку і кнопки за допомогою їх id
         var myList = document.getElementById("FriendOnlineList");
@@ -200,7 +179,7 @@
 
         
         <div class="col text-center">
-            <button type="button" id="myButton2" class="btn btn-warning">Show/Hide Friends</button>
+            <button type="button" id="myButton2" style="white-space:break-spaces;" class="btn btn-warning">Show/Hide Friends</button>
         </div>
         <div class="row text-center">
             <ul id="FriendOnlineList2" ></ul>
@@ -263,10 +242,10 @@
     </div>
 
     <div class="chat-input">
-        <div id="emoji-window" style="display: none;"></div>
-       <button id="emoji-button" style="background-color:black; width:100px">🙂</button>
+        <div id="emoji-window" ></div>
+       <button id="emoji-button" >🙂</button>
         <textarea id="messageInput" placeholder="Your text here..."></textarea>
-        <button id="sendButton" style="font-weight: bold"> Send <i class="fa fa-paper-plane fa-x "></i></button>
+        <button id="sendButton" > Send <i class="fa fa-paper-plane fa-x "></i></button>
     </div>
 </div>
 

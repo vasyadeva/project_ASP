@@ -178,13 +178,17 @@ margin-bottom: auto;*/
     overflow:hidden;
     background: #FFE4B5;
     padding: 10px 10px 0 10px;
+    
     border-radius: 0 6px 6px 0;
     margin-bottom: 8px;
-    max-width: 96%;
+    max-width: 100%;
     width: auto;
     box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
     overflow-wrap: break-word;
     position: relative;
+}
+#messagesList{
+    padding-left:0.5rem;
 }
 
 .my-message {
@@ -876,32 +880,3 @@ h1, h2, h3, h4, h5, h6, center {
     
 }
 
-.scroll-up-btn {
-    position: fixed;
-    height: 45px;
-    width: 42px;
-    background: #1bb83d;
-    right: 30px;
-    bottom: 10px;
-    text-align: center;
-    line-height: 45px;
-    color: #fff;
-    z-index: 9999;
-    font-size: 30px;
-    border-radius: 6px;
-    border-bottom-width: 2px;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-    .scroll-up-btn.show {
-        bottom: 30px;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .scroll-up-btn:hover {
-        filter: brightness(90%);
-    }
