@@ -29,11 +29,31 @@ namespace LinkedNewsChatApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return _context.news != null ?
-                        View(await _context.news.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.news'  is null.");
+            int pageSize = 10;
+            var news = _context.news.AsQueryable();
+            int totalNews = await news.CountAsync();
+            int totalPages = (int)Math.Ceiling((decimal)totalNews / pageSize);
+
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+            else if (page > totalPages)
+            {
+                page = totalPages;
+            }
+
+            var selectedNews = await news.Skip((page - 1) * pageSize)
+                                         .Take(pageSize)
+                                         .ToListAsync();
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+            return View(selectedNews);
+
         }
         public async Task<IActionResult> Data(int? id)
         {
