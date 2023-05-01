@@ -218,11 +218,14 @@ namespace DataLayer
         public bool CheckBan(string username)
         {
             var ban = _dbContext.Users.Where(m => m.Username == username).Select(n => n.BannedDate).FirstOrDefault();
+            var unban = _dbContext.Users.Where(m => m.Username == username).Select(n => n.UnBannedDate).FirstOrDefault();
+
             if (ban != null)
             {
                 DateTime day = DateTime.Now.Date;
                 TimeSpan elapsed = (TimeSpan)(day - ban);
-                if (elapsed.TotalDays >= 7)
+  
+                if (elapsed.TotalDays >= unban)
                 {
                     return false;
                 }
@@ -237,7 +240,7 @@ namespace DataLayer
             }
          }
 
-        public void Ban(string username)
+        public void Ban(string username,int term)
         {
             var user = _dbContext.Users.Where(m=>m.Username==username).Select(k=>k.Username).FirstOrDefault();
             if (user != null)
@@ -245,6 +248,10 @@ namespace DataLayer
 
                 var ban = _dbContext.Users.First(g => g.Username == username);
                 ban.BannedDate = DateTime.Now;
+                if (ban.BannedDate != null)
+                {
+                    ban.UnBannedDate = term;
+                }
                 _dbContext.SaveChanges();
             }
         }
@@ -257,6 +264,19 @@ namespace DataLayer
                 ban.BannedDate = null;
                 _dbContext.SaveChanges();
             }
+        }
+        public int GetTermBan(string username)
+        {
+            var user = _dbContext.Users.Where(m => m.Username == username).Select(k => k.Username).FirstOrDefault();
+            if (user != null)
+            {
+
+                var ban = _dbContext.Users.First(g => g.Username == username);
+                int daysSinceBan = (int)(DateTime.Now.Date - ban.BannedDate.Value.Date).TotalDays;
+                return ban.UnBannedDate- daysSinceBan;
+              
+            }
+            return 0;
         }
     }
 

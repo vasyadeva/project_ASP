@@ -29,8 +29,10 @@ namespace DataLayer
         public void LeaveFromGroup(string username,string group);
         public void DeleteFriend(UserFriends friends);
         public bool CheckBan(string username);
-        public void Ban(string username);
+        public void Ban(string username,int term);
         public void UnBan(string username);
+        public int GetTermBan(string username);
+
 
     }
 }
