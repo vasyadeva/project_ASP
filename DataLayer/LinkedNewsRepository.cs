@@ -273,7 +273,7 @@ namespace DataLayer
 
                 var ban = _dbContext.Users.First(g => g.Username == username);
                 int daysSinceBan = (int)(DateTime.Now.Date - ban.BannedDate.Value.Date).TotalDays;
-                return ban.UnBannedDate- daysSinceBan;
+                return Convert.ToInt32(ban.UnBannedDate)- daysSinceBan;
               
             }
             return 0;

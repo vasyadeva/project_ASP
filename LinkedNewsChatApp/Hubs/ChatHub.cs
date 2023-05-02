@@ -66,7 +66,7 @@ namespace LinkedNewsChatApp.Hubs
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
             }
             //кінець
-            await Clients.Group(generalChatName).SendAsync("NotifyGroup", hubUser, " joined General Chat").ConfigureAwait(true);
+            await Clients.Group(generalChatName).SendAsync("NotifyGroup", hubUser, " приєднався/лася до загального чату").ConfigureAwait(true);
 
             await base.OnConnectedAsync();
         }
@@ -111,7 +111,7 @@ namespace LinkedNewsChatApp.Hubs
             {
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList, Avaid);
             }
-            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " is here! ").ConfigureAwait(true);
+            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " тут! ").ConfigureAwait(true);
         }
 
         public async Task SendPrivateMessage(string toUser, string message)
@@ -266,7 +266,7 @@ namespace LinkedNewsChatApp.Hubs
                 await Clients.User(hubUser.UserIdentifier).SendAsync("GetOldMessagesOnJoin", messageList);
             }
             //кінець 
-            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " joined " + groupName).ConfigureAwait(true);
+            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " приєднався/лася до " + groupName).ConfigureAwait(true);
         }
 
         public async Task LeaveRoom(string groupName)
@@ -287,11 +287,11 @@ namespace LinkedNewsChatApp.Hubs
             await Clients.All.SendAsync("RecieveOnlineGroups", chatOperations.GetListOfGroups(hubUser.Name), reg, hubUser);
             if (groupName == "GeneralDefaultChat")
             {
-                await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " left General Chat").ConfigureAwait(true);
+                await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " покинув/ла загальний чат").ConfigureAwait(true);
             }
             else
             {
-                await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " left " + groupName).ConfigureAwait(true);
+                await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " покинув/ла " + groupName).ConfigureAwait(true);
             }
         }
 
@@ -306,7 +306,7 @@ namespace LinkedNewsChatApp.Hubs
             var groupName = CreatePrivateGroupName(hubUser.Name, toUserName);
 
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " left private chat! Bye, Bye! ").ConfigureAwait(true);
+            await Clients.Group(groupName).SendAsync("NotifyGroup", hubUser, " покинув/ла приватний чат! Бувай! ").ConfigureAwait(true);
         }
         public async Task LeaveFromGroup(string group)
         {

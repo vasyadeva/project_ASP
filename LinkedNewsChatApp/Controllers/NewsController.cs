@@ -31,7 +31,7 @@ namespace LinkedNewsChatApp.Controllers
 
         public async Task<IActionResult> Index(string Category = "initial",int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 10;
             var news = _context.news.AsQueryable(); ;
             if (Category != "initial")
             {

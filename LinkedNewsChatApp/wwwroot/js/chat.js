@@ -32,7 +32,15 @@ connection.on("RemoveFriendFromList", function () {
 
 
 connection.on("BanAllert", function (date) {
-    alert("Вас забанено за порушення правил чату. Вам буде відновлено доступ через: " + date +" день");
+    if (date === 1) {
+        alert("Вас забанено за порушення правил чату. Вам буде відновлено доступ через: " + date + " день");
+    }
+    else if (date > 1 && date < 5) {
+        alert("Вас забанено за порушення правил чату. Вам буде відновлено доступ через: " + date + " дні");
+    }
+    else if (date > 4) {
+        alert("Вас забанено за порушення правил чату. Вам буде відновлено доступ через: " + date + " днів");
+    }
 });
 
 
@@ -108,7 +116,7 @@ function addFriends(user) {
         document.getElementById("groupError").innerHTML = "";
         document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
-        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        document.getElementById("chat-intro").innerHTML = `Приватний чат з ${user.name}`;
         // allow to send messages and chat
         document.getElementById("sendButton").disabled = false;
         // reset button color
@@ -141,7 +149,7 @@ function addFriends(user) {
         document.getElementById("groupError").innerHTML = "";
         document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
-        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        document.getElementById("chat-intro").innerHTML = `Приватний чат з ${user.name}`;
         // allow to send messages and chat
         document.getElementById("sendButton").disabled = false;
         // reset button color
@@ -189,7 +197,7 @@ function addOnlineUserNames(user) {
         document.getElementById("groupError").innerHTML = "";
         document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
-        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        document.getElementById("chat-intro").innerHTML = `Приватний чат ${user.name}`;
         // allow to send messages and chat
         document.getElementById("sendButton").disabled = false;
         // reset button color
@@ -222,7 +230,7 @@ function addOnlineUserNames(user) {
         document.getElementById("groupError").innerHTML = "";
         document.getElementById("groupError2").innerHTML = "";
         // change header to see with whom you chat
-        document.getElementById("chat-intro").innerHTML = `Private Chat with ${user.name}`;
+        document.getElementById("chat-intro").innerHTML = `Приватний чат ${user.name}`;
         // allow to send messages and chat
         document.getElementById("sendButton").disabled = false;
         // reset button color
@@ -264,7 +272,7 @@ document.getElementById("emoji-button").addEventListener("click", function (even
                 emojiHTML += '<br>';
             }
         }
-        emojiWindow.innerHTML = emojiHTML;
+        emojiWindow.innerHTML = '<div id="emoj">' + emojiHTML + '</div>';
         emojiWindow.style.display = 'block';
         const emojiElements = document.querySelectorAll('#emoji-window span');
         for (let i = 0; i < emojiElements.length; i++) {
@@ -277,6 +285,7 @@ document.getElementById("emoji-button").addEventListener("click", function (even
         }
     }
 });
+
 
 
 
@@ -365,28 +374,28 @@ document.getElementById("joinGroupButton").addEventListener("click", function (e
     var groups = allgroups;
     if (groups.includes(group)) {
         var error = document.getElementById("groupError");
-        error.textContent = 'Group name already exists';
+        error.textContent = 'Група уже існує';
         error.style = "color: red";
         $("#GroupChatName").val("");
         return;
     }
     else if (group.length > 50) {
         var error = document.getElementById("groupError");
-        error.textContent = 'Group name is too long';
+        error.textContent = 'Наймення групи дуже довге';
         error.style = "color: red";
         $("#GroupChatName").val("");
         return;
     }
     else if (!group || group === '') {
         var error = document.getElementById("groupError");
-        error.textContent = 'Please enter group name';
+        error.textContent = 'Введіть групу!';
         error.style = "color: red";
         $("#GroupChatName").val("");
         return;
     }
     else {
         var error = document.getElementById("groupError");
-        error.textContent = 'Group successfully created!';
+        error.textContent = 'Група успішно створена!';
         error.style = "color: green";
         connection.invoke("CreateGroup", group).catch(function (err) {
             return console.error(err.toString());
@@ -404,28 +413,28 @@ document.getElementById("joinGroupButton2").addEventListener("click", function (
 
     if (groups.includes(group)) {
         var error = document.getElementById("groupError2");
-        error.textContent = 'Group name already exists';
+        error.textContent = 'Група уже існує';
         error.style = "color: red";
         $("#GroupChatName2").val("");
         return;
     }
     else if (group.length > 50) {
         var error = document.getElementById("groupError2");
-        error.textContent = 'Group name is too long';
+        error.textContent = 'Наймення групи дуже довге';
         error.style = "color: red";
         $("#GroupChatName2").val("");
         return;
     }
     else if (!group || group === '') {
         var error = document.getElementById("groupError2");
-        error.textContent = 'Please enter group name';
+        error.textContent = 'Введіть групу!';
         error.style = "color: red";
         $("#GroupChatName2").val("");
         return;
     }
     else {
         var error = document.getElementById("groupError2");
-        error.textContent = 'Group successfully created!';
+        error.textContent = 'Група успішно створена!';
         error.style = "color: green";
         connection.invoke("CreateGroup", group).catch(function (err) {
             return console.error(err.toString());
@@ -443,7 +452,7 @@ document.getElementById("joinButton").addEventListener("click", function (event)
         var error = document.getElementById("groupError");
         error.textContent = '';
         // Змінити заголовок для відображення з ким ведеться чат
-        document.getElementById("chat-intro").innerHTML = `You are now chatting in ${group} room`;
+        document.getElementById("chat-intro").innerHTML = `Наразі ви спілкуєтеся у групі ${group}`;
         // Встановити поточну групу
         toGroup = group;
 
@@ -459,7 +468,7 @@ document.getElementById("joinButton").addEventListener("click", function (event)
     }
     else {
         var error = document.getElementById("groupError");
-        error.textContent = 'Group dont exists';
+        error.textContent = 'Група не існує';
         error.style = "color: red";
         $("#GroupChatName2").val("");
         return;
@@ -474,7 +483,7 @@ document.getElementById("joinButton2").addEventListener("click", function (event
         var error = document.getElementById("groupError2");
         error.textContent = '';
         // Змінити заголовок для відображення з ким ведеться чат
-        document.getElementById("chat-intro").innerHTML = `You are now chatting in ${group} room`;
+        document.getElementById("chat-intro").innerHTML = `Наразі ви спілкуєтеся у групі ${group}`;
         // Встановити поточну групу
         toGroup = group;
 
@@ -490,7 +499,7 @@ document.getElementById("joinButton2").addEventListener("click", function (event
     }
     else {
         var error = document.getElementById("groupError2");
-        error.textContent = 'Group dont exists';
+        error.textContent = 'Група не існує';
         error.style = "color: red";
         $("#GroupChatName2").val("");
         return;
@@ -528,28 +537,28 @@ connection.on("addfriendjs", function (friend, users, friends) {
 
         if (allfriends.includes(friend)) {
             var error = document.getElementById("userError")
-            error.textContent = 'Friend already added!';
+            error.textContent = 'Друг уже добавлений!';
             error.style = "color: red";
             $("#FriendJoin").val("");
             return;
         }
         else if (friend.length > 50) {
             var error = document.getElementById("userError");
-            error.textContent = 'friend name is too long';
+            error.textContent = 'Наймення друга дуже довге';
             error.style = "color: red";
             $("#FriendJoin").val("");
             return;
         }
         else if (!friend || friend === '') {
             var error = document.getElementById("userError");
-            error.textContent = 'Please enter friend name';
+            error.textContent = 'Введіть друга!';
             error.style = "color: red";
             $("#FriendJoin").val("");
             return;
         }
         else {
             var error = document.getElementById("userError");
-            error.textContent = 'friend successfully added!';
+            error.textContent = 'Друг успішно доданий!';
             error.style = "color: green";
             connection.invoke("AddFriend", friend).catch(function (err) {
                 return console.error(err.toString());
@@ -558,7 +567,7 @@ connection.on("addfriendjs", function (friend, users, friends) {
     }
     else {
         var error = document.getElementById("userError")
-        error.textContent = 'User doesnt exist!';
+        error.textContent = 'Користувач не існує!';
         error.style = "color: red";
         $("#FriendJoin").val("");
         return;
@@ -571,28 +580,28 @@ connection.on("addfriendjs2", function (friend, users, friends) {
     if (fusers.includes(friend)) {
         if (allfriends.includes(friend)) {
             var error = document.getElementById("userError2")
-            error.textContent = 'Friend already added!';
+            error.textContent = 'Друг уже добавлений!';
             error.style = "color: red";
             $("#FriendJoin2").val("");
             return;
         }
         else if (friend.length > 50) {
             var error = document.getElementById("userError2");
-            error.textContent = 'friend name is too long';
+            error.textContent = 'Наймення друга дуже довге';
             error.style = "color: red";
             $("#FriendJoin2").val("");
             return;
         }
         else if (!friend || friend === '') {
             var error = document.getElementById("userError2");
-            error.textContent = 'Please enter friend name';
+            error.textContent = 'Введіть друга!';
             error.style = "color: red";
             $("#FriendJoin2").val("");
             return;
         }
         else {
             var error = document.getElementById("userError2");
-            error.textContent = 'friend successfully added!';
+            error.textContent = 'Друг успішно доданий!';
             error.style = "color: green";
             connection.invoke("AddFriend", friend).catch(function (err) {
                 return console.error(err.toString());
@@ -601,7 +610,7 @@ connection.on("addfriendjs2", function (friend, users, friends) {
     }
     else {
         var error = document.getElementById("userError2")
-        error.textContent = 'User doesnt exist!';
+        error.textContent = 'Користувач не існує!';
         error.style = "color: red";
         $("#FriendJoin2").val("");
         return;
@@ -612,7 +621,7 @@ connection.on("deletefriendjs", function (friend, friends) {
     var allfriends = Array.from(friends);
     if (allfriends.includes(friend)) {
         var error = document.getElementById("userError");
-        error.textContent = 'friend successfully removed!';
+        error.textContent = 'Друг успішно видалений!';
         error.style = "color: green";
         connection.invoke("DeleteFriend", friend).catch(function (err) {
             return console.error(err.toString());
@@ -620,7 +629,7 @@ connection.on("deletefriendjs", function (friend, friends) {
     }
     else {
         var error = document.getElementById("userError")
-        error.textContent = 'Friend doesnt exist!';
+        error.textContent = 'Друга не існує!';
         error.style = "color: red";
         $("#FriendDelete").val("");
         return;
@@ -631,7 +640,7 @@ connection.on("deletefriendjs2", function (friend, friends) {
     var allfriends = Array.from(friends);
     if (allfriends.includes(friend)) {
         var error = document.getElementById("userError2");
-        error.textContent = 'friend successfully removed!';
+        error.textContent = 'Друг успішно видалений!';
         error.style = "color: green";
         connection.invoke("DeleteFriend", friend).catch(function (err) {
             return console.error(err.toString());
@@ -639,7 +648,7 @@ connection.on("deletefriendjs2", function (friend, friends) {
     }
     else {
         var error = document.getElementById("userError2")
-        error.textContent = 'Friend doesnt exist!';
+        error.textContent = 'Друга не існує!';
         error.style = "color: red";
         $("#FriendDelete2").val("");
         return;
@@ -668,7 +677,7 @@ document.getElementById("FriendRemove2").addEventListener("click", function (eve
 
 connection.on("AddCreatorToGroup", function (user, groupName) {
     // change header to see with whom you chat
-    document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;
+    document.getElementById("chat-intro").innerHTML = `Наразі ви спілкуєтеся у групі ${group}`;
     // allow to send messages and chat
     document.getElementById("sendButton").disabled = false;
     // user leave group chat
@@ -690,7 +699,7 @@ connection.on("AddCreatorToGroup", function (user, groupName) {
 
 connection.on("AddToMainChat", function (user, groupName) {
     // change header to see with whom you chat
-    document.getElementById("chat-intro").innerHTML = `You are now chatting in General Chat`;
+    document.getElementById("chat-intro").innerHTML = `Наразі ви спілкуєтеся у загальному чаті`;
     // allow to send messages and chat
     document.getElementById("sendButton").disabled = false;
     // user leave group chat
@@ -844,7 +853,7 @@ function handleGroupButtonClick(event) {
     document.getElementById("groupError2").innerHTML = "";
 
     // Змінити заголовок для відображення з ким ведеться чат
-    document.getElementById("chat-intro").innerHTML = `You are now chatting in ${groupName} room`;
+    document.getElementById("chat-intro").innerHTML = `Наразі ви спілкуєтеся у групі ${groupName}`;
 
     // Увімкнути кнопку відправки повідомлень
     document.getElementById("sendButton").disabled = false;
@@ -884,7 +893,20 @@ connection.start()
     });
 
 
-connection.onclose(function (e) {
-    alert("Ваш сеанс завершився, оновити сторінку?");
-    location.reload();
+let isLeavingPage = false;
+
+window.addEventListener('beforeunload', function (e) {
+    // користувач переходить на іншу сторінку
+    isLeavingPage = true;
 });
+
+connection.onclose(function (e) {
+    
+        if (!isLeavingPage && document.readyState === "complete") {
+            // видаємо alert, якщо користувач не переходить на іншу сторінку
+            alert("Ваш сеанс завершився, оновити сторінку?");
+            location.reload();
+        }
+   
+});
+

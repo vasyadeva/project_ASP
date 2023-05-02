@@ -734,8 +734,8 @@ input:default:hover {
 }
 #LeaveButton {
     margin-top: .5em;
-    max-width: 45%;
-    min-width: 45%;
+    max-width: 60%;
+    min-width: 60%;
     font-weight: 900;
     background-color: #d70114;
     color: #FFFFFF;
@@ -743,7 +743,7 @@ input:default:hover {
     font-size: 20px;
     margin-bottom: .5em;
     text-align: center;
-    margin-left: 28%;
+    margin-left: 21%;
     opacity: 90%;
 }
     #LeaveButton:hover {

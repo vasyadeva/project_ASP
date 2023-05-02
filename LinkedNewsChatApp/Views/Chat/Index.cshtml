@@ -130,28 +130,28 @@ padding-top: 10px;
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="groups-main2">
         <div id="mySidenavGroups" class="sidenavLeft2" >
-        <p style="text-align:center;font-weight: bold;color:white;">Group Chat Rooms</p>
-        <button id="backToMain" class="btn btn-warning btn-lg" onclick="location.href='@Url.Action("Index", "Chat")'">Main Chat</button>
+        <p style="text-align:center;font-weight: bold;color:white;">Групові чати</p>
+        <button id="backToMain" class="btn btn-warning btn-lg" onclick="location.href='@Url.Action("Index", "Chat")'">Головний<br />чат</button>
         <div>
             <div class="text-center">
                 <h6 id="groupError"></h6>
             </div>
             <div class="form-group">
-                <label style="color:white;">Enter new room name</label>
-                <input id="GroupChatName" name="groupName" class="form-control" placeholder="  ..." />
+                <label style="color:white;">Введіть нову групу</label>
+                <input id="GroupChatName" name="groupName" class="form-control" placeholder="" />
             </div>
             <div class="form-group">
-                <input type="button" id="joinGroupButton" style="font-weight: 500;background-color:aliceblue" value="Add new" />
+                <input type="button" id="joinGroupButton" style="font-weight: 500;background-color:aliceblue" value="Створити" />
             </div>
                 <div class="form-group">
-                    <label style="color:white;">Enter room to join</label>
-                    <input id="GroupJoin" name="groupName" class="form-control" placeholder="  ..." />
+                    <label style="color:white;">Введіть групу, щоб приєднатися</label>
+                    <input id="GroupJoin" name="groupName" class="form-control" placeholder="" />
                 </div>
                 <div class="form-group">
-                    <input type="button" id="joinButton" style="font-weight: 500;background-color:aliceblue" value="Join" />
+                    <input type="button" id="joinButton" style="font-weight: 500;background-color:aliceblue" value="Приєднатися" />
                 </div>
         </div>
-        <p style="text-align:center;font-weight: bold;color:white">Chat Rooms Online</p>
+        <p style="text-align:center;font-weight: bold;color:white">Чати:</p>
         <div id="groupOnlineList" class="row text-center">
             <ul id="groupList2"></ul>
         </div>
@@ -165,31 +165,31 @@ padding-top: 10px;
 <div id="mySidenav2" class="sidenav2" style="opacity: 80%;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
     <div id="mySidenavUsers2" class="sidenavRight2">
-        <p style="text-align:center;font-weight: bold;color:white;">Users Online</p>
+        <p style="text-align:center;font-weight: bold;color:white;">Юзери онлайн</p>
         <div class="text-center">
             <h6 id="userError2"></h6>
         </div>
         <div class="form-group">
-            <label style="color:white;">Enter friend to add</label>
-            <input id="FriendJoin2" name="groupName" class="form-control" placeholder="  ..." />
+            <label style="color:white;">Добавити юзера до друзів</label>
+            <input id="FriendJoin2" name="groupName" class="form-control" placeholder="" />
         </div>
         <div class="form-group">
-            <input type="button" id="FriendButton2" style="font-weight: 500;background-color:aliceblue" value="Add Friend" />
+            <input type="button" id="FriendButton2" style="font-weight: 500;background-color:aliceblue" value="Добавити друга" />
         </div>
 
         
         <div class="col text-center">
-            <button type="button" id="myButton2" style="white-space:break-spaces;" class="btn btn-warning">Show/Hide Friends</button>
+            <button type="button" id="myButton2" style="white-space:break-spaces;" class="btn btn-warning">Друзі</button>
         </div>
         <div class="row text-center">
             <ul id="FriendOnlineList2" ></ul>
         </div>
         <div class="form-group">
-            <label style="color:white;">Enter friend to remove</label>
-            <input id="FriendDelete2" name="groupName" class="form-control" placeholder="  ..." />
+            <label style="color:white;">Введіть друга для видалення</label>
+            <input id="FriendDelete2" name="groupName" class="form-control" placeholder="" />
         </div>
         <div class="form-group">
-            <input type="button" id="FriendRemove2" style="font-weight: 500;background-color:aliceblue" value="Remove friend" />
+            <input type="button" id="FriendRemove2" style="font-weight: 500;background-color:aliceblue" value="Видалити друга" />
         </div>
         <div class="row text-center">
             <ul id="userOnlineList2"></ul>
@@ -234,7 +234,7 @@ padding-top: 10px;
     <h1 class="chatHead" style="text-align:center" ;><pre> </pre> </h1>
     <h4 class="chat-header" id="chat-intro" style="text-align:center" ;></h4>
     <div class="form-group">
-        <input type="button" id="LeaveButton" value="Leave room" />
+        <input type="button" id="LeaveButton" value="Покинути групу" />
     </div>
 
     <div class="message-box">
@@ -244,25 +244,25 @@ padding-top: 10px;
     <div class="chat-input">
         <div id="emoji-window" ></div>
        <button id="emoji-button" >🙂</button>
-        <textarea id="messageInput" placeholder="Your text here..."></textarea>
+        <textarea id="messageInput" placeholder="Ваш текст тут..."></textarea>
         <button id="sendButton" > Send <i class="fa fa-paper-plane fa-x "></i></button>
     </div>
 </div>
 
 <div id="mySidenavUsers" class="sidenavRight">
-    <p style="text-align:center;font-weight: bold;color:white;">Users Online</p>
+    <p style="text-align:center;font-weight: bold;color:white;">Юзери онлайн</p>
     <div class="text-center">
         <h6 id="userError"></h6>
     </div>
     <div class="form-group">
-        <label style="color:white;">Enter friend to add</label>
-        <input id="FriendJoin" name="groupName" class="form-control" placeholder="  ..." />
+        <label style="color:white;">Добавити юзера до друзів</label>
+        <input id="FriendJoin" name="groupName" class="form-control" placeholder="" />
     </div>
     <div class="form-group">
-        <input type="button" id="FriendButton" style="font-weight: 500;background-color:aliceblue" value="Add friend" />
+        <input type="button" id="FriendButton" style="font-weight: 500;background-color:aliceblue" value="Добавити друга" />
     </div>
     <div class="col text-center">
-        <button id="myButton" class="btn btn-warning text-center">Show/Hide Friends</button>
+        <button id="myButton" class="btn btn-warning text-center">Друзі</button>
         </div>
     
 
@@ -270,11 +270,11 @@ padding-top: 10px;
         <ul id="FriendOnlineList"></ul>
     </div>
     <div class="form-group">
-        <label style="color:white;">Enter friend to remove</label>
-        <input id="FriendDelete" name="groupName" class="form-control" placeholder="  ..." />
+        <label style="color:white;">Введіть друга для видалення</label>
+        <input id="FriendDelete" name="groupName" class="form-control" placeholder="" />
     </div>
     <div class="form-group">
-        <input type="button" id="FriendRemove" style="font-weight: 500;background-color:aliceblue" value="Remove friend" />
+        <input type="button" id="FriendRemove" style="font-weight: 500;background-color:aliceblue" value="Видалити друга" />
     </div>
     <div class="row text-center">
         <ul id="userOnlineList"></ul>
@@ -283,29 +283,29 @@ padding-top: 10px;
 
 <div class="groups-main">
         <div id="mySidenavGroups" class="sidenavLeft">
-        <p style="text-align:center;font-weight: bold;color:white;">Group Chat Rooms</p>
-        <button id="backToMain" class="btn btn-warning btn-lg" onclick="location.href='@Url.Action("Index", "Chat")'">Main Chat</button>
+        <p style="text-align:center;font-weight: bold;color:white;">Групові чати</p>
+        <button id="backToMain" class="btn btn-warning btn-lg" onclick="location.href='@Url.Action("Index", "Chat")'">Головний<br /> чат</button>
         <div>
             <div class="text-center">
                 <h6 id="groupError2"></h6>
             </div>
             <div class="form-group">
-                <label style="color:white;">Enter new room name</label>
-                <input id="GroupChatName2" name="groupName" class="form-control" placeholder="  ..." />
+                <label style="color:white;">Введіть нову групу</label>
+                <input id="GroupChatName2" name="groupName" class="form-control" placeholder="" />
             </div>
             <div class="form-group">
-                <input type="button" id="joinGroupButton2" style="font-weight: 500;background-color:aliceblue" value="Add new" />
+                <input type="button" id="joinGroupButton2" style="font-weight: 500;background-color:aliceblue" value="Створити" />
             </div>
 
             <div class="form-group">
-                <label style="color:white;">Enter room to join</label>
-                <input id="GroupJoin2" name="groupName" class="form-control" placeholder="  ..." />
+                <label style="color:white;">Введіть групу, щоб приєднатися</label>
+                <input id="GroupJoin2" name="groupName" class="form-control" placeholder="" />
             </div>
             <div class="form-group">
-                <input type="button" id="joinButton2" style="font-weight: 500;background-color:aliceblue" value="Join" />
+                <input type="button" id="joinButton2" style="font-weight: 500;background-color:aliceblue" value="Приєднатися" />
             </div>
         </div>
-        <p style="text-align:center;font-weight: bold;color:white">Chat Rooms Online</p>
+        <p style="text-align:center;font-weight: bold;color:white">Чати:</p>
         <div id="groupOnlineList" class="row text-center">
             <ul id="groupList"></ul>
         </div>

@@ -17,7 +17,7 @@ namespace DataLayer
         public int AvatarId { get; set; }
         public string? Region { get; set; }
         public DateTime? BannedDate { get; set;}
-        public int UnBannedDate { get; set; }
+        public int? UnBannedDate { get; set; }
 
     }
 }
