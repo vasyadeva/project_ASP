@@ -53,15 +53,22 @@ namespace LinkedNewsChatApp.Controllers
             {
                 page = totalPages;
             }
+            if (totalNews!=0)
+            {
+                var selectedNews = await news.Skip((page - 1) * pageSize)
+                                             .Take(pageSize)
+                                             .ToListAsync();
+                ViewBag.TotalPages = totalPages;
+                ViewBag.CurrentPage = page;
+                ViewBag.Category = Category;
 
-            var selectedNews = await news.Skip((page - 1) * pageSize)
-                                         .Take(pageSize)
-                                         .ToListAsync();
-            ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = page;
-            ViewBag.Category = Category;
-
-            return View(selectedNews);
+                return View(selectedNews);
+            }
+            else
+            {
+                
+                return View("Empty");
+            }
 
         }
         public async Task<IActionResult> Data(int? id)
