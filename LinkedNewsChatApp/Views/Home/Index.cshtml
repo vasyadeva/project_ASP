@@ -6,10 +6,7 @@
     var messageRegister = TempData["SuccessfulRegister"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To LinkedNews Application!</h1>
-    <h5 style="text-align:center; font-weight:bold;">Please login to join us</h5>
-</div>
+
 <br />
 <div class="container">
     <div class="d-flex justify-content-center h-100">
@@ -29,27 +26,27 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input asp-for="Username" placeholder="Username" class="form-control" />
+                        <input asp-for="Username" placeholder="Ім'я користувача" class="form-control" />
                         <span asp-validation-for="Username" class="text-warning"></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key fa-spin"></i></span>
                         </div>
-                        <input asp-for="Password" type="password" placeholder="Password" class="form-control" />
+                        <input asp-for="Password" type="password" placeholder="Пароль" class="form-control" />
                         <span asp-validation-for="Password" class="text-warning"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-left login_btn" />
+                        <input type="submit" value="Увійти" class="btn float-left login_btn" />
                     </div>
                 </form>
             </div>
             <div class="card-footer footer-links">
                 <div class="d-flex justify-content-center">
-                    @Html.ActionLink("New to LinkedNews? Sign up", "Register")
+                    @Html.ActionLink("Вперше на LinkedNews? Зареєструйтесь", "Register")
                 </div>
                 <div class="d-flex justify-content-center">
-                    @Html.ActionLink("Forgot your Password?", "ForgetPassword")
+                    @Html.ActionLink("Забули пароль?", "ForgetPassword")
                 </div>
             </div>
         </div>

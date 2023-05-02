@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Реєстрація";
     var messageRegister = TempData["SuccessfulRegister"];
     TempData.Keep("SuccessfulRegister");
 }
@@ -50,11 +50,7 @@
 @model UserModel
 
 @Html.AntiForgeryToken()
-<div class="text-center">
-    <h1 class="display-4">Welcome To LinkedNews Application!</h1>
-    <h4>Please enter your personal details to Register on LinkedNews</h4>
-</div>
-<br />
+
 <div class="text-center">
     <h5 style="color: red"><b>@ViewBag.error</b></h5>
 </div>
@@ -62,7 +58,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="card" style="height:auto;">
             <div class="card-header">
-                <h3>Register</h3>
+                <h3>Зареєструватись</h3>
             </div>
             <div class="card-body">
                 <form method="post">
@@ -71,14 +67,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input asp-for="Username" placeholder="Username" class="form-control" />
+                        <input asp-for="Username" placeholder="Ім'я користувача" class="form-control" />
                         <span asp-validation-for="Username" class="text-warning"></span>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input asp-for="Email" placeholder="Email" class="form-control" />
+                        <input asp-for="Email" placeholder="Електронна пошта" class="form-control" />
                         <span asp-validation-for="Email" class="text-warning"></span>
                     </div>
 
@@ -86,16 +82,16 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key fa-spin"></i></span>
                         </div>
-                        <input asp-for="Password" placeholder="Password" type="password" class="form-control" id="new1Password" />
+                        <input asp-for="Password" placeholder="Пароль" type="password" class="form-control" id="new1Password" />
                         <span asp-validation-for="Password" class="text-warning"></span>
                         <div id="pswd_info" class="pswd-security">
-                            <h4>Password must meet the following requirements:</h4>
+                            <h4>Пароль має містити:</h4>
                             <ul>
-                                <li id="letter" class="invalid">At least <strong>one lowercase character</strong></li>
-                                <li id="capital" class="invalid">At least <strong>one uppercase character</strong></li>
-                                <li id="number" class="invalid">At least <strong>one number</strong></li>
-                                <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
-                                <li id="special" class="invalid">At least <strong>one special character</strong></li>
+                                <li id="letter" class="invalid"> Щонайменше <strong>одна маленька літера</strong></li>
+                                <li id="capital" class="invalid"> Щонайменше <strong>одна велика літера</strong></li>
+                                <li id="number" class="invalid"> Щонайменше <strong>одне число</strong></li>
+                                <li id="length" class="invalid"> Щонайменше  <strong>8 символів</strong></li>
+                                <li id="special" class="invalid"> Щонайменше <strong>один спеціальний символ</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -103,7 +99,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key fa-spin"></i></span>
                         </div>
-                        <input asp-for="ConfirmPassword" placeholder="Confirm your password" type="password" class="form-control" id="new2Password" />
+                        <input asp-for="ConfirmPassword" placeholder="Підтвердіть ваш пароль" type="password" class="form-control" id="new2Password" />
                         <span asp-validation-for="ConfirmPassword" class="text-warning"></span>
                         <div id="pswd_equal" class="pswd-security">
                             <ul>
@@ -174,14 +170,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <input type="submit" value="Register" class="btn float-left login_btn" />
+                        <input type="submit" value="Зареєструватись" class="btn float-left login_btn" />
                     </div>
                 </form>
             </div>
             
             <div class="card-footer">
                 <div class="d-flex justify-content-center footer-links">
-                    @Html.ActionLink("Already have an account? Login", "Index")
+                    @Html.ActionLink("Вже зареєстровані? Увійдіть", "Index")
                 </div>
             </div>
         </div>
