@@ -31,9 +31,10 @@ connection.on("RemoveFriendFromList", function () {
    });
 
 
-connection.on("BanAllert", function () {
-    alert("Вас забанили на тиждень за порушення правил чату");
+connection.on("BanAllert", function (date) {
+    alert("Вас забанено за порушення правил чату. Вам буде відновлено доступ через: " + date +" день");
 });
+
 
 
 connection.on("RecieveOnlineFriends", function (userNames, friendslst) {

@@ -199,8 +199,8 @@ namespace LinkedNewsChatApp.Hubs
             int Avaid = chatOperations.AvaId(hubUser.Name);
             bool isbanned = chatOperations.CheckBan(hubUser.Name);
             if (isbanned == true)
-            {
-                await Clients.Caller.SendAsync("BanAllert");
+            { 
+                await Clients.Caller.SendAsync("BanAllert",chatOperations.GetTermBan(hubUser.Name));
                 await OnConnectedAsync();
             }
             else

@@ -41,7 +41,7 @@
     <nav>
         <ul id="page_scroll" class="pagination">
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)">&laquo;</a>
+                <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="@(ViewBag.CurrentPage - 1)">&laquo;</a>
             </li>
 
             @if (ViewBag.TotalPages <= 5)
@@ -49,7 +49,7 @@
                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
                 {
                     <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
@@ -58,7 +58,7 @@
                 @if (ViewBag.CurrentPage > 3)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="Index" asp-route-page="1">1</a>
+                        <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="1">1</a>
                     </li>
                     @if (ViewBag.CurrentPage > 4)
                     {
@@ -70,7 +70,7 @@
                 @for (int i = Math.Max(1, ViewBag.CurrentPage - 2); i <= Math.Min(ViewBag.TotalPages, ViewBag.CurrentPage + 2); i++)
                 {
                     <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="@i">@i</a>
                     </li>
                 }
                 @if (ViewBag.CurrentPage < ViewBag.TotalPages - 2)
@@ -82,17 +82,21 @@
                         </li>
                     }
                     <li class="page-item">
-                        <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.TotalPages">@ViewBag.TotalPages</a>
+                        <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="@ViewBag.TotalPages">@ViewBag.TotalPages</a>
                     </li>
                 }
             }
 
             <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">&raquo;</a>
+                <a class="page-link" asp-action="Index" asp-route-Category="@ViewBag.Category" asp-route-page="@(ViewBag.CurrentPage + 1)">&raquo;</a>
             </li>
         </ul>
     </nav>
 </div>
 
 
-            
+    <a class="page-link" asp-action="Index" asp-route-Category="Бєктор" asp-route-page="1">Бєктор</a>
+
+    <a class="page-link" asp-action="Index" asp-route-Category="Таємниці Бєктора" asp-route-page="1">Таємниці Бєктора</a>
+
+   

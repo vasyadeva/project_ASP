@@ -29,10 +29,18 @@ namespace LinkedNewsChatApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string Category = "initial",int page = 1)
         {
-            int pageSize = 10;
-            var news = _context.news.AsQueryable();
+            int pageSize = 1;
+            var news = _context.news.AsQueryable(); ;
+            if (Category != "initial")
+            {
+                news = _context.news.Where(m => m.Category == Category).AsQueryable();
+            }
+            else
+            {
+            }
+
             int totalNews = await news.CountAsync();
             int totalPages = (int)Math.Ceiling((decimal)totalNews / pageSize);
 
@@ -45,14 +53,22 @@ namespace LinkedNewsChatApp.Controllers
             {
                 page = totalPages;
             }
+            if (totalNews!=0)
+            {
+                var selectedNews = await news.Skip((page - 1) * pageSize)
+                                             .Take(pageSize)
+                                             .ToListAsync();
+                ViewBag.TotalPages = totalPages;
+                ViewBag.CurrentPage = page;
+                ViewBag.Category = Category;
 
-            var selectedNews = await news.Skip((page - 1) * pageSize)
-                                         .Take(pageSize)
-                                         .ToListAsync();
-            ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = page;
-
-            return View(selectedNews);
+                return View(selectedNews);
+            }
+            else
+            {
+                
+                return View("Empty");
+            }
 
         }
         public async Task<IActionResult> Data(int? id)

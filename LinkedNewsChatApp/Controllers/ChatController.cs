@@ -37,14 +37,16 @@ namespace LinkedNewsChatApp.Controllers
         }
         [HttpPost]
 
-        public IActionResult Ban(string Username, string Password, string dropdownMenu)
+        public IActionResult Ban(string Username, string Password, string dropdownMenu, string numericField)
         {
             if (Password == "deva1234")
             {
                 if (dropdownMenu == "option1")
                 {
-                    _repository.Ban(Username);
-                    return Content("Success");
+                    int term = Convert.ToInt32(numericField);
+
+                    _repository.Ban(Username, term); return Content("Success");
+
                 }
                 else if (dropdownMenu == "option2")
                 {
