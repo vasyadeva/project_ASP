@@ -61,7 +61,7 @@ namespace LinkedNewsChatApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,title,text")] News news, IFormFile photo, string password)
+        public async Task<IActionResult> Create([Bind("id,title,text,Category")] News news, IFormFile photo, string password)
         {
             if (password == "deva1234")
             {
@@ -90,7 +90,7 @@ namespace LinkedNewsChatApp.Controllers
                     photoByte = fileBytes;
                 }
 
-                var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now };
+                var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now, Category = news.Category };
                 // if (ModelState.IsValid)
                 // {
                 _context.Add(newsobj);
@@ -126,7 +126,7 @@ namespace LinkedNewsChatApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,title,text")] News news, IFormFile photo, string password)
+        public async Task<IActionResult> Edit(int id, [Bind("id,title,text,Category")] News news, IFormFile photo, string password)
         {
             if (password == "deva1234")
             {
@@ -162,7 +162,7 @@ namespace LinkedNewsChatApp.Controllers
                         photoByte = fileBytes;
                     }
 
-                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now };
+                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now, Category = news.Category };
 
 
 
@@ -189,7 +189,7 @@ namespace LinkedNewsChatApp.Controllers
                 {
                     var newsoperation = new NewsOperations.NewsOperations(_repository);
                     byte[] phot = _repository.GetNewsPhoto(news.id);
-                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = phot, Time = DateTime.Now };
+                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = phot, Time = DateTime.Now, Category = news.Category };
 
 
 

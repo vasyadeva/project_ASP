@@ -7,5 +7,6 @@
         public string text { get; set; }
         public byte[] photo { get; set; }
         public DateTime Time { get; set; }
+        public string Category { get; set; }
     }
 }
