@@ -425,16 +425,16 @@ button.accept-policy {
 #P_text {
     margin-top: 1rem;
     padding: 1rem;
-    width: 30rem;
+    width: max-content;
     border: 0.3rem groove #0077cc;
 }
 
 #P_name {
     margin-top: 1rem;
     padding: 0;
-    width: 50%;
+    width: max-content;
     text-align:center;
-    margin-left:35%;
+    margin-left:10%;
 }
 
 @media (max-width: 768px) {
