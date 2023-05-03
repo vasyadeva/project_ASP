@@ -139,7 +139,7 @@ button.accept-policy {
         }
 
 
-@media (max-width: 768px) {
+@media (max-width: 864px) {
     #header_imp {
         height: 1%;
         
@@ -326,5 +326,164 @@ button.accept-policy {
             height: 5rem;
         }
     }
+#backToMain{
+    width:9.5rem;
+    
+    padding:0;
+    white-space: normal;
+    font-size:16px;
+    
+}
+#P_container {
+    background-color: transparent !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #191919;
+    padding: 0;
+}
 
-   
+    #P_container #P_mb {
+        background-color: transparent !important;
+        width: 85%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+        #P_container #P_mb .col-lg-6 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            #P_container #P_mb .col-lg-6 img {
+                width: 430px;
+                height: 480px;
+                border-radius: 10px;
+            }
+
+                #P_container #P_mb .col-lg-6 img:hover {
+                    transform: scale(1.1);
+                    transition: transform 0.5s ease-in-out;
+                }
+
+        #P_container #P_mb .px-xl-10 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 50px;
+        }
+
+        #P_container #P_mb .text-black {
+            color: #fff;
+        }
+
+       
+        #P_container #P_mb #P_name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            padding: 10px 30px;
+            background-color: #0077cc;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+#P_container #P_mb #P_text li {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+    #P_container #P_mb #P_text li span {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #0077cc;
+        text-transform: uppercase;
+        margin-right: 20px;
+    }
+
+#P_container #P_mb .btn {
+    font-size: 2.2rem;
+    color: #0077cc;
+    background-color: transparent;
+    border: 2px solid #0077cc;
+    border-radius: 20px;
+    padding: 20px 40px;
+    margin-top: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+    #P_container #P_mb .btn:hover {
+        background-color: #0077cc;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+    }
+
+#P_text {
+    margin-top: 1rem;
+    padding: 1rem;
+    width: 30rem;
+    border: 0.3rem groove #0077cc;
+}
+
+#P_name {
+    margin-top: 1rem;
+    padding: 0;
+    width: 50%;
+    text-align:center;
+    margin-left:35%;
+}
+
+@media (max-width: 768px) {
+    #P_container {
+        width:auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+ 
+    #P_container #P_mb {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    #P_container #P_mb .col-lg-6 {
+        margin-bottom: 2rem;
+    }
+
+        #P_container #P_mb .col-lg-6 img {
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+        }
+
+    #P_container #P_mb .px-xl-10 {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    #P_container #P_mb #P_name {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    #P_container #P_mb #P_text li {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+        #P_container #P_mb #P_text li span {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+
+    #P_container #P_mb .btn {
+        font-size: 1.8rem;
+        padding: 15px 30px;
+        margin-top: 2rem;
+    }

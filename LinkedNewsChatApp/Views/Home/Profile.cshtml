@@ -11,16 +11,16 @@ var imageAv = Model.AvatarId;
      width:contain;
     }
 </style>
-<div class="container" style="display:flex; justify-content:center;flex-direction: row; flex-wrap:wrap" >
-    <div class="row align-items-center">
+<div id="P_container" >
+    <div id="P_mb" class="Profile_row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-            <img src="/avatars/@(imageAv).png" width="256" height="256"/>
+            <img src="/avatars/@(imageAv).png" width="420" height="480"/>
         </div>
-        <div class="col-lg-6 px-xl-10">
-            <div class=" text-black d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+        <div  class="col-lg-6 px-xl-10">
+            <div id="P_name"  >
            @Html.DisplayFor(model => model.Username)
             </div>
-            <ul class="list-unstyled mb-5 text-black">
+            <ul id="P_text" class="list-unstyled mb-5 text-black">
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Email:</span>@Html.DisplayFor(model => model.Email)</li>
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Регіон:</span>@Html.DisplayFor(model => model.Region)</li>
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Про себе:</span>@Html.DisplayFor(model => model.Biography)</li>
