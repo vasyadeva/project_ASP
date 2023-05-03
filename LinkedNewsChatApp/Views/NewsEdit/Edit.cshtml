@@ -1,7 +1,7 @@
 ﻿@model LinkedNewsChatApp.Data.News
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редагування новин";
 }
 
 <h1>Edit</h1>
@@ -41,6 +41,7 @@
                 <div class="form-group">
                     <label for="dropdownMenu">Category</label>
                     <select id="dropdownMenu" name="Category" class="form-control" required>
+                        <option value="Загальне">Загальне</option>
                         <option value="Спорт">Спорт</option>
                         <option value="Політика">Політика</option>
                         <option value="Війна">Війна</option>
@@ -71,7 +72,8 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a id="Na" asp-action="Index">Повернутись до списку новин</a>
+   <br/>
 </div>
 
 @section Scripts {

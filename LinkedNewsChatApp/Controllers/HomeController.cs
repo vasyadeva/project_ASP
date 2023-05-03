@@ -50,7 +50,7 @@ namespace LinkedNewsChatApp.Controllers
             var validUser = _loginOperator.GetValidUser(mappedUser);
             if (validUser == null)
             {
-                ViewBag.error = "Invalid Account";
+                ViewBag.error = "Недійсний акаунт";
                 return View(userModel);
             }
 
@@ -88,7 +88,7 @@ namespace LinkedNewsChatApp.Controllers
                 var foundUserByUsername = _loginOperator.GetUserByUsername(mappedUser.Username);
                 if (foundUserByUsername != null)
                 {
-                    ViewBag.error = "User with this name already exists";
+                    ViewBag.error = "Користувач з таким ім'ям вже існує!";
                     return View(userModel);
                 }
                 else
@@ -97,7 +97,7 @@ namespace LinkedNewsChatApp.Controllers
                     var newUser = _mapper.Map<UserModel, User>(userModel);
                     _loginOperator.Register(newUser);
                     ModelState.Clear();
-                    TempData["SuccessfulRegister"] = "Person successfully created";
+                    TempData["SuccessfulRegister"] = "Реєстрація пройшла успішно!";
                     return RedirectToAction("Index");
                 }
             }
@@ -120,14 +120,14 @@ namespace LinkedNewsChatApp.Controllers
             // check if username and email aren't empty
             if (userModel.Username == null || userModel.Email == null)
             {
-                ViewBag.error = "Required parameters are missing";
+                ViewBag.error = "Всі поля мають бути заповнені!";
                 return View(userModel);
             }
 
             Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
             if (!validateEmailRegex.IsMatch(userModel.Email))
             {
-                ViewBag.error = "Email is invalid";
+                ViewBag.error = "Недійсна електронна пошта";
                 return View(userModel);
             };
 
@@ -137,13 +137,13 @@ namespace LinkedNewsChatApp.Controllers
             var validUser = _loginOperator.UpdateUserPasswordByEmail(mappedUser, newRandomPassword);
             if (validUser == null)
             {
-                ViewBag.error = "User not found";
+                ViewBag.error = "Користувача не знайдено";
                 return View(userModel);
             }
 
             // send new password email
             _mailService.SendEmail(validUser, newRandomPassword);
-            TempData["SuccessfulUpdate"] = "Email With New Password Sent";
+            TempData["SuccessfulUpdate"] = "Пароль успішно надіслано. Перевірте вашу пошту!";
 
             if (User.Identity.IsAuthenticated)
             {
@@ -159,7 +159,7 @@ namespace LinkedNewsChatApp.Controllers
             var user = _loginOperator.GetUserByClaim(User);
             if (user == null)
             {
-                ViewBag.error = "Please Logout. Account Error.";
+                ViewBag.error = "Будь ласка,вийдіть. Сталася помилка.";
                 return RedirectToAction("Index", "Chat");
             }
             var userModel = _mapper.Map<User, UserModel>(user);
@@ -180,28 +180,28 @@ namespace LinkedNewsChatApp.Controllers
             // check if fields aren't empty
             if (oldPswd == null || new1Pswd == null || new2Pswd == null)
             {
-                ViewBag.error = "Required parameters are missing";
+                ViewBag.error = "Всі поля мають бути заповнені!";
                 return View();
             }
 
             // check if new password is secure
             if (!_loginOperator.IsSecurePassword(new1Pswd))
             {
-                ViewBag.error = "New password does not meet requirements!";
+                ViewBag.error = "Новий пароль не відповідає вимогам!";
                 return View();
             }
 
             // check if passwords are the same
             if (new1Pswd != new2Pswd)
             {
-                ViewBag.error = "Passwords do not match!";
+                ViewBag.error = "Паролі не співпадають!";
                 return View();
             }
 
             // check if old password and new are two different
             if (oldPswd == new1Pswd)
             {
-                ViewBag.error = "New and old passwords are similar";
+                ViewBag.error = "Новий і старий пароль - ідентичні";
                 return View();
             }
 
@@ -209,20 +209,20 @@ namespace LinkedNewsChatApp.Controllers
             var user = _loginOperator.GetUserByClaim(User);
             if (user == null)
             {
-                ViewBag.error = "Please Logout. Account Error.";
+                ViewBag.error = "Будь ласка, вийдіть. Сталася помилка.";
                 return View();
             }
 
             // check if old password match user password
             if (!BCrypt.Net.BCrypt.Verify(oldPswd, user.Password))
             {
-                ViewBag.error = "Wrong Password. Don't remember password? Choose Forget Password option.";
+                ViewBag.error = "Неправильний пароль. Забули пароль? Перейдіть на сторінку: Забули пароль.";
                 return View();
             }
 
             // update password and redirect
             _loginOperator.UpdateUserPassword(user, new1Pswd);
-            TempData["ResetPassword"] = "Successful Password Change";
+            TempData["ResetPassword"] = "Пароль успішно змінено";
             return RedirectToAction("Profile", "Home");
         }
 

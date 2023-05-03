@@ -25,13 +25,34 @@ namespace LinkedNewsChatApp.Controllers
 
         
         // GET: NewsEdit
-        public async Task<IActionResult> Index()
+       
+        public async Task<IActionResult> Index(int page = 1)
         {
-              return _context.news != null ? 
-                          View(await _context.news.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.news'  is null.");
-        }
+            int pageSize = 10;
+            var news = _context.news.AsQueryable(); ;
+         
+            int totalNews = await news.CountAsync();
+            int totalPages = (int)Math.Ceiling((decimal)totalNews / pageSize);
 
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+            else if (page > totalPages)
+            {
+                page = totalPages;
+            }
+          
+                var selectedNews = await news.Skip((page - 1) * pageSize)
+                                             .Take(pageSize)
+                                             .ToListAsync();
+                ViewBag.TotalPages = totalPages;
+                ViewBag.CurrentPage = page;
+              
+                return View(selectedNews);
+  
+        }
         // GET: NewsEdit/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -63,7 +84,7 @@ namespace LinkedNewsChatApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,title,text,Category")] News news, IFormFile photo, string password)
         {
-            if (password == "deva1234")
+            if (password == "d5n!_4RX")
             {
                 if (photo != null)
                 {
@@ -101,7 +122,7 @@ namespace LinkedNewsChatApp.Controllers
             }
             else
             {
-                return Content("Invalid password");
+                return View("Incorrect");
             }
         }
 
@@ -128,7 +149,7 @@ namespace LinkedNewsChatApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,title,text,Category")] News news, IFormFile photo, string password)
         {
-            if (password == "deva1234")
+            if (password == "d5n!_4RX")
             {
                 if (id != news.id)
                 {
@@ -218,7 +239,7 @@ namespace LinkedNewsChatApp.Controllers
             }
             else
             {
-                return Content("Invalid password");
+                return View("Incorrect");
             }
         }
 
@@ -248,7 +269,7 @@ namespace LinkedNewsChatApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id, string password)
         {
-            if (password == "deva1234")
+            if (password == "d5n!_4RX")
             {
                 if (_context.news == null)
                 {
@@ -265,10 +286,26 @@ namespace LinkedNewsChatApp.Controllers
             }
             else
             {
-                return Content("Invalid password");
+                return View("Incorrect");
             }
         }
 
+        public async Task<IActionResult> DataView(int? id)
+        {
+            if (id == null || _context.news == null)
+            {
+                return NotFound();
+            }
+
+            var news = await _context.news
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+
+            return View(news);
+        }
         private bool NewsExists(int id)
         {
           return (_context.news?.Any(e => e.id == id)).GetValueOrDefault();

@@ -61,6 +61,7 @@ namespace LinkedNewsChatApp.Controllers
                 ViewBag.TotalPages = totalPages;
                 ViewBag.CurrentPage = page;
                 ViewBag.Category = Category;
+                ViewData["Title"] = Category;
 
                 return View(selectedNews);
             }

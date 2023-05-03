@@ -876,8 +876,9 @@ input:default:hover {
         margin-top: 15px;
         font-size: 14px;
         color: #aaa;
-        text-align: right;
+        
     }
+
 
     h1, h2, h3, h4, h5, h6, center {
         color: white !important;
@@ -892,14 +893,18 @@ input:default:hover {
         box-shadow: 0 0 0 .2rem rgba(255 195 18,.5) !important;
     }
 
-    .News_cat {
-        display: inline-block;
-        background-color: #eaeaea;
-        color: #333;
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
-    }
+.News_cat {
+    display: inline-block;
+    background-color: #eaeaea;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
 
         .News_cat:hover {
             background-color: #333;

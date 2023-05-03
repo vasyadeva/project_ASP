@@ -56,7 +56,7 @@ function CheckIfMatching() {
     var firstPswd = $('#new1Password').val();
 
     if (firstPswd == secondPswd) {
-        $('#match').removeClass('invalid').addClass('valid').html('Passwords are matching');
+        $('#match').removeClass('invalid').addClass('valid').html('Паролі співпадають');
     } else
-        $('#match').removeClass('valid').addClass('invalid').html('Passwords are NOT matching');
+        $('#match').removeClass('valid').addClass('invalid').html('Паролі не співпадають');
 }

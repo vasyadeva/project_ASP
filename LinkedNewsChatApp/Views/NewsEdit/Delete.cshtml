@@ -1,7 +1,7 @@
 ﻿@model LinkedNewsChatApp.Data.News
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Видалення новини";
 }
 
 <h1>Delete</h1>
@@ -58,7 +58,8 @@
         </div>
         
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a id="Na" asp-action="Index">Повернутись до списку новин</a>
+       <br/>
     </form>
     }
 </div>

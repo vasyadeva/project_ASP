@@ -1,23 +1,28 @@
 ﻿@model IEnumerable<LinkedNewsChatApp.Data.News>
 
 @{
-    ViewData["Title"] = "Index";
-    <head>
-       
+    ViewData["Title"] = "Новини";
 
-    </head>
+    
 }
 
 <h1 class="news_hd">Новини</h1>
-<a class="News_cat" asp-action="Index" asp-route-Category="Бєктор" asp-route-page="1">Бєктор</a>
+ <div class="cont" style="display:flex; justify-content:center;flex-direction: row; flex-wrap:wrap">
+         <a class="News_cat" asp-action="Index" asp-route-Category="Загальне" asp-route-page="1">Загальне</a>
+                       <a class="News_cat"   asp-action="Index" asp-route-Category="Спорт" asp-route-page="1">Спорт</a>               
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Політика" asp-route-page="1">Політика</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Війна" asp-route-page="1">Війна</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Наука" asp-route-page="1">Наука</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Економіка" asp-route-page="1">Економіка</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Технології" asp-route-page="1">Технології</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Лайт" asp-route-page="1">Лайт</a>
+                       <a class="News_cat"  asp-action="Index" asp-route-Category="Погода" asp-route-page="1">Погода</a>
 
-<a class="News_cat" asp-action="Index" asp-route-Category="Таємниці Бєктора" asp-route-page="1">Таємниці Бєктора</a>
-
-
+  </div>
    <main class="main columns">
 @foreach (var item in Model)
 {
-
+  
   <section class="column_NI">
             <a class="article_NI"  asp-action="Data" asp-route-id="@item.id">
       <figure class="article_image">

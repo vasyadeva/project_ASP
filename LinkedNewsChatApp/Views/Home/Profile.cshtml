@@ -1,6 +1,6 @@
 ﻿@model UserModel
 @{
-ViewData["Title"] = "Профіль користувача";
+ViewData["Title"] = "Профіль";
 var imageAv = Model.AvatarId;
 }
 <style>
@@ -11,7 +11,7 @@ var imageAv = Model.AvatarId;
      width:contain;
     }
 </style>
-<div class="container">
+<div class="container" style="display:flex; justify-content:center;flex-direction: row; flex-wrap:wrap" >
     <div class="row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0 text-center">
             <img src="/avatars/@(imageAv).png" width="256" height="256"/>
@@ -25,7 +25,8 @@ var imageAv = Model.AvatarId;
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Регіон:</span>@Html.DisplayFor(model => model.Region)</li>
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Про себе:</span>@Html.DisplayFor(model => model.Biography)</li>
             </ul>
-       <a href="@Url.Action("Edit", "Profile", new { id = Model.UserId })" class="btn  btn-icon"><i class="fas fa-edit"></i></a>
+       <a href="@Url.Action("Edit", "Profile", new { id = Model.UserId })" 
+   </a>
  </div>
     </div>
 

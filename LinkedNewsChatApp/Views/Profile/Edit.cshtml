@@ -1,5 +1,8 @@
 ﻿@using DataLayer
 @model User
+@{
+    ViewData["Title"] = "Редагування профілю";
+}
 @section Scripts
 {
 <script src="~/js/passwordValidation.js"></script>
@@ -173,13 +176,13 @@ background-color:  rgb(255, 252, 234);;
 
 <form asp-action="Edit" method="post">
     <div class="form-group">
-    <label asp-for="Username"></label>
+    <label asp-for="Username">Ім'я користувача</label>
     <input asp-for="Username" class="form-control" disabled />
     <span asp-validation-for="Username" class="text-danger"></span>
 
     </div>
     <div class="form-group">
-        <label asp-for="Email"></label>
+        <label asp-for="Email">Електронна пошта</label>
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
@@ -233,9 +236,9 @@ background-color:  rgb(255, 252, 234);;
                             </div>
                     </div>
     <div class="form-group">
-        <label asp-for="Biography">About me:</label>
+        <label asp-for="Biography"> Про себе:</label>
         <textarea asp-for="Biography" class="form-control"></textarea>
         <span asp-validation-for="Biography" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
 </form>

@@ -39,19 +39,19 @@ namespace LinkedNewsChatApp.Controllers
 
         public IActionResult Ban(string Username, string Password, string dropdownMenu, string numericField)
         {
-            if (Password == "deva1234")
+            if (Password == "d5n!_4RX ")
             {
                 if (dropdownMenu == "option1")
                 {
                     int term = Convert.ToInt32(numericField);
 
-                    _repository.Ban(Username, term); return Content("Success");
+                    _repository.Ban(Username, term); return View("Success");
 
                 }
                 else if (dropdownMenu == "option2")
                 {
                     _repository.UnBan(Username);
-                    return Content("Success");
+                    return View("Success");
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace LinkedNewsChatApp.Controllers
             }
             else
             {
-                return Content("Invalid password");
+                return View("Incorrect");
             }
 
         }

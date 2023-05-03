@@ -60,4 +60,4 @@ function topFunction() {
         // removing smooth scroll on slide-up button click
         $('html').css("scrollBehavior", "auto");
     });
-
+}

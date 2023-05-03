@@ -7,35 +7,34 @@ namespace LinkedNewsChatApp.Models
         [Key]
         public int UserId { get; set; }
 
-        [Required(ErrorMessage = "Username is required")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "Username must be 3-20 characters long")]
+        [Required(ErrorMessage = "Введіть ім'я користувача!")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Ім'я користувача має містити 3-20 символів!")]
         public string? Username { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = "Введіть електронну пошту!")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$",
-            ErrorMessage = "Please enter valid email adress")]
+            ErrorMessage = "Введіть згідно з стандарту!")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [RegularExpression(@"^((?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$",
-            ErrorMessage = "The password must be at least 8 characters long contain at least one uppercase " +
-            "and one lowercase character, number and special character!")]
+            ErrorMessage = "Пароль має містити принаймні 8 символів, містити принаймні одну велику літеру, " + "одну маленьку, число та спеціальний символ!")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "Please confirm your password")]
+        [Required(ErrorMessage = "Будь ласка, підтвердіть ваш пароль!")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
+        [Compare("Password", ErrorMessage = "Паролі не співпадають!")]
         public string? ConfirmPassword { get; set; }
 
-        [Range(1, 10, ErrorMessage = "Value must be between 1 and 10")]
-        [RegularExpression(@"^\d+$", ErrorMessage = "Value must be an integer")]
+        [Range(1, 10, ErrorMessage = "Значення має бути в межах від 1 до 10")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Введіть значення цілочисельного типу")]
         public int AvatarId { get; set; }
-        [StringLength(100, ErrorMessage ="Value must be less than 100 symbols")]
+        [StringLength(100, ErrorMessage ="Досягнуто ліміт тексту!")]
         public string? Biography { get; set; }
 
-        [StringLength(100, ErrorMessage = "Choose region!", MinimumLength =1)]
+        [StringLength(100, ErrorMessage = "Оберіть регіон!", MinimumLength =1)]
         public string Region { get; set; }
 
     }
