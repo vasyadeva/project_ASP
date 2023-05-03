@@ -3,14 +3,7 @@
 ViewData["Title"] = "Профіль";
 var imageAv = Model.AvatarId;
 }
-<style>
-    .row{
-            background: -webkit-gradient(linear, left top, right top, from(#51a2f3), to(#1729b3));
-     background: linear-gradient(to right, #1729b3, #51a2f3);
-     position:absolute;
-     width:contain;
-    }
-</style>
+
 <div id="P_container" >
     <div id="P_mb" class="Profile_row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0 text-center">
@@ -25,9 +18,7 @@ var imageAv = Model.AvatarId;
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Регіон:</span>@Html.DisplayFor(model => model.Region)</li>
                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Про себе:</span>@Html.DisplayFor(model => model.Biography)</li>
             </ul>
-       <a href="@Url.Action("Edit", "Profile", new { id = Model.UserId })" 
-   </a>
- </div>
+            <a href="@Url.Action("Edit", "Profile", new { id = Model.UserId })" class="btn  btn-icon"><i class="fas fa-edit"></i></a>
     </div>
 
 </div>
