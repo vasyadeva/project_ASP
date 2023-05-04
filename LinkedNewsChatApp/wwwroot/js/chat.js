@@ -332,14 +332,17 @@ function addLastTenMessages(message) {
     document.getElementById("messagesList").appendChild(li);
 
     li.innerHTML = `<div class="one-message ${currentUser.name === message.fromUserName ? "my-message" : ""}">
-   <a href="/Profile/UserProfile?username=${message.fromUserName}"><img src="/avatars/${message.avaId}.png"/> </a>
-
+<div class="break">
+<img src="/avatars/${message.avaId}.png"/>
 <p class="username"><b>${message.fromUserName}</b></p>
+</div>
 <div class="message">
 <p class="text-content"></p>
+
 </div>
 <span class="time-right">${message.time}</span>
 </div>`;
+
     li.getElementsByClassName("text-content")[0].textContent = message.message;
     const scrollingElement = document.getElementsByClassName("message-box")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
@@ -351,10 +354,13 @@ connection.on("ReceiveMessage", function (user, message, timenow, avaid) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
     li.innerHTML = `<div class="one-message ${currentUser.userIdentifier === user.userIdentifier ? "my-message" : ""}">
+<div class="break">
 <img src="/avatars/${avaid}.png"/>
 <p class="username"><b>${user.name}</b></p>
+</div>
 <div class="message">
 <p class="text-content"></p>
+
 </div>
 <span class="time-right">${timenow}</span>
 </div>`;

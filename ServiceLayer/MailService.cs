@@ -21,13 +21,13 @@ namespace ServiceLayer
                 string senderEmail = _config.GetValue<string>("SenderEmail");
                 string senderPassword = _config.GetValue<string>("SenderPassword");
                 //mail text content
-                string subject = "HermesChat: Account Recovery";
-                string body = @$"<p>Hello, dear {updatedUser.Username}!
+                string subject = "LinkedNews: відновлення аккаунта";
+                string body = @$"<p>Привіт, {updatedUser.Username}!
                             <br/>
-                            Here is your new password : <b>{newPassword}</b>
-                            See you on https://hermeschatapp20220326121130.azurewebsites.net/
+                            Ось ваш оновлений пароль : <b>{newPassword}</b>
+                            Чекаєм тебе у http://linkednews-001-site1.atempurl.com/
                             <br/>
-                            Regards, Hermes App Teeam</p>";
+                            З повагою, команда LinkedNews</p>";
 
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(senderEmail);

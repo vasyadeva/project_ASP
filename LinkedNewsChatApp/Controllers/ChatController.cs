@@ -64,6 +64,40 @@ namespace LinkedNewsChatApp.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult DeleteMessage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult DeleteMessage(string Username, string Password, string Message, string dropdownMenu)
+        {
+            if (Password == "d5n!_4RX")
+            {
+                if (dropdownMenu == "Одне повідомлення")
+                {
+                    
+                    _repository.DeleteMessage(Username, Message);
+                    return View("Success");
+
+                }
+                else if (dropdownMenu == "Усі повідомлення")
+                {
+                    _repository.DeleteMessages(Username, Message);
+                    return View("Success");
+                }
+                else
+                {
+                    return Content("Invalid option");
+                }
+            }
+            else
+            {
+                return View("Incorrect");
+            }
+
+        }
     }
 }
 
