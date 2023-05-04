@@ -16,7 +16,7 @@ namespace LinkedNewsChatApp.Models
             ErrorMessage = "Введіть згідно з стандарту!")]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Введіть пароль!")]
         [RegularExpression(@"^((?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$",
             ErrorMessage = "Пароль має містити принаймні 8 символів, містити принаймні одну велику літеру, " + "одну маленьку, число та спеціальний символ!")]
         [DataType(DataType.Password)]
@@ -33,7 +33,7 @@ namespace LinkedNewsChatApp.Models
         public int AvatarId { get; set; }
         [StringLength(100, ErrorMessage ="Досягнуто ліміт тексту!")]
         public string? Biography { get; set; }
-
+        [Required(ErrorMessage = "Оберіть регіон!")]
         [StringLength(100, ErrorMessage = "Оберіть регіон!", MinimumLength =1)]
         public string Region { get; set; }
 

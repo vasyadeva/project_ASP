@@ -29,16 +29,17 @@ namespace LinkedNewsChatApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string Category = "initial",int page = 1)
+        public async Task<IActionResult> Index(string Category = "Новини", int page = 1)
         {
             int pageSize = 10;
             var news = _context.news.AsQueryable(); ;
-            if (Category != "initial")
+            if (Category != "Новини")
             {
                 news = _context.news.Where(m => m.Category == Category).AsQueryable();
             }
             else
             {
+             
             }
 
             int totalNews = await news.CountAsync();
@@ -67,7 +68,7 @@ namespace LinkedNewsChatApp.Controllers
             }
             else
             {
-                
+                ViewData["Title"] = Category;
                 return View("Empty");
             }
 
