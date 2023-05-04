@@ -333,7 +333,7 @@ function addLastTenMessages(message) {
 
     li.innerHTML = `<div class="one-message ${currentUser.name === message.fromUserName ? "my-message" : ""}">
 <div class="break">
-<img src="/avatars/${message.avaId}.png"/>
+<a href="/Profile/UserProfile?username=${message.fromUserName}"><img src="/avatars/${message.avaId}.png"/> </a>
 <p class="username"><b>${message.fromUserName}</b></p>
 </div>
 <div class="message">
