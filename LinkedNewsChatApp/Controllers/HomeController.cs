@@ -240,5 +240,6 @@ namespace LinkedNewsChatApp.Controllers
         {
             return View();
         }
+       
     }
 }

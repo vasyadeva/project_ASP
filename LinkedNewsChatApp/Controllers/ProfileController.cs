@@ -12,6 +12,7 @@ namespace LinkedNewsChatApp.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LinkedNewsDbContext _context;
         private readonly UserManagerRepository _repository;
+
         public ProfileController(IHttpContextAccessor httpContextAccessor, LinkedNewsDbContext context, UserManagerRepository repository)
 
         {
@@ -84,6 +85,36 @@ namespace LinkedNewsChatApp.Controllers
 
             return user.UserId;
         }
+        public int GetUserId(string userName)
+        {
+            
+            if (userName == null)
+            {
+                return -1; // or throw an exception or return null
+            }
 
+            var user = _context.Users.FirstOrDefault(u => u.Username == userName);
+
+            if (user == null)
+            {
+                return -1; // or throw an exception or return null
+            }
+
+            return user.UserId;
+        }
+        public async Task<IActionResult> UserProfile(string username)
+        {
+            var user = await _repository.GetUser(username);
+            var model = new UserModel()
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Region = user.Region,
+                Biography = user.Biography,
+                AvatarId = user.AvatarId
+             };
+
+            return View(model);
+        }
     }
 }

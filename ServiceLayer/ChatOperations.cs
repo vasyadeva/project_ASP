@@ -111,5 +111,6 @@ namespace ServiceLayer
         {
             return _repository.GetTermBan(username);
         }
+      
     }
 }

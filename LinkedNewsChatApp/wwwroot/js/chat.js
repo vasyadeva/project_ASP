@@ -332,7 +332,8 @@ function addLastTenMessages(message) {
     document.getElementById("messagesList").appendChild(li);
 
     li.innerHTML = `<div class="one-message ${currentUser.name === message.fromUserName ? "my-message" : ""}">
-<img src="/avatars/${message.avaId}.png"/>
+   <a href="/Profile/UserProfile?username=${message.fromUserName}"><img src="/avatars/${message.avaId}.png"/> </a>
+
 <p class="username"><b>${message.fromUserName}</b></p>
 <div class="message">
 <p class="text-content"></p>
@@ -343,6 +344,8 @@ function addLastTenMessages(message) {
     const scrollingElement = document.getElementsByClassName("message-box")[0];
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
 }
+
+
 
 connection.on("ReceiveMessage", function (user, message, timenow, avaid) {
     var li = document.createElement("li");

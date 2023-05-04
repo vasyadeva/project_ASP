@@ -401,6 +401,9 @@ namespace LinkedNewsChatApp.Hubs
             var friends = chatOperations.GetFriends(hubUser.Name);
             await Clients.Caller.SendAsync("deletefriendjs2", user, friends);
         }
+
+        
     }
+
 }
 

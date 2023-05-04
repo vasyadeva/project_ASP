@@ -1,0 +1,27 @@
+﻿
+@model UserModel
+@{
+ViewData["Title"] = "Профіль";
+var imageAv = Model.AvatarId;
+}
+
+<div id="P_container" >
+    <div id="P_mb" class="Profile_row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 text-center">
+            <img src="/avatars/@(imageAv).png" width="420" height="480"/>
+        </div>
+        <div  class="col-lg-6 px-xl-10">
+            <div id="P_name"  >
+           @Html.DisplayFor(model => model.Username)
+            </div>
+            <ul id="P_text" class="list-unstyled mb-5 text-black">
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Email:</span>@Html.DisplayFor(model => model.Email)</li>
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Регіон:</span>@Html.DisplayFor(model => model.Region)</li>
+                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 me-2 font-weight-500">Про себе:</span>@Html.DisplayFor(model => model.Biography)</li>
+            </ul>
+    </div>
+
+</div>
+      
+         
+               

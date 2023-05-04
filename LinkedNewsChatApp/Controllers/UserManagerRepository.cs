@@ -63,5 +63,14 @@ namespace LinkedNewsChatApp.Data
 
             return true;
         }
+        public async Task<User> GetUser(string username)
+        {
+            var user = _context.Users.Where(u => u.Username == username).FirstOrDefault();
+            if (user != null)
+            {
+                return await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);  
+            }
+            return null; // якщо користувача не знайдено
+        }
     }
 }
