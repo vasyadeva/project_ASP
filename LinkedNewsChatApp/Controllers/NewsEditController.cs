@@ -43,7 +43,8 @@ namespace LinkedNewsChatApp.Controllers
             {
                 page = totalPages;
             }
-          
+            if (totalNews != 0)
+            {
                 var selectedNews = await news.Skip((page - 1) * pageSize)
                                              .Take(pageSize)
                                              .ToListAsync();
@@ -51,7 +52,12 @@ namespace LinkedNewsChatApp.Controllers
                 ViewBag.CurrentPage = page;
               
                 return View(selectedNews);
-  
+            }
+            else
+            {
+
+                return View("Empty");
+            }
         }
         // GET: NewsEdit/Details/5
         public async Task<IActionResult> Details(int? id)
