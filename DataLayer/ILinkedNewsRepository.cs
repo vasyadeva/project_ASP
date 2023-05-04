@@ -32,7 +32,8 @@ namespace DataLayer
         public void Ban(string username,int term);
         public void UnBan(string username);
         public int GetTermBan(string username);
-
+        public void DeleteMessage(string username,string message);
+        public void DeleteMessages(string username, string message);
 
     }
 }

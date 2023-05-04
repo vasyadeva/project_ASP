@@ -1,0 +1,33 @@
+﻿<div>
+
+    @using (Html.BeginForm("DeleteMessage", "Chat", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label for="username">Юзернейм</label>
+                    <input type="text" name="Username" class="form-control" id="username" placeholder="Введіть юзернейм" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Повідомлення</label>
+                    <input type="text" name="Message" class="form-control" id="message" placeholder="Введіть повідомлення" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль адміністратора</label>
+                    <input type="password" name="Password" class="form-control" id="password" placeholder="Введіть пароль" required>
+                </div>
+                <div class="form-group">
+                    <label for="dropdownMenu">Обрати дію:</label>
+                    <select id="dropdownMenu" name="dropdownMenu" class="form-control" required>
+                        <option value="Одне повідомлення">Одне повідомлення</option>
+                        <option value="Усі повідомлення">Усі повідомлення</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Опублікувати</button>
+            </form>
+
+        </div>
+    }
+
+
+</div>

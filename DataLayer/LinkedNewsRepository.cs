@@ -278,6 +278,28 @@ namespace DataLayer
             }
             return 0;
         }
+
+        public void DeleteMessage(string username,string message)
+        {
+            var mess = _dbContext.hubGroupMessages.Where(m=>m.FromUserName == username).Where(k=>k.Message == message).FirstOrDefault();
+            if (mess != null)
+            {
+                _dbContext.hubGroupMessages.Remove(mess);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteMessages(string username, string message)
+        {
+            var mess = _dbContext.hubGroupMessages.Where(m => m.FromUserName == username).Where(k => k.Message.Contains(message)).ToList();
+            if (mess != null)
+            {
+                foreach (HubGroupMessage i in mess) {
+                    _dbContext.hubGroupMessages.Remove(i);
+                    _dbContext.SaveChanges();
+                }
+            }
+        }
     }
 
 }
