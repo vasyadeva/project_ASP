@@ -115,7 +115,7 @@ button.accept-policy {
     }
 
     a.navbar-brand {
-        white-space: normal;
+        margin-bottom:0.2rem;
         text-align: center;
         word-break: break-all;
         font-size: 32px;
@@ -139,13 +139,14 @@ button.accept-policy {
         }
 
 
-@media (max-width: 830px) {
+@media (max-width: 860px) {
     #header_imp {
         height: 1%;
         
     }
 
     a.navbar-brand {
+        margin:0;
         font-size: 18px;
         vertical-align:central;
     }
