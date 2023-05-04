@@ -115,7 +115,7 @@ button.accept-policy {
     }
 
     a.navbar-brand {
-        white-space: normal;
+        margin-bottom:0.2rem;
         text-align: center;
         word-break: break-all;
         font-size: 32px;
@@ -139,20 +139,21 @@ button.accept-policy {
         }
 
 
-@media (max-width: 864px) {
+@media (max-width: 860px) {
     #header_imp {
         height: 1%;
         
     }
 
     a.navbar-brand {
+        margin:0;
         font-size: 18px;
-        margin-bottom:auto;
+        vertical-align:central;
     }
 
     .nav-link {
         
-        font-size: 14px;
+        font-size: 13px;
         margin-right: 5px;
     }
     .navbar-toggler {
@@ -167,30 +168,34 @@ button.accept-policy {
         background-color: #161616 !important;
         transition: box-shadow 0.15s ease-in-out !important;
     }
-
-    .navbar-toggler-icon {
-        background-color: #2f2f2f !important;
+    #navbar-tog {
+        width: 3rem;
+        height: 3rem;
+        font-size: 25px;
+    }
+    .navbar-toggler {
+        padding:0;
+        text-align:center;
+        background-color: transparent !important;
         opacity: 100% !important;
         color: darkgray !important;
         border: none !important;
-        height: 20px !important;
         transition: box-shadow 0.15s ease-in-out;
     }
 
     .container-fluid {
         position: relative;
         z-index: 999;
-        padding: 1% !important;
-        
         background-color: #111;
         opacity: 1;
+        padding:0 !important;
     }
     
 
         #my_Btn:hover {
             background-color: #555;
         }
-}
+    }
 
 .abt-h {
     text-align: center;
@@ -335,62 +340,73 @@ button.accept-policy {
     
 }
 #P_container {
-    background-color: transparent !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #191919;
-    padding: 0;
+padding: 50px;
 }
 
-    #P_container #P_mb {
-        background-color: transparent !important;
-        width: 85%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+.Profile_row {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
 
-        #P_container #P_mb .col-lg-6 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.col-lg-6 {
+width: 50%;
+padding: 0 20px;
+}
 
-            #P_container #P_mb .col-lg-6 img {
-                width: 430px;
-                height: 480px;
-                border-radius: 10px;
-            }
+#P_name {
+font-size: 36px;
+font-weight: bold;
+margin-bottom: 20px;
+}
 
-                #P_container #P_mb .col-lg-6 img:hover {
-                    transform: scale(1.1);
-                    transition: transform 0.5s ease-in-out;
-                }
+#P_text li {
+font-size: 28px;
+margin-bottom: 30px;
+}
 
-        #P_container #P_mb .px-xl-10 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-left: 50px;
-        }
+.display-26 {
+font-size: 26px;
+}
 
-        #P_container #P_mb .text-black {
-            color: #fff;
-        }
+.font-weight-500 {
+font-weight: 500;
+}
 
-       
-        #P_container #P_mb #P_name {
-            font-size: 2.2rem;
-            font-weight: bold;
-            padding: 10px 30px;
-            background-color: #0077cc;
-            border-radius: 20px;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
+.btn {
+display: inline-block;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+background-color: #007bff;
+color: #fff;
+font-size: 24px;
+text-decoration: none;
+}
+
+.btn:hover {
+background-color: #0069d9;
+}
+
+.btn-icon {
+margin-left: 20px;
+}
+
+
+#P_container #P_mb .col-lg-6 img:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
+}
+#P_container #P_mb #P_name {
+    text-align:center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    padding: 10px 30px;
+    background-color: #0077cc;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
 
 #P_container #P_mb #P_text li {
     font-size: 1.8rem;
@@ -412,6 +428,7 @@ button.accept-policy {
     border: 2px solid #0077cc;
     border-radius: 20px;
     padding: 20px 40px;
+    margin-left:0;
     margin-top: 30px;
     transition: all 0.3s ease-in-out;
 }
@@ -422,68 +439,33 @@ button.accept-policy {
         transition: all 0.3s ease-in-out;
     }
 
-#P_text {
-    margin-top: 1rem;
-    padding: 1rem;
-    width: max-content;
-    border: 0.3rem groove #0077cc;
-}
-
-#P_name {
-    margin-top: 1rem;
-    padding: 0;
-    width: max-content;
-    text-align:center;
-    margin-left:10%;
-}
-
-@media (max-width: 768px) {
-    #P_container {
-        width:auto;
-        flex-direction: column;
-        align-items: center;
-    }
-
- 
-    #P_container #P_mb {
-        flex-direction: column;
-        align-items: center;
-        width: 90%;
-    }
-
-    #P_container #P_mb .col-lg-6 {
-        margin-bottom: 2rem;
-    }
-
-        #P_container #P_mb .col-lg-6 img {
-            width: 100%;
-            height: auto;
-            border-radius: 0;
-        }
-
-    #P_container #P_mb .px-xl-10 {
-        padding-left: 0;
-        text-align: center;
-    }
-
-    #P_container #P_mb #P_name {
-        margin-top: 2rem;
-        width: 100%;
-        padding: 1rem;
-    }
-
+@media (max-width: 570px) {
     #P_container #P_mb #P_text li {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.2rem;
+        margin-bottom: 30px;
     }
 
         #P_container #P_mb #P_text li span {
-            font-size: 1.8rem;
-            margin-right: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0077cc;
+            text-transform: uppercase;
+            margin-right: 20px;
         }
 
-    #P_container #P_mb .btn {
-        font-size: 1.8rem;
-        padding: 15px 30px;
-        margin-top: 2rem;
+    #P_container #P_mb .col-lg-6 img {
+        width: 70%;
+        height: 60%;
+        border-radius: 10px;
     }
+
+    #P_container {
+        margin-left: 0;
+        block-size: contain;
+        padding: 2rem;
+        max-width: 100%;
+    }
+
+        #P_container #P_mb .btn {
+            padding: 10px 20px;
+        }

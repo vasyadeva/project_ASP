@@ -610,7 +610,7 @@ input:default:hover {
 }
 
 
-@media (min-width: 750px) {
+@media (min-width: 580px) {
 
     .spbutton {
         display: none;
@@ -630,7 +630,6 @@ input:default:hover {
         display: none; /* —ховати блок з групами */
     }
     .message-box {
-        
         min-width: 90%;
         margin-right: auto;
         margin-left: auto;
