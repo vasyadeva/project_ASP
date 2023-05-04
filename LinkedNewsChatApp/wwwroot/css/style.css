@@ -340,6 +340,7 @@ button.accept-policy {
     
 }
 #P_container {
+    max-width:100%;
 padding: 50px;
 }
 
@@ -350,8 +351,9 @@ justify-content: center;
 }
 
 .col-lg-6 {
-width: 50%;
-padding: 0 20px;
+    overflow-wrap: break-word;
+    width: 40%;
+    padding: 0 20px;
 }
 
 #P_name {
@@ -361,6 +363,7 @@ margin-bottom: 20px;
 }
 
 #P_text li {
+
 font-size: 28px;
 margin-bottom: 30px;
 }
@@ -409,6 +412,7 @@ margin-left: 20px;
 }
 
 #P_container #P_mb #P_text li {
+    width:100%;
     font-size: 1.8rem;
     margin-bottom: 30px;
 }
