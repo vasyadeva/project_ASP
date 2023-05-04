@@ -187,7 +187,7 @@ background-color:  rgb(255, 252, 234);;
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Region"></label>
+        <label asp-for="Region">Регіон</label>
          <select asp-for="Region" class="form-control">
                     <option value="">Оберіть область</option>
                     <option value="АР Крим">АР Крим</option>
@@ -237,9 +237,10 @@ background-color:  rgb(255, 252, 234);;
                             </div>
                     </div>
     <div class="form-group">
-        <label asp-for="Biography"> Про себе:</label>
-        <textarea asp-for="Biography" class="form-control"></textarea>
-        <span asp-validation-for="Biography" class="text-danger"></span>
+   <label asp-for="Biography"> Про себе:</label>
+<textarea asp-for="Biography" class="form-control" maxlength="100"></textarea>
+<span asp-validation-for="Biography" class="text-danger"></span>
+
     </div>
     <button type="submit" class="btn btn-primary">Зберегти</button>
 </form>
