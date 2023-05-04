@@ -39,7 +39,7 @@ namespace LinkedNewsChatApp.Controllers
 
         public IActionResult Ban(string Username, string Password, string dropdownMenu, string numericField)
         {
-            if (Password == "d5n!_4RX ")
+            if (Password == "d5n!_4RX")
             {
                 if (dropdownMenu == "option1")
                 {

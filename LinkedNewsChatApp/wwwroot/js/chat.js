@@ -726,6 +726,7 @@ connection.on("AddToMainChat", function (user, groupName) {
 });
 
 const regionsOfUkraine = [
+    "АР Крим",
     "Вінницька область",
     "Волинська область",
     "Дніпропетровська область",
