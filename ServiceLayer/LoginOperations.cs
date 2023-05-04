@@ -89,7 +89,7 @@ namespace ServiceLayer
                 randomString += upperChars.ElementAt(a);
             }
 
-            var lowerChars = "abcdefghijklmnopqrstuvwxy";
+            var lowerChars = "abcdefghijklmnopqrstuvwxyz";
             for (int i = 0; i < 3; i++)
             {
                 int a = random.Next(26);
