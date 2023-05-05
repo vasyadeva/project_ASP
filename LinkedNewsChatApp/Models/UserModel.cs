@@ -8,6 +8,7 @@ namespace LinkedNewsChatApp.Models
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "Введіть ім'я користувача!")]
+        [RegularExpression("[A-Za-z0-9_.]+", ErrorMessage = "Ім'я користувача не може містити пробіли!")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "Ім'я користувача має містити 3-20 символів!")]
         public string? Username { get; set; }
 
