@@ -223,6 +223,7 @@ namespace DataLayer
             if (ban != null)
             {
                 DateTime day = DateTime.Now.Date;
+                day = day.AddHours(10);
                 TimeSpan elapsed = (TimeSpan)(day - ban);
   
                 if (elapsed.TotalDays >= unban)
@@ -247,7 +248,10 @@ namespace DataLayer
             {
 
                 var ban = _dbContext.Users.First(g => g.Username == username);
-                ban.BannedDate = DateTime.Now;
+                DateTime day = DateTime.Now.Date;
+                day = day.AddHours(10);
+                ban.BannedDate = day;
+
                 if (ban.BannedDate != null)
                 {
                     ban.UnBannedDate = term;
@@ -270,9 +274,10 @@ namespace DataLayer
             var user = _dbContext.Users.Where(m => m.Username == username).Select(k => k.Username).FirstOrDefault();
             if (user != null)
             {
-
+                DateTime day = DateTime.Now.Date;
+                day = day.AddHours(10);
                 var ban = _dbContext.Users.First(g => g.Username == username);
-                int daysSinceBan = (int)(DateTime.Now.Date - ban.BannedDate.Value.Date).TotalDays;
+                int daysSinceBan = (int)(day - ban.BannedDate.Value.Date).TotalDays;
                 return Convert.ToInt32(ban.UnBannedDate)- daysSinceBan;
               
             }

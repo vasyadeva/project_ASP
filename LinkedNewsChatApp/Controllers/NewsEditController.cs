@@ -116,8 +116,9 @@ namespace LinkedNewsChatApp.Controllers
                     byte[] fileBytes = ms.ToArray();
                     photoByte = fileBytes;
                 }
-
-                var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now, Category = news.Category };
+                DateTime day = DateTime.Now.Date;
+                day = day.AddHours(10);
+                var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = day, Category = news.Category };
                 // if (ModelState.IsValid)
                 // {
                 _context.Add(newsobj);
@@ -188,8 +189,9 @@ namespace LinkedNewsChatApp.Controllers
                         byte[] fileBytes = ms.ToArray();
                         photoByte = fileBytes;
                     }
-
-                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = DateTime.Now, Category = news.Category };
+                    DateTime day = DateTime.Now.Date;
+                    day = day.AddHours(10);
+                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = photoByte, Time = day, Category = news.Category };
 
 
 
@@ -216,7 +218,9 @@ namespace LinkedNewsChatApp.Controllers
                 {
                     var newsoperation = new NewsOperations.NewsOperations(_repository);
                     byte[] phot = _repository.GetNewsPhoto(news.id);
-                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = phot, Time = DateTime.Now, Category = news.Category };
+                    DateTime day = DateTime.Now.Date;
+                    day = day.AddHours(10);
+                    var newsobj = new News() { id = news.id, title = news.title, text = news.text, photo = phot, Time = day, Category = news.Category };
 
 
 

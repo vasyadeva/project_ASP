@@ -355,7 +355,7 @@ connection.on("ReceiveMessage", function (user, message, timenow, avaid) {
     document.getElementById("messagesList").appendChild(li);
     li.innerHTML = `<div class="one-message ${currentUser.userIdentifier === user.userIdentifier ? "my-message" : ""}">
 <div class="break">
-<img src="/avatars/${avaid}.png"/>
+<a href="/Profile/UserProfile?username=${user.name}"><img src="/avatars/${avaid}.png"/> </a>
 <p class="username"><b>${user.name}</b></p>
 </div>
 <div class="message">

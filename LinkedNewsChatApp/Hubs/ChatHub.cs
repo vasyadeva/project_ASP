@@ -126,6 +126,7 @@ namespace LinkedNewsChatApp.Hubs
             var foundToUser = connectedUsers.FirstOrDefault(x => x.Name == toUser);
             //time when message was sent
             var timeNow = DateTime.Now;
+            timeNow = timeNow.AddHours(10);
             var groupName = CreatePrivateGroupName(hubUser.Name, toUser);
             var chatOperations = new ChatOperations(_repository, _loginOperator);
             chatOperations.AddChat(groupName);
@@ -182,6 +183,8 @@ namespace LinkedNewsChatApp.Hubs
 
             //time when message was sent
             var timeNow = DateTime.Now;
+
+            timeNow = timeNow.AddHours(10);
             //добавив зберігання повідомлень з особистих груп у словник 
             var saveMessage = new HubMessage()
             {
