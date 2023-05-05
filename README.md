@@ -1,6 +1,6 @@
 # Real-time SignalR chat application.
 
-<img width="1100" alt="image" [url=https://ibb.co/2vnvBxM][img]https://i.ibb.co/YcRcGmd/0461-A9-E5-8454-40-E4-BD02-AC498572-A39-B.png[/img][/url]
+<img width="1100" alt="image" href="https://ibb.co/2vnvBxM"</img> 
 
 Simple chat app created with MVC ASP .NET and SignalR.
 
